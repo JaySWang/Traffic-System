@@ -1,0 +1,171 @@
+\documentclass[12pt]{amsart}
+\usepackage{geometry} 
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{amsmath} 
+\usepackage{amssymb} 
+\usepackage{graphicx, subfig} 
+\usepackage{caption}
+\usepackage{float}
+\geometry{a4paper} 
+
+\title{Initial Report}
+\author{Team Brisk}
+
+\begin{document}
+
+\maketitle
+
+\section{\textbf{Project Description}}
+\subsection{\textbf{Aims for the Project}}
+In recent years, so many traffic simulation systems have been developed to analyze the traffic problem. However, those systems are not suitable or practical in some situations. Our team aims at developing a traffic simulation system that can support different types of vehicles running on several kinds of roads under some traffic management policies. The system will be of high quality and completed in time.
+
+\subsection{\textbf{Strategy for Achieving Aims}}
+According to the aims,our group chose the strategy, development platform and language to develop the project. Overall, we follow the waterfall model to develop our project step by step.
+	
+Strategy:The strategy of group project is waterfall model that we can develop the group project step by step.In order to finish our project in time, we shall plan well and follow the timetable strictly. We will also use development technics that we are familiar with and set priorities to different functional requirements and implement the compulsory ones first. To make the quality better, we plan to spend more time designing before coding as well as apply testing technics such as unit testing. We also plan to hold design review and code review meetings.
+
+\subsection{\textbf{Initial Plan}}
+Our group designed the initial timetable as a schedule of our group project. Table 1 is the initial plan of time.
+
+\begin{table}[h]
+\begin{tabular}{ | c | c | c | }
+\hline
+Phases & Start date & End date\\
+\hline
+Planning & 2015-01-26 & 2015-01-28\\
+\hline
+Requirement analysis & 2015-01-29 & 2015-02-02\\
+\hline
+Architecture design & 2015-02-03 & 2015-02-07\\
+\hline
+UI design & 2015-02-03 & 2015-02-08\\
+\hline
+Detail design & 2015-02-09 & 2015-02-19\\
+\hline
+Implementation & 2015-02-20 & 2015-03-15\\
+\hline
+Testing & 2015-03-16 & 2015-03-20\\
+\hline
+\end{tabular}
+\caption{Initial Time Table}
+\end{table}
+
+\subsection{Requirements Analysis}
+Requirements Analysis is one of the most essential parts of the model. It is our obligation to know what the requirements are. According to the requirements, we can design the model correctly.
+
+System context:The system context of this system is to simulate a road network which contains several different parts including: roundabouts and multi-lane junctions. There are also several types of vehicles running on it under some traffic policies.
+
+Functional requirements:
+
+1.Traffic model should have different vehicles(cars,coaches,buses etc.).(High Priority)
+
+2.Traffic model can be operated in different parts of road(eg. straight roads, curves, roundabouts).(High Priority)
+
+3.Designing suitable maps.(High Priority)
+
+4.Model should be based on time to change.(High Priority)
+
+5.Considering emergency situation.(High Priority)
+
+6.Allowing diff traffic management policy.(Medium Priority)
+
+7.Comparing different policies.(Low Priority)
+
+Non-functional requirements:
+
+1.Efficiency: space and time complex should not be very high.(Mandatory)
+
+2.Flexible: should fit with general situations not only the situation we designed.(Optional)
+
+3.Standards requirements: should fit with software engineering principle.(Optional)
+
+4.Implementation requirements: based on java programing language.(Optional)
+
+5.Reliability:can run continuously for at least 5 hours.(Mandatory)
+
+6.Robustness:can deal with unexpected input.(Mandatory)
+
+7.Usability:can be used without training.(Optional)
+
+\subsection{Designing}
+
+\begin{figure}[!b]
+\includegraphics[width=2.00in,height=1.80in]{Business.png}
+\caption{Business Concept Model}
+\end{figure}
+
+The Business Concept Model shows as figure 1.
+
+\begin{figure}[!tb]
+\includegraphics[width=2.00in,height=1.80in]{Case.png}
+\caption{Use Case}
+\end{figure}
+The Use Case shows as figure 2.
+
+\begin{figure}[!tb]
+ \includegraphics[width=2.30in,height=1.70in]{Architecture.png}
+ \caption{Initial System Architecture}\label{first-img}
+\end{figure}
+The Initial System Architecture shows as figure 3.
+
+\begin{figure}[!tb]
+ \includegraphics[width=2.40in,height=2.00in]{MVC.png}
+ \caption{MVC Style Architecture}\label{second-img}
+\end{figure}
+The MVC Style Architecture shows as figure 4.
+
+\subsection{Construction}
+
+Our group synchronized the code by Github and use the MVC design as pattern to improve code quality. Considering the unity, our group is trying to uniform some code styles by designing coding standards.
+
+\subsection{Testing and debugging}
+A special member responsible for testing and debugging was assigned by the group.
+
+\subsection{Development Platform:Eclipse}
+\subsection{Development Language:JAVA}
+
+\section{\textbf{Project Organisation}}
+\subsection{\textbf{Team Members and Roles}}
+Our group designed the team members and roles table as the workload of each member. Table 2 is the Team Members and Roles.
+\begin{table}[h]
+\begin{tabular}{ | c | c | }
+\hline
+Member &  Roles and Responsibilities\\
+\hline
+Wang,Shengsheng & Coordinator,Architect and Developer\\
+\hline
+Qu,Tong & Model builder and Developer\\
+\hline
+Liu,Yiran & GUI designer and Developer\\
+\hline
+Yamani,Lujain Bassam & Quality assurance and Developer\\
+\hline
+Duan,Zhaoxu & Developer and Document writer\\
+\hline
+\end{tabular}
+\caption{Team Members and Roles}
+\end{table}
+\subsection{\textbf{Peer Assessment}}
+
+1. 20(100/5) marks are allocated to each member.
+
+2. The basic marks for everyone is 90$\%$ of the total, that is 20 * 0.9 = 18.
+
+3. 2 * 5 = 10 marks are put in the mark pool and will be distributed in the end of the project according to contribution and overall performance.(by secret voting)
+
+4. There are some cases in which one might lose marks and the marks will be allocated to mark pool.
+
+\quad
+a.Do not present in the meeting(-2).
+
+\quad
+b.Being late for the meeting for more than 5 minutes(-1)
+ 
+\quad
+c.Fail to finish tasks in time(-2 to -5)
+
+\subsection{\textbf{Conflicts Resolve}}
+There will be a group meeting for every week.We will share work by group members through Github. In case of a conflict, the group member in charge of the specific part will be required to design an approach to resolve the problem. However, there will be a group communication before addressing the conflict.
+
+\end{document}
