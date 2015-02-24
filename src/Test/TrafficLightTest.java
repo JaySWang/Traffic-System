@@ -1,5 +1,6 @@
 package Test;
 
+import view.TrafficLightView;
 import model.TrafficLight;
 import modelInterface.ITrafficLight;
 
@@ -9,7 +10,11 @@ public class TrafficLightTest {
 	
 	public static void main(String args[]){
 		
-		ITrafficLight t = new TrafficLight(4);
+		TrafficLight t = new TrafficLight(4);
+		TrafficLightView tv = new TrafficLightView();
+		tv.on();
+		
+		t.registerObserver(tv);
 		t.on();
 		
 
@@ -19,7 +24,7 @@ public class TrafficLightTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("1");
+	
 		t.off();
 		
 		try {
@@ -28,7 +33,7 @@ public class TrafficLightTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("2");
+		
 		t.on();
 	}
 }

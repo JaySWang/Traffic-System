@@ -3,24 +3,30 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import observer.ITrafficLightObservable;
+import observer.ITrafficLightObserver;
+
 import modelInterface.ITrafficLight;
 
 
 
 
-public class TrafficLight extends Thread implements ITrafficLight {
+public class TrafficLight extends Thread implements ITrafficLight,ITrafficLightObservable {
 
- final Integer RED = 0;
- final Integer GREEN = 1;
+ final static Integer RED = 0;
+ final static Integer GREEN = 1;
  final Integer OFF = 0;
  final Integer ON = 1;
  int  intervalTime = 1000;
  int numberOfLights;
  
+ ArrayList<ITrafficLightObserver> observers = new ArrayList<ITrafficLightObserver> ();
+ 
+ 
  int state;
  ArrayList<Integer> lightStates;
  
-	
+
 	public TrafficLight(int numberOfLights){
 		this.numberOfLights = numberOfLights;
 		
@@ -30,7 +36,10 @@ public class TrafficLight extends Thread implements ITrafficLight {
 
 	}
 	
-	
+	   public int getlightState(){
+		   return state;
+	   }
+		
 	
 	private void initial() {
 		lightStates = new ArrayList<Integer>(numberOfLights);
@@ -74,6 +83,7 @@ while(true){
 					lightStates.set(j, RED);
 				}
 				lightStates.set(i, GREEN);
+				notifyObservers();
 				test();
 				
 				try {
@@ -105,6 +115,20 @@ while(true){
 	@Override
 	public void setInterval(int sec) {
 		intervalTime = 1000*sec;		
+	}
+
+	@Override
+	public void registerObserver(ITrafficLightObserver ob) {
+		observers.add(ob);
+		
+	}
+
+	@Override
+	public void notifyObservers() {
+		for(int i = 0;i<observers.size();i++){
+			observers.get(i).update(this);
+		}
+		
 	}
 	
 	
