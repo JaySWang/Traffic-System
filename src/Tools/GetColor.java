@@ -1,10 +1,10 @@
 package Tools;
-/*
+/**
  * get color from image is ok
- * get the screenshot and then use the method which used to get image's color to get it
- * find a way to get jframe's color directly
+ * using robot to get the image and then use getRGB to get the point
+ * using getPixel of robot
  * 
- * 
+ * @author qutong
  * */
 
 import java.awt.AWTException;
@@ -53,9 +53,9 @@ public class GetColor {
 	 */
 	public static Color getJframeRGB(JFrame obj, int x, int y) throws AWTException {
 		Robot rbt = new Robot();
-		Point point = obj.getLocationOnScreen();
+		/*Point point = obj.getLocationOnScreen();
 		BufferedImage image = rbt.createScreenCapture(new Rectangle(point.x,
-				point.y, obj.getWidth(), obj.getHeight()));
+				point.y, obj.getWidth(), obj.getHeight()));*/
 		Color selectedColor = rbt.getPixelColor(x, y);
 		return selectedColor;
 	}
