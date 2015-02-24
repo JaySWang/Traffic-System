@@ -1,8 +1,9 @@
-package model;
+package Test;
 
+import model.TrafficLight;
 import modelInterface.ITrafficLight;
 
-public class TestMain {
+public class TrafficLightTest {
 
 	
 	
