@@ -1,5 +1,8 @@
 package Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Controller.TrafficLightController;
 import ControllerInterface.ITrafficLightController;
 import view.TrafficLightView;
@@ -12,12 +15,23 @@ public class TrafficLightTest {
 	
 	public static void main(String args[]){
 		
-		TrafficLight t = new TrafficLight(4);
-		ITrafficLightController c = new TrafficLightController(t);
-		TrafficLightView tv = new TrafficLightView(t,c);
-		tv.on();
+		TrafficLight t0 = new TrafficLight(4,0);
+		TrafficLight t1 = new TrafficLight(3,1);
+
+	
+	
+
+		List<ITrafficLight> TrafficLights = new ArrayList();
+		TrafficLights.add(t0);
+		TrafficLights.add(t1);
+		ITrafficLightController c = new TrafficLightController(TrafficLights);
 		
-		t.registerObserver(tv);
+		TrafficLightView tv = new TrafficLightView(TrafficLights,c);
+
+
+		
+		t0.registerObserver(tv);
+		t1.registerObserver(tv);
 	
 	}
 }

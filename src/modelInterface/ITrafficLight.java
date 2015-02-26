@@ -13,7 +13,8 @@ public void setInterval(int sec);
 
 public void off();
 public void on();
-
+public int getNo();
+public int getNumberOfLights();
 
 	
 	

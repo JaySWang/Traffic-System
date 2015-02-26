@@ -19,17 +19,29 @@ public class TrafficLight extends Thread implements ITrafficLight,ITrafficLightO
  final Integer ON = 1;
  int  intervalTime = 1000;
  int numberOfLights;
+ int no;
  
- ArrayList<ITrafficLightObserver> observers = new ArrayList<ITrafficLightObserver> ();
+ 
+ 
+ public int getNo() {
+	return no;
+}
+ public int getNumberOfLights() {
+	return numberOfLights;
+}
+
+
+
+ArrayList<ITrafficLightObserver> observers = new ArrayList<ITrafficLightObserver> ();
  
  
  int state;
  ArrayList<Integer> lightStates;
  
 
-	public TrafficLight(int numberOfLights){
+	public TrafficLight(int numberOfLights,int no){
 		this.numberOfLights = numberOfLights;
-		
+		this.no = no;
 		initial();
 		off();
 		start();
