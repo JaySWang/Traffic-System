@@ -4,7 +4,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
-
+/**
+ * this class is the method to get color by robot directly,also used to verify the GetColor class
+ * improve the reliability 
+ * 
+ * @author qutong
+ * */
 public class PickColor2 extends JFrame {
 	public static void main(String[] args) {
 		PickColor2 pc = new PickColor2();

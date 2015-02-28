@@ -13,14 +13,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 /**
- * get color from image is ok
- * using robot to get the image and then use getRGB to get the point
- * using getPixel of robot
+ * this class different from GetColor, the return value is hexadecimal
+ * it will be simplified in the end
  * 
  * @author qutong
  * */
 
-public class GetColor{
+public class GetColor2{
 	/**
 	 * 取得图像上指定位置像素的 rgb 颜色分量,并保存到数组rgb里面。
 	 * 
@@ -35,9 +34,9 @@ public class GetColor{
 	 * 			  返回整数的 24-31 位是 0xff ，16-23 位表示红色值，8-15 位表示绿色值，0-7 位表示蓝色值。
 	 * @return 返回包含 rgb 颜色分量值的数组。元素 index 由小到大分别对应 r，g，b。
 	 */
-	public static int[] getImageRGB(BufferedImage image, int x, int y) {
+	public static int getImageRGB(BufferedImage image, int x, int y) {
 		int pixel = image.getRGB(x, y);
-		return seperateRGB.transfer16(pixel);
+		return pixel;
 	}
 
 	/**
@@ -70,7 +69,7 @@ public class GetColor{
 	 * @return 返回包含 rgb 颜色分量值的数组。元素 index 由小到大分别对应 r，g，b。
 	 * @throws AWTException 
 	 */
-	public static  int[] getJframebySt(JFrame obj, int x, int y) throws AWTException {
+	public static  int getJframebySt(JFrame obj, int x, int y) throws AWTException {
 		Robot rbt = new Robot();
 		Point point = obj.getLocationOnScreen();
 		BufferedImage ScreenShot = rbt.createScreenCapture(new Rectangle(point.x,
@@ -109,16 +108,6 @@ public class GetColor{
 				point.y, obj.getWidth(), obj.getHeight()));
 		ScreenShot.getRGB(point.x, point.y, obj.getWidth(), obj.getHeight(),rgbArray, offset, scansize);
 		return rgbArray;
-	}
-	public static void main(String[] arg) throws IOException{
-		GetColor g= new GetColor();
-		//use smiley.png test getImageRGB
-		BufferedImage s=ImageIO.read(new File("smiley.png"));
-		int[] result;
-		result=g.getImageRGB(s,30,36);
-		System.out.println(result[0]);
-		System.out.println(result[1]);
-		System.out.println(result[2]);
 	}
 
 }
