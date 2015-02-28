@@ -6,6 +6,7 @@ import java.util.Random;
 /**
  * This is the implementation of sensors, it's like the drivers' eyes
  * it will provide a method return the color of particular area.
+ * this is the superclass
  * @author qutong
  * */
 public class Sensor {
