@@ -5,9 +5,9 @@ package model;
  * @version 1.0
  *
  */
-public class Vehicle {
+public class Vehicle implements IVehicle {
 	private int width;
-	private int lenghth;
+	private int length;
 	private int location_x;
 	private int location_y;
 	private int speed;
@@ -26,11 +26,11 @@ public class Vehicle {
 	public void setWidth(int width) {
 		this.width = width;
 	}
-	public int getLenghth() {
-		return lenghth;
+	public int getLength() {
+		return length;
 	}
-	public void setLenghth(int lenghth) {
-		this.lenghth = lenghth;
+	public void setLength(int length) {
+		this.length = length;
 	}
 	public int getLocation_x() {
 		return location_x;
@@ -119,4 +119,5 @@ public class Vehicle {
     void turnJudgement(){
     	
     }
+
 }

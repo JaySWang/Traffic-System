@@ -13,16 +13,22 @@ MainView mv = new MainView();
 VehicleManagement vm = new VehicleManagement();
 
 vm.registerObserver(mv);
-IVehicle v1 = new Vehicle(0,10,10,10);
-IVehicle v2 = new Vehicle(0,30,10,10);
-IVehicle v3 = new Vehicle(20,60,20,20);
-IVehicle v4 = new Vehicle(20,100,20,20);
+IVehicle v1 = new Vehicle();
+IVehicle v2 = new Vehicle();
+v1.setLength(10);
+v1.setWidth(10);
+v1.setLocation_x(0);
+v1.setLocation_y(10);
+
+v2.setLength(20);
+v2.setWidth(20);
+v2.setLocation_x(0);
+v2.setLocation_y(30);
 
 
 vm.addVehicle(v1);
 vm.addVehicle(v2);
-vm.addVehicle(v3);
-vm.addVehicle(v4);
+
 vm.setInterval(100);
 vm.start();
 

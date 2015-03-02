@@ -17,7 +17,7 @@ public void paint(Graphics g){
 	
 	if(vehicles!=null){
 	for(IVehicle v:vehicles){
-		g.drawRect(v.getX(),v.getY(),v.getWidth(),v.getHight());
+		g.drawRect(v.getLocation_x(),v.getLocation_y(),v.getWidth(),v.getLength());
 		
 	}
 	}
