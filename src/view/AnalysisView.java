@@ -29,22 +29,9 @@ public class AnalysisView extends JFrame {
 	private JPanel panel;
 	private JButton btnOk;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AnalysisView frame = new AnalysisView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -102,15 +89,21 @@ public class AnalysisView extends JFrame {
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.exit(0);
-				
+close();				
 			}
+
+		
 		});
 		panel.add(btnOk);
 		//this.getContentPane().add(table);
 		this.setTitle("Traffic Policies Analysis"); 
 		this.pack(); 
 		this.setVisible(true);
+	}
+	
+	private void close() {
+		this.setVisible(false);
+		
 	}
 
 }
