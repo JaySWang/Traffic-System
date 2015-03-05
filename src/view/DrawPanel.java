@@ -25,11 +25,8 @@ public void paint(Graphics g){
 	
 	if(vehicles!=null){
 	for(IVehicle v:vehicles){
-<<<<<<< HEAD
-	  
 
-=======
->>>>>>> FETCH_HEAD
+	 
 		g.drawRect(v.getLocation_x(),v.getLocation_y(),v.getWidth(),v.getLength());
 		
 	}
