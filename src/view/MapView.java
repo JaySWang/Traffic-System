@@ -1,0 +1,186 @@
+package view;
+
+import java.awt.Graphics;
+import java.awt.Panel;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import ControllerInterface.ITrafficLightController;
+
+import constValue.ConstValues;
+
+import model.IVehicle;
+import model.IVehicleManagement;
+import modelInterface.ITrafficLight;
+
+import observer.ITrafficLightObservable;
+import observer.ITrafficLightObserver;
+import observer.IVehicleObservable;
+
+public class MapView extends Panel implements ITrafficLightObserver {
+
+	List<IVehicle> vehicles;
+    ImageIcon map = new ImageIcon(getClass().getResource("/Icon/map.png"));;
+
+	ImageIcon greenIcon = new  ImageIcon(getClass().getResource("/Icon/green.jpg"));
+	ImageIcon redIcon = new  ImageIcon(getClass().getResource("/Icon/red.jpg"));
+
+
+	int trafficLightState = ConstValues.OFF;
+	
+	List<Light> lightList = new ArrayList();
+
+	List<ITrafficLight> trafficLights;
+	ITrafficLightController trafficLightController;
+
+	
+	
+	public MapView(List<ITrafficLight> t,ITrafficLightController c){
+		super();
+		initialLights();
+		trafficLights = t;
+		trafficLightController = c;
+		
+		
+		
+	}
+	
+
+	public void setTrafficLightState(int tls){
+		trafficLightState = tls;
+	}
+	
+	
+	private void initialLights() {
+
+		Light light1 = new Light(map.getIconWidth()/4,map.getIconHeight()/2,1);
+		Light light2 = new Light(map.getIconWidth()/4,map.getIconHeight()/3,0);
+		Light light3 = new Light(map.getIconWidth()/4,map.getIconHeight()/4,1);
+		Light light4 = new Light(map.getIconWidth()/4,map.getIconHeight()/10,0);
+		Light light5 = new Light(map.getIconWidth()/2,map.getIconHeight()/2,1);
+		Light light6 = new Light(map.getIconWidth()/2,map.getIconHeight()/3,0);
+		Light light7 = new Light(map.getIconWidth()/2,map.getIconHeight()/4,1);
+
+		
+		lightList.add(light1);
+		lightList.add(light2);
+		lightList.add(light3);
+		lightList.add(light4);
+		lightList.add(light5);
+		lightList.add(light6);
+		lightList.add(light7);
+
+
+		
+	}
+
+
+	class Light{
+		int location_x;
+		int location_y;
+		ImageIcon state;
+		int lightSize = 30;
+		
+		
+	
+
+
+		public  Light(int x,int y,int s){
+			
+			location_x = x;
+			 location_y = y;
+				 
+			setState(s);
+		}	
+		
+		
+		private void setState(int s){
+			 if(s == ConstValues.GREEN){
+				 state = greenIcon;
+			 }
+			 else if(s == ConstValues.RED){
+				 state = redIcon;
+			 }	
+		
+		}
+	}
+
+	
+    
+public void paint(Graphics g){
+	super.paint(g);
+ 
+	g.drawImage(map.getImage(),0,0,map.getIconWidth(),map.getIconHeight(),this);
+	
+	if(trafficLightState == ConstValues.ON){
+	for(Light l:lightList){
+		
+		g.drawImage(l.state.getImage(),l.location_x,l.location_y,l.lightSize,l.lightSize,this);
+		
+	}
+	}
+	
+
+	
+	if(vehicles!=null){
+	for(IVehicle v:vehicles){
+
+	 
+		g.drawRect(v.getLocation_x(),v.getLocation_y(),v.getWidth(),v.getLength());
+		
+	}
+	}
+	
+}
+
+
+
+
+public void update(IVehicleObservable o) {
+vehicles = ((IVehicleManagement)o).getVehicles();
+
+Graphics g= this.getGraphics();
+update(g);
+}
+
+
+
+
+@Override
+public void update(ITrafficLightObservable o) {
+	
+	List states = ((ITrafficLight)o).getStates();
+	
+	int no = ((ITrafficLight)o).getNo();
+	
+	int position = getLightPosition(no);
+	for(int i = 0;i<states.size();i++){
+	
+			lightList.get(position+i).setState((Integer)states.get(i));		
+	
+	}
+	
+}
+
+
+private int getLightPosition(int no) {
+	int position = 0 ;
+	for(int i = 0;i<no;i++){
+		position+= trafficLights.get(i).getNumberOfLights();
+	}
+	
+	return position;
+}
+
+
+
+
+public void setIntervalTime(String selectedItem) {
+	trafficLightController.setIntervalTime(selectedItem);
+}
+	
+}

@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import constValue.ConstValues;
+
 import observer.ITrafficLightObservable;
 import observer.ITrafficLightObserver;
 
@@ -15,8 +17,7 @@ public class TrafficLight extends Thread implements ITrafficLight,ITrafficLightO
 
  final static Integer RED = 0;
  final static Integer GREEN = 1;
- final Integer OFF = 0;
- final Integer ON = 1;
+
  int  intervalTime = 1000;
  int numberOfLights;
  int no;
@@ -73,7 +74,7 @@ ArrayList<ITrafficLightObserver> observers = new ArrayList<ITrafficLightObserver
 
 	@Override
 	public void off() {
-		state = OFF;
+		state = ConstValues.OFF;
 	
 	
 		
@@ -82,14 +83,14 @@ ArrayList<ITrafficLightObserver> observers = new ArrayList<ITrafficLightObserver
 	@Override
 	public void on() {
 		
-		state = ON;
+		state = ConstValues.ON;
 	
 	}
 	
 	public void run(){
 		
 while(true){
-			for(int i = 0;i < numberOfLights&&(state == ON);i++){
+			for(int i = 0;i < numberOfLights&&(state == ConstValues.ON);i++){
 					
 				for(int j = 0;j < numberOfLights;j++){
 					lightStates.set(j, RED);

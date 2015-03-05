@@ -1,17 +1,48 @@
 package Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Controller.TrafficLightController;
+import ControllerInterface.ITrafficLightController;
 import model.IVehicle;
+import model.TrafficLight;
 import model.Vehicle;
 import model.VehicleManagement;
+import modelInterface.ITrafficLight;
 import view.MainView;
+import view.MapView;
 
 public class MainViewTest {
 	
 	
 	public static void main(String args[]){
-MainView mv = new MainView();
+		
+		
+
+
 
 VehicleManagement vm = new VehicleManagement();
+TrafficLight t0 = new TrafficLight(4,0);
+TrafficLight t1 = new TrafficLight(3,1);
+
+
+List<ITrafficLight> TrafficLights = new ArrayList();
+TrafficLights.add(t0);
+TrafficLights.add(t1);
+
+
+
+ITrafficLightController c = new TrafficLightController(TrafficLights);
+MapView mapPanel = new MapView(TrafficLights,c);
+
+t0.registerObserver(mapPanel);
+t1.registerObserver(mapPanel);
+
+MainView mv = new MainView(mapPanel);
+
+
+
 
 vm.registerObserver(mv);
 IVehicle v1 = new Vehicle();
@@ -32,6 +63,8 @@ vm.addVehicle(v2);
 
 vm.setInterval(100);
 vm.start();
+t0.on();
+t1.on();
 
 
 	}
