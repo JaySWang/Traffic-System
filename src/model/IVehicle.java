@@ -2,18 +2,18 @@ package model;
 
 public interface IVehicle {
 
-	public int getX();
-	public int getY();
+	public int getLocation_x();
+	public int getLocation_y();
 	public int getWidth();
-	public int getHight();
+	public int getLength();
 
-	public void setX(int x);
+	public void setLocation_x(int location_x);
 
-	public void setY(int y);
+	public void setLocation_y(int location_y);
 
 	public void setWidth(int width);
 
-	public void setHight(int hight);
+	public void setLength(int length);
 
 	
 }
