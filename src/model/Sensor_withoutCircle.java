@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import Tools.GetColor;
 import Tools.GetColor2;
+import Tools.seperateRGB;
 /**
  * this sensor can only be used in the no circle maps
  * @author qutong
@@ -59,11 +60,15 @@ public class Sensor_withoutCircle extends Sensor{
 	 * @return coa
 	 * 		this is the color of this area, the value should be calculated, 
 	 * 		the specific method will be decided after research work
+	 * @throws AWTException 
 	 */
-	Color areaColor(int[] points){
-		int length=points.length;
-		
+	Color areaColor(JFrame obj) throws AWTException{
+		int[] points=this.randomPointsColor(obj);
 		Color coa = null;
+		for(int i=0;i<points.length;i++){
+			int rgb[]=seperateRGB.transfer16(points[i]);
+		}
+		
 		return coa;
 	}
 }
