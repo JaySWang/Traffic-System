@@ -10,7 +10,7 @@ public class Vehicle implements IVehicle {
 	private int length;
 	private int location_x;
 	private int location_y;
-	private int speed;
+	private int speed;//if the refresh 0.1s,the min speed is 1m/s therefore every pixel represent 0.1 meter
 	private int angle;//0-360
 	private int acceleration;
 	private String next;//what will the vehicle do

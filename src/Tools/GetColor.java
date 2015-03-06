@@ -79,6 +79,7 @@ public class GetColor{
 		System.out.println("location y: "+point.y);
 		System.out.println("width: "+obj.getWidth());
 		System.out.println("length: "+obj.getHeight());
+		System.out.println("color of thi spoint is:" +getImageRGB(ScreenShot,x,y));
 		return getImageRGB(ScreenShot,x,y);
 	}
 	/**
