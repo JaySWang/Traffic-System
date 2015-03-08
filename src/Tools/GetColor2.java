@@ -110,5 +110,17 @@ public class GetColor2{
 		ScreenShot.getRGB(point.x, point.y, obj.getWidth(), obj.getHeight(),rgbArray, offset, scansize);
 		return rgbArray;
 	}
+	/**
+	 * this method get image from the screenshot got by View and store in local path.
+	 * @param x
+	 * @param y
+	 * @return
+	 * @throws IOException
+	 */
+	int getColorFromImage(int x, int y) throws IOException{
+		File f= new File("screensho_current.png");
+		BufferedImage screenshot =ImageIO.read(f);
+		return getImageRGB(screenshot,x,y);
+	}
 
 }
