@@ -119,5 +119,11 @@ public class Vehicle implements IVehicle {
     void turnJudgement(){
     	
     }
+    /**
+     * based on the value of next calculate the position and speed next 0.1s
+     */
+    void calculateNextPosition(){
+    	
+    }
 
 }

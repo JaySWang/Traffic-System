@@ -81,27 +81,7 @@ public class Sensor_withoutCircle extends Sensor {
 		r = r / points.length;
 		g = g / points.length;
 		b = b / points.length;
-		if (r < 256 & 204 < r) {// r=255
-			if (b < 256 & 204 < b) {// b=255
-				if (g < 256 & 204 < g) {// g=255
-					coa = Color.white;
-				}
-				if (g >= 0 & g < 40) {// g=0
-					coa = Color.yellow;
-				}
-			}
-			if (b >= 0 & b < 40) {// b=0
-				if (g >= 0 & g < 40) {// g=0
-					coa = Color.red;
-				}
-			}
-		}
-		if (120 < r & r < 200) {// r=160
 
-		}
-		if (r > 150 & r < 230) {// r=190
-
-		}
 		return coa;
 	}
 }
