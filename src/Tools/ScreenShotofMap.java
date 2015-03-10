@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 /**
  * this class include methods used to get screenshot of the UI of system.
  * @author qutong
@@ -23,7 +24,7 @@ public class ScreenShotofMap {
 	 * @throws AWTException
 	 * @throws IOException
 	 */
-void updateScreenShot(JFrame obj) throws AWTException, IOException{
+void updateScreenShot(JPanel obj) throws AWTException, IOException{
 	Robot rbt = new Robot();
 	Point point = obj.getLocationOnScreen();
 	BufferedImage ScreenShot = rbt.createScreenCapture(new Rectangle(point.x,
