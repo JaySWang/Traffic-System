@@ -57,23 +57,24 @@ public class MapView extends Panel implements ITrafficLightObserver {
 	
 	private void initialLights() {
 
-		Light light1 = new Light(map.getIconWidth()/4,map.getIconHeight()/2,1);
-		Light light2 = new Light(map.getIconWidth()/4,map.getIconHeight()/3,0);
-		Light light3 = new Light(map.getIconWidth()/4,map.getIconHeight()/4,1);
-		Light light4 = new Light(map.getIconWidth()/4,map.getIconHeight()/10,0);
-		Light light5 = new Light(map.getIconWidth()/2,map.getIconHeight()/2,1);
-		Light light6 = new Light(map.getIconWidth()/2,map.getIconHeight()/3,0);
-		Light light7 = new Light(map.getIconWidth()/2,map.getIconHeight()/4,1);
+		Light light1 = new Light((275.0/1280.0)*map.getIconWidth()-greenIcon.getIconWidth(),map.getIconHeight()*(82.0/650.0)-greenIcon.getIconHeight(),1);
+		Light light2 = new Light((340.0/1280.0)*map.getIconWidth(),map.getIconHeight()*(135.0/650.0),0);
+		Light light3 = new Light((270.0/1280.0)*map.getIconWidth()-greenIcon.getIconWidth(),map.getIconHeight()*(135.0/650.0),1);
+//		Light light4 = new Light(map.getIconWidth()/4,map.getIconHeight()/10,0);
+//		Light light5 = new Light(map.getIconWidth()/2,map.getIconHeight()/2,1);
+//		Light light6 = new Light(map.getIconWidth()/2,map.getIconHeight()/3,0);
+//		Light light7 = new Light(map.getIconWidth()/2,map.getIconHeight()/4,1);
 
 		
 		lightList.add(light1);
 		lightList.add(light2);
 		lightList.add(light3);
-		lightList.add(light4);
-		lightList.add(light5);
-		lightList.add(light6);
-		lightList.add(light7);
+//		lightList.add(light4);
+//		lightList.add(light5);
+//		lightList.add(light6);
+//		lightList.add(light7);
 
+	    System.out.println(map.getIconWidth()+" "+map.getIconHeight());
 
 		
 	}
@@ -89,10 +90,10 @@ public class MapView extends Panel implements ITrafficLightObserver {
 	
 
 
-		public  Light(int x,int y,int s){
+		public  Light(double x,double y,int s){
 			
-			location_x = x;
-			 location_y = y;
+			location_x = (int)x;
+			 location_y = (int)y;
 				 
 			setState(s);
 		}	
@@ -115,7 +116,6 @@ public void paint(Graphics g){
 	super.paint(g);
  
 	g.drawImage(map.getImage(),0,0,map.getIconWidth(),map.getIconHeight(),this);
-	
 	if(trafficLightState == ConstValues.ON){
 	for(Light l:lightList){
 		

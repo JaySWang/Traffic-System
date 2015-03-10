@@ -82,7 +82,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	public void run(){
 		while(true){
 			for(IVehicle v:vehicles){
-				v.setLocation_x(v.getLocation_x()+10);
+				v.setLocation_x(v.getLocation_x()+20);
 
 			}
 			

@@ -87,18 +87,21 @@ public class MainView implements IVehicleObserver{
 		
 
 		frame = new JFrame();
+		frame.getContentPane().setEnabled(false);
 		
 		Dimension screenSize = kit.getScreenSize();
-		frame.setBounds(0, 0, screenSize.width*3/5,screenSize.height*2/3);
+		frame.setBounds(0, 0, screenSize.width,screenSize.height);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{1280, 0};
-		gridBagLayout.rowHeights = new int[]{100, 400, 0};
+		gridBagLayout.rowHeights = new int[]{100, 600, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
+		
+		//control view
 		controlPanel = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
