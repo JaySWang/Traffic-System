@@ -61,7 +61,7 @@ v2.setLocation_y(30);
 vm.addVehicle(v1);
 vm.addVehicle(v2);
 
-vm.setInterval(100);
+vm.setIntervalTime(1);
 vm.start();
 t0.on();
 t1.on();

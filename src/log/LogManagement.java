@@ -7,12 +7,34 @@ import java.util.List;
 public class LogManagement {
 
 	
-	List<TrafficMgtPolicyLog> tLogs = new ArrayList();
+	List<TrafficMgtPolicyLog> tLogs = new ArrayList<TrafficMgtPolicyLog>();
 	
-	List<VehicleLog> vLogs = new ArrayList();
+	List<VehicleLog> vLogs = new ArrayList<VehicleLog>();
 
 	
+	static LogManagement  lm;
 	
+	
+	
+	
+	
+	
+	private LogManagement() {
+		super();
+	}
+	
+	public static LogManagement getInstance(){
+		if(lm==null){
+			lm = new LogManagement();
+		}
+		
+		return lm;
+		
+		
+	};
+	
+	
+
 	public void addLog(TrafficMgtPolicyLog tLog){
 		tLogs.add(tLog);
 	}

@@ -6,7 +6,7 @@ public interface IVehicleManagement {
 
 	public List<IVehicle> getVehicles();
 
-	void setInterval(long msec);
+	void setIntervalTime(int sec);
 	
 	void addVehicle(IVehicle v);
 	

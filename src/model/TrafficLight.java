@@ -7,20 +7,33 @@ import constValue.ConstValues;
 
 import observer.ITrafficLightObservable;
 import observer.ITrafficLightObserver;
+import observer.ITrafficMgtPolicyObservable;
+import observer.ITrafficMgtPolicyObserver;
 
+import log.LogManagement;
 import modelInterface.ITrafficLight;
 
 
 
 
-public class TrafficLight extends Thread implements ITrafficLight,ITrafficLightObservable {
+public class TrafficLight extends Thread implements ITrafficLight,ITrafficLightObservable,ITrafficMgtPolicyObservable {
 
- final static Integer RED = 0;
- final static Integer GREEN = 1;
 
- int  intervalTime = 1000;
+ArrayList<ITrafficLightObserver> observers = new ArrayList<ITrafficLightObserver> ();
+ 
+LogManagement lm = LogManagement.getInstance();
+ArrayList<ITrafficMgtPolicyObserver> trafficMgtPolicyObservers = new ArrayList<ITrafficMgtPolicyObserver> ();
+
+
+
+ int lightState = -1;
+ ArrayList<Integer> lightStates;
+ 
+ int  intervalTime;
  int numberOfLights;
  int no;
+ 
+ int count = 0;
  
  
  
@@ -33,34 +46,41 @@ public class TrafficLight extends Thread implements ITrafficLight,ITrafficLightO
 
 
 
-ArrayList<ITrafficLightObserver> observers = new ArrayList<ITrafficLightObserver> ();
  
- 
- int state;
- ArrayList<Integer> lightStates;
- 
+
+public int getLightState() {
+	return lightState;
+}
+public void setLightState(int state) {
+	this.lightState = state;
+}
+public int getIntervalTime() {
+	return intervalTime;
+}
 
 	public TrafficLight(int numberOfLights,int no){
 		this.numberOfLights = numberOfLights;
 		this.no = no;
+		
+
 		initial();
-		off();
+		
+		notifyTMPObservers();
+
 		start();
 
 	}
-	
-	   public int getlightState(){
-		   return state;
-	   }
+
 		
 	
 	private void initial() {
 		lightStates = new ArrayList<Integer>(numberOfLights);
 		for(int i = 0;i<numberOfLights;i++){
-			lightStates.add(RED);
+			lightStates.add(ConstValues.RED);
 			
 		}
-		
+		lightState = ConstValues.OFF;
+		intervalTime = 1000;
 	}
 
 
@@ -74,35 +94,39 @@ ArrayList<ITrafficLightObserver> observers = new ArrayList<ITrafficLightObserver
 
 	@Override
 	public void off() {
-		state = ConstValues.OFF;
-	
-	
+			notifyTMPObservers();		
 		
+		lightState = ConstValues.OFF;
 	}
 
 	@Override
 	public void on() {
-		
-		state = ConstValues.ON;
+			notifyTMPObservers();
 	
+		lightState = ConstValues.ON;
 	}
+
+	
+	
+	
+	
+	
 	
 	public void run(){
 		
 while(true){
-			for(int i = 0;i < numberOfLights&&(state == ConstValues.ON);i++){
+			for(int i = 0;i < numberOfLights&&(lightState == ConstValues.ON);i++){
 					
 				for(int j = 0;j < numberOfLights;j++){
-					lightStates.set(j, RED);
+					lightStates.set(j, ConstValues.RED);
 				}
-				lightStates.set(i, GREEN);
+				lightStates.set(i, ConstValues.GREEN);
 				notifyObservers();
-				test();
 				
 				try {
 					sleep(intervalTime);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
 				
@@ -117,18 +141,11 @@ while(true){
 
 
 
-	private void test() {
-		
-		System.out.println(lightStates.toString());
-		
-	}
 
 
 
-	@Override
-	public void setInterval(int sec) {
-		intervalTime = 1000*sec;		
-	}
+
+
 
 	@Override
 	public void registerObserver(ITrafficLightObserver ob) {
@@ -141,6 +158,28 @@ while(true){
 		for(int i = 0;i<observers.size();i++){
 			observers.get(i).update(this);
 		}
+		
+	}
+	
+	
+	
+	@Override
+	public void registerTMPObserver(ITrafficMgtPolicyObserver ob) {
+		trafficMgtPolicyObservers.add(ob);		
+	}
+	@Override
+	public void notifyTMPObservers() {
+		for(int i = 0;i<trafficMgtPolicyObservers.size();i++){
+			trafficMgtPolicyObservers.get(i).update(this);
+		}
+				
+	}
+	@Override
+	public void setInterval(int sec) {
+		if(lightState!=-1){
+			notifyTMPObservers();
+		}
+		intervalTime = 1000*sec;	
 		
 	}
 	
