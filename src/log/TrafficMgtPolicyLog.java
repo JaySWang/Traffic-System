@@ -1,25 +1,48 @@
 package log;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class TrafficMgtPolicyLog {
 
-	List<TrafficMgtPolicyLog> tmpLogs = new ArrayList();
-	List<VehicleLog> vLogs = new ArrayList();
+int id;	
+int lightState;
+int speedLimit;
+	
+int startTime;
+int endTime;
+public TrafficMgtPolicyLog(int id, int lightState, int speedLimit, int startTime) {
+	super();
+	this.id = id;
+	this.lightState = lightState;
+	this.speedLimit = speedLimit;
+	this.startTime = startTime;
+}
+public int getId() {
+	return id;
+}
 
+public int getLightState() {
+	return lightState;
+}
+
+public int getSpeedLimit() {
+	return speedLimit;
+}
+
+public int getStartTime() {
+	return startTime;
+}
+
+public int getEndTime() {
+	return endTime;
+}
+public void setEndTime(int endTime) {
+	this.endTime = endTime;
+}
 	
-	
-	public void addLog(TrafficMgtPolicyLog tmpLog){
-		tmpLogs.add(tmpLog);
-	}
-	
-	public void addLog(VehicleLog vLog){
-		vLogs.add(vLog);
-	}
-	
-	
-	
+
+
+
 	
 	
 	
