@@ -34,6 +34,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+import Tools.ScreenShotofMap;
+
 import constValue.ConstValues;
 
 import java.awt.event.MouseAdapter;
@@ -48,7 +50,7 @@ public class MainView implements IVehicleObserver{
     Toolkit kit = Toolkit.getDefaultToolkit();
 
 
- 	
+
 
  	private final JPanel panel = new JPanel();
     

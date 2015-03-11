@@ -24,7 +24,7 @@ public class ScreenShotofMap {
 	 * @throws AWTException
 	 * @throws IOException
 	 */
-void updateScreenShot(JPanel obj) throws AWTException, IOException{
+public void updateScreenShot(JPanel obj) throws AWTException, IOException{
 	Robot rbt = new Robot();
 	Point point = obj.getLocationOnScreen();
 	BufferedImage ScreenShot = rbt.createScreenCapture(new Rectangle(point.x,
