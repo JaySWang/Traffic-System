@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -14,6 +15,42 @@ public class Sensor {
 	private int location_y;
 	private int size_x;
 	private int size_y;
+	private int x_min ;
+	private int x_max ;
+	private int y_min ;
+	private int y_max ;
+	
+	public int getX_min() {
+		return x_min;
+	}
+
+	public void setX_min(int x_min) {
+		this.x_min = this.getLocation_x() - (this.getSize_x() / 2);
+	}
+
+	public int getX_max() {
+		return x_max;
+	}
+
+	public void setX_max(int x_max) {
+		this.x_max = this.getLocation_x() + (this.getSize_x() / 2);
+	}
+
+	public int getY_min() {
+		return y_min;
+	}
+
+	public void setY_min(int y_min) {
+		this.y_min = this.getLocation_y() - (this.getSize_y() / 2);
+	}
+
+	public int getY_max() {
+		return y_max;
+	}
+
+	public void setY_max(int y_max) {
+		this.y_max = this.getLocation_y() + (this.getSize_y() / 2);
+	}
 
 	public int getLocation_x() {
 		return location_x;
@@ -52,7 +89,7 @@ public class Sensor {
 		return pColor;
 	}
 
-	int[] randomPointsColor() {
+	int[] randomPointsColor() throws IOException {
 		int[] pColor = null;
 		return pColor;
 	}
@@ -79,8 +116,9 @@ public class Sensor {
 	 * @return coa this is the color of this area, the value should be
 	 *         calculated, the specific method will be decided after research
 	 *         work
+	 * @throws IOException 
 	 */
-	Color areaColor() {
+	Color areaColor() throws IOException {
 		Color coa = null;
 		return coa;
 	}

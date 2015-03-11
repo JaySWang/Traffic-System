@@ -2,6 +2,7 @@ package model;
 
 import java.awt.AWTException;
 import java.awt.Color;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
@@ -16,11 +17,7 @@ import Tools.seperateRGB;
  * 
  */
 public class Sensor_withoutCircle extends Sensor {
-	int x_min = this.getLocation_x() - this.getSize_x() / 2;
-	int x_max = this.getLocation_x() + this.getSize_x() / 2;
-	int y_min = this.getLocation_y() - this.getSize_y() / 2;
-	int y_max = this.getLocation_y() - this.getSize_y() / 2;
-
+	
 	/**
 	 * this method is used to get all the pixels in particular area
 	 * 
@@ -32,8 +29,8 @@ public class Sensor_withoutCircle extends Sensor {
 	int[] allPointsColor(JFrame obj) throws AWTException {
 		int[] pColor = null;
 		int i = 0;
-		for (int x = x_min; x < x_max; x++) {
-			for (int y = y_min; y < y_max; y++) {
+		for (int x = this.getX_min(); x < this.getX_max(); x++) {
+			for (int y = this.getY_min(); y < this.getY_max(); y++) {
 				pColor[i] = GetColor2.getJframebySt(obj, x, y);
 			}
 		}
@@ -48,13 +45,14 @@ public class Sensor_withoutCircle extends Sensor {
 	 * @param obj
 	 *            the UI's Jframe
 	 * @return pColor all the pixels' GRB(hexadecimal)
-	 * @throws AWTException
+	 * @throws IOException
 	 */
-	int[] randomPointsColor(JFrame obj) throws AWTException {
-		int[] pColor = new int[4];
+	int[] randomPointsColor() throws IOException {
+		int[] pColor = new int[5];
 		for (int i = 0; i < 5; i++) {
-			pColor[i] = GetColor2.getJframebySt(obj, randomInt(x_min, x_max),
-					randomInt(y_min, y_max));
+			pColor[i] = GetColor2.getColorFromImage(randomInt(this.getX_min(), this.getX_max()),
+					randomInt(this.getY_min(), this.getY_max()));
+			//pColor[i] = GetColor2.getColorFromImage(1,10);
 		}
 		return pColor;
 	}
@@ -66,10 +64,10 @@ public class Sensor_withoutCircle extends Sensor {
 	 * @return coa this is the color of this area, the value should be
 	 *         calculated, the specific method will be decided after research
 	 *         work
-	 * @throws AWTException
+	 * @throws IOException
 	 */
-	Color areaColor(JFrame obj) throws AWTException {
-		int[] points = this.randomPointsColor(obj);
+	Color areaColor() throws IOException {
+		int[] points = this.randomPointsColor();
 		int r = 0, g = 0, b = 0;
 		Color coa = null;
 		for (int i = 0; i < points.length; i++) {
@@ -81,7 +79,44 @@ public class Sensor_withoutCircle extends Sensor {
 		r = r / points.length;
 		g = g / points.length;
 		b = b / points.length;
+		if (this.isRound(255, r) && this.isRound(255, g)
+				&& this.isRound(255, b)) {
+			coa = Color.white;
+		} else if (this.isRound(190, r) && this.isRound(190, g)
+				&& this.isRound(190, b)) {
+			coa = Color.gray;
+		} else if (this.isRound(0, r) && this.isRound(0, g)
+				&& this.isRound(0, b)) {
+			coa = Color.black;
+		} else if (this.isRound(255, r) && this.isRound(0, g)
+				&& this.isRound(0, b)) {
+			coa = Color.red;
+		} else if (this.isRound(255, r) && this.isRound(255, g)
+				&& this.isRound(0, b)) {
+			coa = Color.yellow;
+		} else if (this.isRound(0, r) && this.isRound(255, g)
+				&& this.isRound(0, b)) {
+			coa = Color.green;
+		} else if (this.isRound(0, r) && this.isRound(0, g)
+				&& this.isRound(255, b)) {
+			coa = Color.blue;
+		} else if (this.isRound(255, r) && this.isRound(165, g)
+				&& this.isRound(0, b)) {
+			coa = Color.orange;
+		} else if (this.isRound(0, r) && this.isRound(255, g)
+				&& this.isRound(255, b)) {
+			coa = Color.cyan;
+		}
 
 		return coa;
+	}
+	public static void main(String[] arg) throws IOException{
+		Sensor_withoutCircle n= new Sensor_withoutCircle();
+		n.setLocation_x(10);
+		n.setLocation_y(100);
+		n.setSize_x(10);
+		n.setSize_y(10);
+		System.out.println("location x: "+n.getLocation_x()+"location y: "+n.getLocation_y()+"x: "+n.getSize_x()+"y: "+n.getSize_y());
+		System.out.println("the position's color is "+n.areaColor());
 	}
 }

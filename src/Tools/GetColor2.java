@@ -117,10 +117,28 @@ public class GetColor2{
 	 * @return
 	 * @throws IOException
 	 */
-	int getColorFromImage(int x, int y) throws IOException{
+	public static int getColorFromImage(int x, int y) throws IOException{
 		File f= new File("screensho_current.png");
 		BufferedImage screenshot =ImageIO.read(f);
+		int[] result;
+		
+		result=seperateRGB.transfer16(getImageRGB(screenshot,x,y));
+		System.out.println("the color in position is : ");
+		System.out.println(result[0]);
+		System.out.println(result[1]);
+		System.out.println(result[2]);
+		
 		return getImageRGB(screenshot,x,y);
+	} 
+	
+	public static void main(String[] arg) throws IOException{
+		GetColor2 g= new GetColor2();
+		int[] result;
+		result=seperateRGB.transfer16(g.getColorFromImage(1,113 ));
+		System.out.println("the color in position is : ");
+		System.out.println(result[0]);
+		System.out.println(result[1]);
+		System.out.println(result[2]);
 	}
 
 }
