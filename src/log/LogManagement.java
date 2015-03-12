@@ -43,11 +43,20 @@ public class LogManagement {
 		vLogs.add(vLog);
 	}
 
-	public List<TrafficMgtPolicyLog> gettLogs() {
+	public List<TrafficMgtPolicyLog> getTLogs() {
 		return tLogs;
 	}
+	public TrafficMgtPolicyLog getTLogById(int tId) {
+		for(TrafficMgtPolicyLog tl : tLogs){
+			if(tl.getId()==tId){
+				return tl;
+			}
+		}
+		
+		return null;
+	}
 
-	public List<VehicleLog> getvLogs() {
+	public List<VehicleLog> getVLogs() {
 		return vLogs;
 	}
 	
@@ -63,7 +72,19 @@ public class LogManagement {
 		return logs;
 	}
 	
-	public List<VehicleLog> getVLogByTime(int from,int to){
+	
+	
+	
+	public List<VehicleLog> getVLogByTrafficMgtPolicyId(int tId){
+		TrafficMgtPolicyLog tl = getTLogById(tId); 
+		List<VehicleLog> logs = getVLogByTime(tl.getStartTime(),tl.getEndTime());
+
+		return logs;
+	}
+	
+	
+	
+	private List<VehicleLog> getVLogByTime(int from,int to){
 		List<VehicleLog> logs = new ArrayList();
 		for(VehicleLog vl:vLogs){
 			if(from<=vl.getTime()&&vl.getTime()<=to){
