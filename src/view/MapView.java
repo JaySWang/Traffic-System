@@ -18,9 +18,9 @@ import ControllerInterface.ITrafficLightController;
 
 import constValue.ConstValues;
 
-import model.IVehicle;
-import model.IVehicleManagement;
 import modelInterface.ITrafficLight;
+import modelInterface.IVehicle;
+import modelInterface.IVehicleManagement;
 
 import observer.ITrafficLightObservable;
 import observer.ITrafficLightObserver;

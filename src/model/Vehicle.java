@@ -1,4 +1,7 @@
 package model;
+
+import modelInterface.IVehicle;
+
 /**
  * this class is the model of all the vehicle in this system, this version doesn't consider the circle
  * @author qutong

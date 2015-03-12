@@ -1,4 +1,4 @@
-package model;
+package modelInterface;
 
 import java.util.List;
 

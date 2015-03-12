@@ -5,11 +5,11 @@ import java.util.List;
 
 import Controller.TrafficLightController;
 import ControllerInterface.ITrafficLightController;
-import model.IVehicle;
 import model.TrafficLight;
 import model.Vehicle;
 import model.VehicleManagement;
 import modelInterface.ITrafficLight;
+import modelInterface.IVehicle;
 import view.MainView;
 import view.MapView;
 

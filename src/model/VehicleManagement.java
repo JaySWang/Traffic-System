@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import log.LogManagement;
+import modelInterface.IVehicle;
+import modelInterface.IVehicleManagement;
 
 import observer.ITrafficMgtPolicyObservable;
 import observer.ITrafficMgtPolicyObserver;
