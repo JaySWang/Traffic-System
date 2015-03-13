@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import log.LogManagement;
 import modelInterface.IAnalysis;
 
@@ -24,6 +26,12 @@ public class Analysis implements IAnalysis {
 	public int getCongestionRateByTMPId(int TrafficMgtPolicyId) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ArrayList getAnalysisLog() {
+		// TODO Auto-generated method stub
+		return lm.getALogs();
 	}
 
 	

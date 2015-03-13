@@ -10,6 +10,8 @@ public class LogManagement {
 	List<TrafficMgtPolicyLog> tLogs = new ArrayList<TrafficMgtPolicyLog>();
 	
 	List<VehicleLog> vLogs = new ArrayList<VehicleLog>();
+	List<AnalysisLog> aLogs = new ArrayList<AnalysisLog>();
+
 
 	
 	static LogManagement  lm;
@@ -92,6 +94,10 @@ public class LogManagement {
 			}
 		}
 		return logs;
+	}
+
+	public List getALogs() {
+		return aLogs;
 	}
 	
 	
