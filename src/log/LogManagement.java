@@ -3,6 +3,11 @@ package log;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Analysis;
+import modelInterface.IAnalysis;
+
+import constValue.ConstValues;
+
 
 public class LogManagement {
 
@@ -15,7 +20,7 @@ public class LogManagement {
 
 	
 	static LogManagement  lm;
-	
+	IAnalysis a= new Analysis();
 	
 	
 	
@@ -39,8 +44,28 @@ public class LogManagement {
 
 	public void addLog(TrafficMgtPolicyLog tLog){
 		tLogs.add(tLog);
+		addALog(tLog);
 	}
 	
+	private void addALog(TrafficMgtPolicyLog tLog) {
+		int speedLimit = tLog.getSpeedLimit();
+		
+		String trafficLights;
+		if(tLog.getLightState() == ConstValues.ON){
+			trafficLights = "ON";
+			
+		}else{
+			trafficLights = "OFF";
+		}
+		
+		double averageSpeed = a.getAverageSpeedByTMPId(tLog.getId()) ;
+		double congestionRate = a.getCongestionRateByTMPId(tLog.getId());
+		
+		
+		
+		AnalysisLog al = new AnalysisLog(speedLimit, trafficLights, averageSpeed, congestionRate);	
+	}
+
 	public void addLog(VehicleLog vLog){
 		vLogs.add(vLog);
 	}
@@ -48,6 +73,7 @@ public class LogManagement {
 	public List<TrafficMgtPolicyLog> getTLogs() {
 		return tLogs;
 	}
+	
 	public TrafficMgtPolicyLog getTLogById(int tId) {
 		for(TrafficMgtPolicyLog tl : tLogs){
 			if(tl.getId()==tId){

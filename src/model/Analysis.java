@@ -1,8 +1,9 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import log.LogManagement;
+import log.VehicleLog;
 import modelInterface.IAnalysis;
 
 public class Analysis implements IAnalysis {
@@ -11,29 +12,46 @@ public class Analysis implements IAnalysis {
 	
 	
 	@Override
-	public int getAverageSpeedByVId(int VehicleId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public double getAverageSpeedByVId(int VehicleId) {
 
-	@Override
-	public int getAverageSpeedByTMPId(int TrafficMgtPolicyId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getCongestionRateByTMPId(int TrafficMgtPolicyId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList getAnalysisLog() {
-		// TODO Auto-generated method stub
-		return lm.getALogs();
+		List<VehicleLog> vls = lm.getVLogByVehicleId(VehicleId);
+		double averageSpeed = calculateAverageSpeed(vls);
+		
+	
+		
+		return averageSpeed;
 	}
 
 	
+	private double calculateAverageSpeed(List<VehicleLog> vls) {
+
+		int totalSpeed = 0;
+		
+		for(VehicleLog vl:vls){
+			totalSpeed+=vl.getSpeed();
+
+		}
+	return totalSpeed/vls.size();
+		
+	}
+
+	@Override
+	public double getAverageSpeedByTMPId(int TrafficMgtPolicyId) {
+		
+		
+		List<VehicleLog> vls = lm.getVLogByTrafficMgtPolicyId(TrafficMgtPolicyId);	
+		
+		
+        double averageSpeed = calculateAverageSpeed(vls);
+        
+		return averageSpeed;
+		
+	}
+
+	@Override
+	public double getCongestionRateByTMPId(int TrafficMgtPolicyId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }
