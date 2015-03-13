@@ -17,7 +17,7 @@ import Tools.seperateRGB;
  * 
  */
 public class Sensor_withoutCircle extends Sensor {
-	
+
 	/**
 	 * this method is used to get all the pixels in particular area
 	 * 
@@ -50,9 +50,9 @@ public class Sensor_withoutCircle extends Sensor {
 	int[] randomPointsColor() throws IOException {
 		int[] pColor = new int[5];
 		for (int i = 0; i < 5; i++) {
-			pColor[i] = GetColor2.getColorFromImage(randomInt(this.getX_min(), this.getX_max()),
+			pColor[i] = GetColor2.getColorFromImage(
+					randomInt(this.getX_min(), this.getX_max()),
 					randomInt(this.getY_min(), this.getY_max()));
-			//pColor[i] = GetColor2.getColorFromImage(1,10);
 		}
 		return pColor;
 	}
@@ -110,13 +110,18 @@ public class Sensor_withoutCircle extends Sensor {
 
 		return coa;
 	}
-	public static void main(String[] arg) throws IOException{
-		Sensor_withoutCircle n= new Sensor_withoutCircle();
+
+	public static void main(String[] arg) throws IOException {
+		Sensor_withoutCircle n = new Sensor_withoutCircle();
 		n.setLocation_x(10);
 		n.setLocation_y(100);
 		n.setSize_x(10);
 		n.setSize_y(10);
-		System.out.println("location x: "+n.getLocation_x()+"location y: "+n.getLocation_y()+"x: "+n.getSize_x()+"y: "+n.getSize_y());
-		System.out.println("the position's color is "+n.areaColor());
+		System.out.println("xmax: " + n.getX_max() + "xmin: " + n.getX_min()
+				+ "yman: " + n.getY_max() + "ymin: " + n.getY_min());
+		System.out.println("location x: " + n.getLocation_x() + "location y: "
+				+ n.getLocation_y() + "x: " + n.getSize_x() + "y: "
+				+ n.getSize_y());
+		System.out.println("the position's color is " + n.areaColor());
 	}
 }
