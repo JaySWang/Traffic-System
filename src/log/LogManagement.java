@@ -20,7 +20,7 @@ public class LogManagement {
 
 	
 	static LogManagement  lm;
-	IAnalysis a= new Analysis();
+
 	
 	
 	
@@ -47,6 +47,12 @@ public class LogManagement {
 		addALog(tLog);
 	}
 	
+	
+	public void addLog(AnalysisLog aLog){
+		aLogs.add(aLog);
+		
+	}
+	
 	private void addALog(TrafficMgtPolicyLog tLog) {
 		int speedLimit = tLog.getSpeedLimit();
 		
@@ -58,12 +64,15 @@ public class LogManagement {
 			trafficLights = "OFF";
 		}
 		
+		IAnalysis a= new Analysis();
 		double averageSpeed = a.getAverageSpeedByTMPId(tLog.getId()) ;
 		double congestionRate = a.getCongestionRateByTMPId(tLog.getId());
 		
 		
 		
 		AnalysisLog al = new AnalysisLog(speedLimit, trafficLights, averageSpeed, congestionRate);	
+		aLogs.add(al);
+	
 	}
 
 	public void addLog(VehicleLog vLog){

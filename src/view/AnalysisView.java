@@ -21,6 +21,10 @@ import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+
+import log.AnalysisLog;
+import log.LogManagement;
 
 public class AnalysisView extends JFrame {
 
@@ -37,16 +41,48 @@ public class AnalysisView extends JFrame {
 	 */
 	public AnalysisView() {
 		
+	
+
 		
-	 Object[][] playerInfo={ 
-			     {1,new Integer(66),"On",new Integer(98),0.6}, 
-				 {2,new Integer(12),"Off",new Integer(128),0.6},
-				 {3,new Integer(22),"On",new Integer(128),0.7},
-				 {4,new Integer(33),"On",new Integer(128),0.1},
-				 {5,new Integer(44),"On",new Integer(128),0.2},
-				 }; 
+		
+		//initial table
+		LogManagement lm = LogManagement.getInstance();
+		
+		//test
+		AnalysisLog al0 = new AnalysisLog(10,"on",20,30);
+		AnalysisLog al1 = new AnalysisLog(10,"off",2.0,30);
+		AnalysisLog al2 = new AnalysisLog(0,"off",2.0,3.0);
+		lm.addLog(al0);
+		lm.addLog(al1);
+
+		lm.addLog(al2);
+
+		
+		
+		
+		List<AnalysisLog> aLogs = lm.getALogs();
+		int x = aLogs.size();
+
+		
+		
+		int colSize = 5;
+	 Object[][] playerInfo = new Object[x][colSize];
+	 String[] s;
+	 
 	 String[] Names={"No","Speed Limit","Traffic Lights","Average Speed","Congestion Rate"}; 
 		
+	 for(int i = 0;i<aLogs.size();i++){
+		 s = new String[colSize];
+         s[0] = aLogs.get(i).getNo()+"";		 
+         s[1] = aLogs.get(i).getSpeedLimit()+"";	
+         s[2] = aLogs.get(i).getTrafficLightState();	
+         s[3] = aLogs.get(i).getAverageSpeed()+"";	
+         s[4] = aLogs.get(i).getCongestionRate()+"";	
+		 playerInfo[i] = s;
+		 
+	 }
+	 
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
@@ -57,19 +93,8 @@ public class AnalysisView extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		table = new JTable(playerInfo,Names);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{new Integer(1), new Integer(66), "On", new Integer(98), new Double(0.6)},
-				{new Integer(2), new Integer(12), "Off", new Integer(128), new Double(0.6)},
-				{new Integer(3), new Integer(22), "On", new Integer(128), new Double(0.7)},
-				{new Integer(4), new Integer(33), "On", new Integer(128), new Double(0.1)},
-				{new Integer(5), new Integer(44), "On", new Integer(128), new Double(0.2)},
-				{new Integer(6), new Integer(44), "On", new Integer(128), new Double(0.2)},
-			},
-			new String[] {
-				"No", "Speed Limit", "Traffic Lights", "Average Speed", "Congestion Rate"
-			}
-		));
+		
+		
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setEnabled(false);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
