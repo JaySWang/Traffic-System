@@ -5,21 +5,41 @@ public class AnalysisLog {
 	int no;
 	int speedLimit;
 	
-	String trafficLights;
+	String trafficLightState;
 	
 	double averageSpeed;
 	double congestionRate;
 	
-	public AnalysisLog(int speedLimit, String trafficLights,
+	public AnalysisLog(int speedLimit, String trafficLightState,
 			double averageSpeed, double congestionRate) {
 		super();
 		
 		this.no = count;
 		this.speedLimit = speedLimit;
-		this.trafficLights = trafficLights;
+		this.trafficLightState = trafficLightState;
 		this.averageSpeed = averageSpeed;
 		this.congestionRate = congestionRate;
 		count++;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public int getSpeedLimit() {
+		return speedLimit;
+	}
+
+	public String getTrafficLightState() {
+		return trafficLightState;
+	}
+
+	public double getAverageSpeed() {
+		return averageSpeed;
+	}
+
+	public double getCongestionRate() {
+		return congestionRate;
 	}
 	
 	
