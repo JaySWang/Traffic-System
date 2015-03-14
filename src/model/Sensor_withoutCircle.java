@@ -113,9 +113,9 @@ public class Sensor_withoutCircle extends Sensor {
 
 	public static void main(String[] arg) throws IOException {
 		Sensor_withoutCircle n = new Sensor_withoutCircle();
-		n.setLocation_x(10);
-		n.setLocation_y(100);
-		n.setSize_x(10);
+		n.setLocation_x(271);
+		n.setLocation_y(590);//147,186
+		n.setSize_x(1);
 		n.setSize_y(10);
 		System.out.println("xmax: " + n.getX_max() + "xmin: " + n.getX_min()
 				+ "yman: " + n.getY_max() + "ymin: " + n.getY_min());
