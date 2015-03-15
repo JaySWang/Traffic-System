@@ -30,6 +30,7 @@ ArrayList<ITrafficMgtPolicyObserver> trafficMgtPolicyObservers = new ArrayList<I
  ArrayList<Integer> lightStates;
  
  int  intervalTime;
+
  int numberOfLights;
  int no;
  
@@ -65,7 +66,6 @@ public int getIntervalTime() {
 
 		initial();
 		
-		notifyTMPObservers();
 
 		start();
 
@@ -94,16 +94,21 @@ public int getIntervalTime() {
 
 	@Override
 	public void off() {
-			notifyTMPObservers();		
-		
 		lightState = ConstValues.OFF;
+		   intervalTime = 0;
+			notifyTMPObservers();	
+
+		
 	}
 
 	@Override
 	public void on() {
-			notifyTMPObservers();
-	
 		lightState = ConstValues.ON;
+		   intervalTime = 1000;
+
+			notifyTMPObservers();
+
+	
 	}
 
 	
@@ -176,10 +181,10 @@ while(true){
 	}
 	@Override
 	public void setInterval(int sec) {
-		if(lightState!=-1){
-			notifyTMPObservers();
-		}
 		intervalTime = 1000*sec;	
+
+			notifyTMPObservers();
+		
 		
 	}
 	

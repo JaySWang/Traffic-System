@@ -22,7 +22,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	
 	int intervalTime;
 	
-	
+	//timing for the simulation 
 	static int timing;
 	int speedLimit;
 	

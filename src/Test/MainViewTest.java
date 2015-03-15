@@ -3,9 +3,12 @@ package Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import observer.ITrafficMgtPolicyObserver;
+
 import Controller.TrafficLightController;
 import ControllerInterface.ITrafficLightController;
 import model.TrafficLight;
+import model.TrafficMgtPolicy;
 import model.Vehicle;
 import model.VehicleManagement;
 import modelInterface.ITrafficLight;
@@ -25,6 +28,11 @@ public class MainViewTest {
 		TrafficLights.add(t0);
 		// TrafficLights.add(t1);
 
+		TrafficMgtPolicy tp = new TrafficMgtPolicy();
+		t0.registerTMPObserver(tp);
+		
+		
+		
 		ITrafficLightController c = new TrafficLightController(TrafficLights);
 		MapView mapPanel = new MapView(TrafficLights, c);
 
@@ -51,7 +59,6 @@ public class MainViewTest {
 
 		vm.setIntervalTime(1);
 		vm.start();
-		t0.on();
 		// t1.on();
 
 	}

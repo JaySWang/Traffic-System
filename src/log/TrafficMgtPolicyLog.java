@@ -14,9 +14,10 @@ int startTime;
 int endTime;
 
 
-public TrafficMgtPolicyLog(int lightState, int speedLimit, int startTime, int endTime ) {
+public TrafficMgtPolicyLog(int lightState,int lightIntervalTime, int speedLimit, int startTime, int endTime ) {
 	super();
 	this.lightState = lightState;
+	this.lightIntervalTime = lightIntervalTime;
 	this.speedLimit = speedLimit;
 	this.startTime = startTime;
 	this.endTime = endTime;
@@ -43,6 +44,9 @@ public int getEndTime() {
 }
 public void setEndTime(int endTime) {
 	this.endTime = endTime;
+}
+public int getLightIntervalTime() {
+	return lightIntervalTime;
 }
 	
 
