@@ -46,6 +46,8 @@ public class MainViewTest {
 		IVehicle v2 = new Vehicle();
 		v1.setLength(10);
 		v1.setWidth(10);
+		v1.setSpeed(10);
+        v1.setAcceleration(10);
 		v1.setLocation_x(0);
 		v1.setLocation_y(100);
 

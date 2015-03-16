@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import log.LogManagement;
+import log.VehicleLog;
 import modelInterface.IVehicle;
 import modelInterface.IVehicleManagement;
 
@@ -84,7 +85,15 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	public void run(){
 		while(true){
 			for(IVehicle v:vehicles){
-				v.setLocation_x(v.getLocation_x()+20);
+				VehicleLog vLog = new VehicleLog(v.getId(), v.getLocation_x(), v.getLocation_y(),
+			v.getSpeed(),timing);
+				lm.addLog(vLog);
+				
+				
+				v.setLocation_x(v.getLocation_x()+v.getSpeed());
+				v.setSpeed(v.getSpeed()+v.getAcceleration());
+				
+				
 
 			}
 			

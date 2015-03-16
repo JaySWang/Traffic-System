@@ -14,6 +14,7 @@ import modelInterface.IVehicle;
  * 
  */
 public class Vehicle implements IVehicle {
+	private int id;
 	private int width;
 	private int length;
 	private int location_x;
@@ -30,6 +31,26 @@ public class Vehicle implements IVehicle {
 	Sensor_withoutCircle s4 = new Sensor_withoutCircle();
 	Sensor_withoutCircle s5 = new Sensor_withoutCircle();
 	Sensor_withoutCircle s6 = new Sensor_withoutCircle();
+	
+	
+	
+	
+	public Vehicle(){
+		
+	}
+	
+	
+
+	public Vehicle(int id, int width, int length, int location_x,
+			int location_y, int speed) {
+		super();
+		this.id = id;
+		this.width = width;
+		this.length = length;
+		this.location_x = location_x;
+		this.location_y = location_y;
+		this.speed = speed;
+	}
 
 	public Sensor_withoutCircle getS1() {
 		return s1;
@@ -236,6 +257,11 @@ public class Vehicle implements IVehicle {
 					+ v.getLocation_x() + "," + v.getLocation_y() + ")"
 					+ v.getAngle());
 		}
+	}
+
+	@Override
+	public int getId() {
+     return id;		
 	}
 
 }

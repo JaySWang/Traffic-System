@@ -32,9 +32,11 @@ public class Analysis implements IAnalysis {
 
 		}
 		
-		//test 
+		if(vls.size()!=0){
+			return totalSpeed/vls.size();
+		}
 		
-	//return totalSpeed/vls.size();
+	
 		return 0;
 	}
 
