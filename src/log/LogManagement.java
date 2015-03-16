@@ -55,7 +55,9 @@ public class LogManagement {
 	
 	private void addALog(TrafficMgtPolicyLog tLog) {
 		int speedLimit = tLog.getSpeedLimit();
-		
+		int lightIntervalTime = tLog.getLightIntervalTime();
+
+				
 		String trafficLights;
 		if(tLog.getLightState() == ConstValues.ON){
 			trafficLights = "ON";
@@ -69,8 +71,7 @@ public class LogManagement {
 		double congestionRate = a.getCongestionRateByTMPId(tLog.getId());
 		
 		
-		
-		AnalysisLog al = new AnalysisLog(speedLimit, trafficLights, averageSpeed, congestionRate);	
+		AnalysisLog al = new AnalysisLog(speedLimit, trafficLights,lightIntervalTime, averageSpeed, congestionRate);	
 		aLogs.add(al);
 	
 	}

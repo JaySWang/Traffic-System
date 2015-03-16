@@ -11,7 +11,7 @@ public class TrafficMgtPolicy implements ITrafficMgtPolicyObserver {
 	
 	int speedLimit;
 	int lightState;
-	int startTime = -1;
+	int startTime = 0;
 	int endTime;
 	int lightIntervalTime;
 	TrafficMgtPolicyLog tpl ;
@@ -21,27 +21,25 @@ public class TrafficMgtPolicy implements ITrafficMgtPolicyObserver {
 	
 	@Override
 	public void update(ITrafficMgtPolicyObservable o) {
-		if(startTime!=-1){
+	
 			addLog();
 
-		}
+		
 		
 		if(o instanceof TrafficLight ){
 			lightState = ((TrafficLight)o).getLightState();
-			lightIntervalTime =  ((TrafficLight)o).getLightState();
+			lightIntervalTime =  ((TrafficLight)o).getIntervalTime()/1000;
 			
 		}
 		
 		if(o instanceof VehicleManagement ){
-			if(startTime!=-1){
-				addLog();
-
-			}
-			startTime = VehicleManagement.getTiming();
+	
 			speedLimit =  ((VehicleManagement)o).getSpeedLimit();
 			
 			
 		}
+		startTime = VehicleManagement.getTiming();
+
 		
 	}
 
@@ -50,7 +48,7 @@ public class TrafficMgtPolicy implements ITrafficMgtPolicyObserver {
 
 	private void addLog() {
 		endTime = VehicleManagement.getTiming();
-		 tpl = new TrafficMgtPolicyLog( lightState,  speedLimit,  startTime, endTime);
+		 tpl = new TrafficMgtPolicyLog(lightState,lightIntervalTime, speedLimit,  startTime, endTime);
 		 lm.addLog(tpl);
 		 startTime = endTime;		
 	}

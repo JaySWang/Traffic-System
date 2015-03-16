@@ -53,8 +53,17 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 
 	public void setTrafficLightState(int tls) {
 		trafficLightState = tls;
+		if(trafficLightState == ConstValues.ON){
+			trafficLightController.on();
+		}else{
+			trafficLightController.off();
+
+		}
+	
 	}
 
+	
+	
 	private void initialLights() {
 
 		Light light1 = new Light((275.0 / 1280.0) * map.getIconWidth()
@@ -110,6 +119,9 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 		}
 	}
 
+	
+	//screenShot
+	
 	public void paint(Graphics g) {
 		super.paint(g);
 		

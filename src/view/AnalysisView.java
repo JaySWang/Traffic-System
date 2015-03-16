@@ -48,15 +48,7 @@ public class AnalysisView extends JFrame {
 		//initial table
 		LogManagement lm = LogManagement.getInstance();
 		
-		//test
-		AnalysisLog al0 = new AnalysisLog(10,"on",20,30);
-		AnalysisLog al1 = new AnalysisLog(10,"off",2.0,30);
-		AnalysisLog al2 = new AnalysisLog(0,"off",2.0,3.0);
-		lm.addLog(al0);
-		lm.addLog(al1);
-
-		lm.addLog(al2);
-
+	
 		
 		
 		
@@ -65,19 +57,21 @@ public class AnalysisView extends JFrame {
 
 		
 		
-		int colSize = 5;
+		int colSize = 6;
 	 Object[][] playerInfo = new Object[x][colSize];
 	 String[] s;
 	 
-	 String[] Names={"No","Speed Limit","Traffic Lights","Average Speed","Congestion Rate"}; 
+	 String[] Names={"No","Speed Limit","Traffic Lights","Light Interval Time","Average Speed","Congestion Rate"}; 
 		
 	 for(int i = 0;i<aLogs.size();i++){
 		 s = new String[colSize];
          s[0] = aLogs.get(i).getNo()+"";		 
          s[1] = aLogs.get(i).getSpeedLimit()+"";	
-         s[2] = aLogs.get(i).getTrafficLightState();	
-         s[3] = aLogs.get(i).getAverageSpeed()+"";	
-         s[4] = aLogs.get(i).getCongestionRate()+"";	
+         s[2] = aLogs.get(i).getTrafficLightState();
+         s[3] = aLogs.get(i).getLightIntervalTime()+"";	
+
+         s[4] = aLogs.get(i).getAverageSpeed()+"";	
+         s[5] = aLogs.get(i).getCongestionRate()+"";	
 		 playerInfo[i] = s;
 		 
 	 }

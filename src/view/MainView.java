@@ -57,6 +57,7 @@ public class MainView implements IVehicleObserver{
     
  	JButton btnOn;
  	JButton btnOff;
+ 	JButton btnSet;
  	JComboBox comboBox;
     
     
@@ -129,6 +130,9 @@ public class MainView implements IVehicleObserver{
 				mapPanel.setTrafficLightState(ConstValues.ON);
 				btnOn.setEnabled(false);
 				btnOff.setEnabled(true);
+				comboBox.setEnabled(true);
+				comboBox.setSelectedIndex(0);
+				btnSet.setEnabled(true);
 
 				
 			}
@@ -144,6 +148,8 @@ public class MainView implements IVehicleObserver{
 				mapPanel.setTrafficLightState(ConstValues.OFF);
 				btnOn.setEnabled(true);
 				btnOff.setEnabled(false);
+				comboBox.setEnabled(false);
+				btnSet.setEnabled(false);
 
 			}
 		});
@@ -156,7 +162,8 @@ public class MainView implements IVehicleObserver{
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
 		controlPanel.add(comboBox);
 		
-		JButton btnSet = new JButton("Set");
+		 btnSet = new JButton("Set");
+		
 		btnSet.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -164,6 +171,9 @@ public class MainView implements IVehicleObserver{
 							
 			}
 		});
+		btnSet.setEnabled(false);
+		comboBox.setEnabled(false);
+
 		controlPanel.add(btnSet);
 		controlPanel.add(panel);
 		

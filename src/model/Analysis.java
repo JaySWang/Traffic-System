@@ -31,8 +31,11 @@ public class Analysis implements IAnalysis {
 			totalSpeed+=vl.getSpeed();
 
 		}
-	return totalSpeed/vls.size();
 		
+		//test 
+		
+	//return totalSpeed/vls.size();
+		return 0;
 	}
 
 	@Override
