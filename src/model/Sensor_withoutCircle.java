@@ -24,17 +24,19 @@ public class Sensor_withoutCircle extends Sensor {
 	 * @param obj
 	 *            the UI's Jframe
 	 * @return pColor all the pixels' GRB(hexadecimal)
+	 * @throws IOException
 	 * @throws AWTException
 	 */
-	int[] allPointsColor(JFrame obj) throws AWTException {
-		int[] pColor = null;
-		int i = 0;
-		for (int x = this.getX_min(); x < this.getX_max(); x++) {
-			for (int y = this.getY_min(); y < this.getY_max(); y++) {
-				pColor[i] = GetColor2.getJframebySt(obj, x, y);
+	int[] allPointsColor() throws IOException {
+		int[] pColor = new int[5];
+		int n = 0;
+		for (int x = this.getX_min(); x < this.getX_min() + this.getSize_x()
+				+ 1; x++) {
+			for (int y = this.getY_min(); y < this.getY_min()
+					+ this.getSize_y() + 1; y++) {
+				pColor[n] = GetColor2.getColorFromImage(x, y);
 			}
 		}
-		i++;
 		return pColor;
 	}
 
@@ -110,11 +112,36 @@ public class Sensor_withoutCircle extends Sensor {
 
 		return coa;
 	}
+/**
+ * calculate the distance between vehicle and cross
+ * @return
+ * 			numbers of white pixels
+ * @throws IOException
+ */
+	int countColor() throws IOException {
+		int distance=0;
+		int r = 0, g = 0, b = 0;
+
+		int[] points = this.allPointsColor();
+		for (int i = 0; i <= points.length; i++) {
+			int rgb[] = seperateRGB.transfer16(points[i]);
+			r = rgb[0] + r;
+			g = rgb[1] + g;
+			b = rgb[2] + b;
+			if (this.isRound(255, r) && this.isRound(255, g)
+					&& this.isRound(255, b)) {
+				distance++;
+			} else {
+				distance = distance + 0;
+			}
+		}
+		return distance;
+	}
 
 	public static void main(String[] arg) throws IOException {
 		Sensor_withoutCircle n = new Sensor_withoutCircle();
 		n.setLocation_x(271);
-		n.setLocation_y(590);//147,186
+		n.setLocation_y(590);// 147,186
 		n.setSize_x(1);
 		n.setSize_y(10);
 		System.out.println("xmax: " + n.getX_max() + "xmin: " + n.getX_min()

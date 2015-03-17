@@ -193,11 +193,11 @@ public class Vehicle implements IVehicle {
 			this.getS1().setLocation_x(this.getLocation_x() - 19);
 			this.getS1().setLocation_y(this.getLocation_y() + 14);
 			this.getS1().setSize_x(1);
-			this.getS1().setSize_y(5);
+			this.getS1().setSize_y(30);
 			this.getS2().setLocation_x(this.getLocation_x() + 19);
 			this.getS2().setLocation_y(this.getLocation_y() - 14);
 			this.getS2().setSize_x(1);
-			this.getS2().setSize_y(5);
+			this.getS2().setSize_y(30);
 
 			/*
 			 * if (s1.areaColor() == Color.black && s2.areaColor() ==
