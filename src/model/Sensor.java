@@ -84,7 +84,7 @@ public class Sensor {
 		this.size_y = size_y;
 	}
 
-	int[] allPointsColor() {
+	int[] allPointsColor() throws IOException {
 		int[] pColor = null;
 		return pColor;
 	}

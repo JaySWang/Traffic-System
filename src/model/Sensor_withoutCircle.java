@@ -34,8 +34,15 @@ public class Sensor_withoutCircle extends Sensor {
 				+ 1; x++) {
 			for (int y = this.getY_min(); y < this.getY_min()
 					+ this.getSize_y() + 1; y++) {
+				
+				try{
 				pColor[n] = GetColor2.getColorFromImage(x, y);
-			}
+				}
+				catch(IOException e){
+					throw e;
+					
+				}
+				}
 		}
 		return pColor;
 	}
