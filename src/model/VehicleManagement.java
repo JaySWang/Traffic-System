@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import constValue.ConstValues;
+
 import log.LogManagement;
 import log.VehicleLog;
 import modelInterface.IVehicle;
@@ -26,14 +28,22 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	//timing for the simulation 
 	static int timing;
 	int speedLimit;
+	static VehicleManagement vm;
+	
+	
+	public static VehicleManagement getInstance(){
+		if(vm==null){
+			vm = new VehicleManagement();
+		}
+		
+		return vm;
+		
+		
+	};
 	
 	
 	
-	
-	
-	
-	
-	public VehicleManagement() {
+	private VehicleManagement() {
 		timing = 0;
 		speedLimit = 100;
 		notifyTMPObservers();
@@ -89,8 +99,21 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 			v.getSpeed(),timing);
 				lm.addLog(vLog);
 				
+				switch(v.getDirection()){
+					case ConstValues.EastToWest : v.setLocation_x(v.getLocation_x()+v.getSpeed());
+					break;
+					
+					case ConstValues.WastToEest : v.setLocation_x(v.getLocation_x()-v.getSpeed());
+					break;
+
+					case ConstValues.SouthToNorth : v.setLocation_y(v.getLocation_y()-v.getSpeed());
+					break;
+
+					case ConstValues.NorthToSouth : v.setLocation_y(v.getLocation_y()+v.getSpeed());
+
 				
-				v.setLocation_x(v.getLocation_x()+v.getSpeed());
+				}
+			
 				v.setSpeed(v.getSpeed()+v.getAcceleration());
 				
 				

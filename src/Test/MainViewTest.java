@@ -10,6 +10,7 @@ import ControllerInterface.ITrafficLightController;
 import model.TrafficLight;
 import model.TrafficMgtPolicy;
 import model.Vehicle;
+import model.VehicleGenerator;
 import model.VehicleManagement;
 import modelInterface.ITrafficLight;
 import modelInterface.IVehicle;
@@ -20,7 +21,7 @@ public class MainViewTest {
 
 	public static void main(String args[]) {
 
-		VehicleManagement vm = new VehicleManagement();
+		VehicleManagement vm =VehicleManagement.getInstance();
 		TrafficLight t0 = new TrafficLight(3, 0);
 		// TrafficLight t1 = new TrafficLight(4,0);
 
@@ -40,28 +41,14 @@ public class MainViewTest {
 		// t1.registerObserver(mapPanel);
 
 		MainView mv = new MainView(mapPanel);
-
+         
 		vm.registerObserver(mv);
-		IVehicle v1 = new Vehicle();
-		IVehicle v2 = new Vehicle();
-		v1.setLength(10);
-		v1.setWidth(10);
-		v1.setSpeed(10);
-        v1.setAcceleration(10);
-		v1.setLocation_x(0);
-		v1.setLocation_y(100);
-
-		v2.setLength(20);
-		v2.setWidth(20);
-		v2.setLocation_x(0);
-		v2.setLocation_y(30);
-
-		vm.addVehicle(v1);
-		// vm.addVehicle(v2);
-
+		
+		VehicleGenerator vg = new VehicleGenerator(1);
+        vg.on();
+        
 		vm.setIntervalTime(1);
 		vm.start();
-		// t1.on();
 
 	}
 }

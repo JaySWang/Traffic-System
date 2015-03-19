@@ -18,6 +18,12 @@ public class ConstValues {
  public final static int SPEED_UP = 5;
  
  
+ //direction
+ public final static int EastToWest = 0;
+ public final static int WastToEest = 1;
+ public final  static int SouthToNorth = 2;
+ public final static int NorthToSouth = 3;
+
  
 
  

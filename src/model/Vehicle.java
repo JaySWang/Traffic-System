@@ -23,8 +23,12 @@ public class Vehicle implements IVehicle {
 						// every pixel represent 0.1 meter
 	private int angle;// 0-360
 	private int acceleration;
-	private String next;// what will the vehicle do
+    private int direction;
 
+	private String next;// what will the vehicle do
+	
+	
+	
 	Sensor_withoutCircle s1 = new Sensor_withoutCircle();
 	Sensor_withoutCircle s2 = new Sensor_withoutCircle();
 	Sensor_withoutCircle s3 = new Sensor_withoutCircle();
@@ -42,7 +46,7 @@ public class Vehicle implements IVehicle {
 	
 
 	public Vehicle(int id, int width, int length, int location_x,
-			int location_y, int speed) {
+			int location_y,int direction, int speed) {
 		super();
 		this.id = id;
 		this.width = width;
@@ -50,6 +54,7 @@ public class Vehicle implements IVehicle {
 		this.location_x = location_x;
 		this.location_y = location_y;
 		this.speed = speed;
+		this.direction = direction;
 	}
 
 	public Sensor_withoutCircle getS1() {
@@ -155,6 +160,20 @@ public class Vehicle implements IVehicle {
 	public void setAcceleration(int acceleration) {
 		this.acceleration = acceleration;
 	}
+
+	
+	
+	public int getDirection() {
+		return direction;
+	}
+
+
+
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+
+
 
 	public String getNext() {
 		return next;
