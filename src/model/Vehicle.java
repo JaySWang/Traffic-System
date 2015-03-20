@@ -370,11 +370,23 @@ public class Vehicle implements IVehicle {
 	 * @throws IOException
 	 */
 	void turnJudgement() throws IOException {
-		if(s7.areaColor()==Color.red){
+		if (s7.areaColor() == Color.red) {
 			this.setStatus(1);
-		}
-		else if (s2.areaColor() == Color.black && s5.areaColor() == Color.white) {
-			this.setLocation_x((int) (this.getLocation_x() + this.getSpeed() * 0.1));
+		} else if (s1.areaColor() == Color.red// traffic light is red
+				|| s3.areaColor() != Color.gray// there is not the road in front
+												// of the vehicle, car or end of
+												// the road
+		) {
+			this.setStatus(1);
+
+		} else if (s6.areaColor() != Color.gray
+				&& s6.areaColor() != Color.black) {// not drive normally or
+													// there is a car come from
+													// the road behind it
+
+		} else if (s2.areaColor() == Color.black
+				&& s5.areaColor() == Color.white) {
+			this.setStatus(0);
 		} else {
 			this.setAngle(90);
 		}
@@ -389,7 +401,9 @@ public class Vehicle implements IVehicle {
 	void calculateNextPosition() throws IOException {
 		if (this.status == 2) {// do nothing is stop
 
-		} else if (this.status == 1) {//emergency stop will make the vehicle stop on its left side close to the edge
+		} else if (this.status == 1) {// emergency stop will make the vehicle
+										// stop on its left side close to the
+										// edge
 			switch (this.angle) {
 			case 0:
 				this.setLocation_x(this.getLocation_x() - 4);
@@ -400,8 +414,7 @@ public class Vehicle implements IVehicle {
 			case 270:
 				this.setLocation_y(this.getLocation_y() + 4);
 			}
-		}
-		else if (this.status == 4) {//recover from emergency stop 
+		} else if (this.status == 4) {// recover from emergency stop
 			switch (this.angle) {
 			case 0:
 				this.setLocation_x(this.getLocation_x() + 4);
@@ -412,7 +425,7 @@ public class Vehicle implements IVehicle {
 			case 270:
 				this.setLocation_y(this.getLocation_y() - 4);
 			}
-		}else if (this.angle == 0 && this.status == 0) {
+		} else if (this.angle == 0 && this.status == 0) {
 			this.setLocation_y((int) (this.getLocation_y() - this.getSpeed() * 0.1));
 		} else {
 			this.setAngle(90);
