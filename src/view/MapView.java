@@ -66,14 +66,9 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 	
 	private void initialLights() {
 
-		Light light1 = new Light((275.0 / 1280.0) * map.getIconWidth()
-				- greenIcon.getIconWidth(), map.getIconHeight()
-				* (82.0 / 650.0) - greenIcon.getIconHeight(), 1);
-		Light light2 = new Light((340.0 / 1280.0) * map.getIconWidth(),
-				map.getIconHeight() * (135.0 / 650.0), 0);
-		Light light3 = new Light((270.0 / 1280.0) * map.getIconWidth()
-				- greenIcon.getIconWidth(), map.getIconHeight()
-				* (135.0 / 650.0), 1);
+		Light light1 = new Light(240,115, 1);
+		Light light2 = new Light(240,227, 0);
+		Light light3 = new Light(350, 227,1);
 		// Light light4 = new
 		// Light(map.getIconWidth()/4,map.getIconHeight()/10,0);
 		// Light light5 = new

@@ -9,7 +9,7 @@ public interface IVehicle {
 	public int getId();
 	public int getSpeed();
 	public int getAcceleration();
-
+	public int getDirection();
 	
 	public void setAcceleration(int acceleration);
 	
