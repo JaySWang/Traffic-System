@@ -21,7 +21,7 @@ public class Sensor {
 	private int y_max;
 
 	public int getX_min() {
-		return x_min;
+		return x_min=this.getLocation_x();
 	}
 
 	public void setX_min(int x_min) {
@@ -29,27 +29,27 @@ public class Sensor {
 	}
 
 	public int getX_max() {
-		return x_max;
+		return x_max= this.getX_min()+this.getSize_x();
 	}
 
 	public void setX_max(int x_max) {
-		this.x_max = x_max;
+		this.x_max =x_max;
 	}
 
 	public int getY_min() {
-		return y_min;
+		return y_min= this.getLocation_y();
 	}
 
 	public void setY_min(int y_min) {
-		this.y_min = y_min;
+		this.y_min =y_min;
 	}
 
 	public int getY_max() {
-		return y_max;
+		return y_max=this.getY_min()+this.getSize_y();
 	}
 
 	public void setY_max(int y_max) {
-		this.y_max = y_max;
+		this.y_max =y_max;
 	}
 
 	public int getLocation_x() {
