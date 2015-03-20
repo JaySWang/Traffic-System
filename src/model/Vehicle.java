@@ -370,7 +370,10 @@ public class Vehicle implements IVehicle {
 	 * @throws IOException
 	 */
 	void turnJudgement() throws IOException {
-		if (s2.areaColor() == Color.black && s5.areaColor() == Color.white) {
+		if(s7.areaColor()==Color.red){
+			this.setStatus(1);
+		}
+		else if (s2.areaColor() == Color.black && s5.areaColor() == Color.white) {
 			this.setLocation_x((int) (this.getLocation_x() + this.getSpeed() * 0.1));
 		} else {
 			this.setAngle(90);
@@ -395,9 +398,21 @@ public class Vehicle implements IVehicle {
 			case 180:
 				this.setLocation_x(this.getLocation_x() + 4);
 			case 270:
+				this.setLocation_y(this.getLocation_y() + 4);
+			}
+		}
+		else if (this.status == 4) {//recover from emergency stop 
+			switch (this.angle) {
+			case 0:
+				this.setLocation_x(this.getLocation_x() + 4);
+			case 90:
+				this.setLocation_y(this.getLocation_y() + 4);
+			case 180:
+				this.setLocation_x(this.getLocation_x() - 4);
+			case 270:
 				this.setLocation_y(this.getLocation_y() - 4);
 			}
-		} else if (this.angle == 0 && this.status == 0) {
+		}else if (this.angle == 0 && this.status == 0) {
 			this.setLocation_y((int) (this.getLocation_y() - this.getSpeed() * 0.1));
 		} else {
 			this.setAngle(90);
