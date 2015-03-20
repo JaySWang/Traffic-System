@@ -21,7 +21,7 @@ public class Sensor {
 	private int y_max;
 
 	public int getX_min() {
-		return x_min = this.getLocation_x() - (this.getSize_x() / 2);
+		return x_min;
 	}
 
 	public void setX_min(int x_min) {
@@ -29,7 +29,7 @@ public class Sensor {
 	}
 
 	public int getX_max() {
-		return x_max = this.getLocation_x() + (this.getSize_x() / 2);
+		return x_max;
 	}
 
 	public void setX_max(int x_max) {
@@ -37,7 +37,7 @@ public class Sensor {
 	}
 
 	public int getY_min() {
-		return y_min = this.getLocation_y() - (this.getSize_y() / 2);
+		return y_min;
 	}
 
 	public void setY_min(int y_min) {
@@ -45,7 +45,7 @@ public class Sensor {
 	}
 
 	public int getY_max() {
-		return y_max = this.getLocation_y() + (this.getSize_y() / 2);
+		return y_max;
 	}
 
 	public void setY_max(int y_max) {
@@ -84,7 +84,7 @@ public class Sensor {
 		this.size_y = size_y;
 	}
 
-	int[] allPointsColor() {
+	int[] allPointsColor() throws IOException {
 		int[] pColor = null;
 		return pColor;
 	}
