@@ -9,7 +9,7 @@ public class TrafficMgtPolicy implements ITrafficMgtPolicyObserver {
 
 	LogManagement lm = LogManagement.getInstance();
 	
-	int speedLimit;
+	int speedLimit = -1;
 	int lightState;
 	int startTime = 0;
 	int endTime;
@@ -32,9 +32,9 @@ public class TrafficMgtPolicy implements ITrafficMgtPolicyObserver {
 			
 		}
 		
-		if(o instanceof VehicleManagement ){
+		if(o instanceof TrafficCondition ){
 	
-			speedLimit =  ((VehicleManagement)o).getSpeedLimit();
+			speedLimit =  ((TrafficCondition)o).getSpeedLimit();
 			
 			
 		}

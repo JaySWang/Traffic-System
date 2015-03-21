@@ -25,6 +25,11 @@ public class ConstValues {
  public final static int NorthToSouth = 3;
 
  
+ //density level
+ public final static int Low = 1;
+ public final static int Medium = 2;
+ public final static int High = 3;
+ 
 
  
  
