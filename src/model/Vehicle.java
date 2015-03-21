@@ -23,30 +23,28 @@ public class Vehicle implements IVehicle {
 						// every pixel represent 0.1 meter
 	private int angle;// 0-360
 	private int acceleration;
-    private int direction;
+	private int direction;
+	private int status;// next position will calculate based on this information
+	/*
+	 * 0: normal; 1: emergency stop; 2: stop; 4: recover from emergency stop;
+	 */
 
 	private String next;// what will the vehicle do
-	
-	
-	
+
 	Sensor_withoutCircle s1 = new Sensor_withoutCircle();
 	Sensor_withoutCircle s2 = new Sensor_withoutCircle();
 	Sensor_withoutCircle s3 = new Sensor_withoutCircle();
 	Sensor_withoutCircle s4 = new Sensor_withoutCircle();
 	Sensor_withoutCircle s5 = new Sensor_withoutCircle();
 	Sensor_withoutCircle s6 = new Sensor_withoutCircle();
-	
-	
-	
-	
-	public Vehicle(){
-		
+	Sensor_withoutCircle s7 = new Sensor_withoutCircle();
+
+	public Vehicle() {
+
 	}
-	
-	
 
 	public Vehicle(int id, int width, int length, int location_x,
-			int location_y,int direction, int speed) {
+			int location_y, int direction, int speed) {
 		super();
 		this.id = id;
 		this.width = width;
@@ -105,6 +103,14 @@ public class Vehicle implements IVehicle {
 		this.s6 = s6;
 	}
 
+	public Sensor_withoutCircle getS7() {
+		return s7;
+	}
+
+	public void setS7(Sensor_withoutCircle s7) {
+		this.s7 = s7;
+	}
+
 	public int getWidth() {
 		return width;
 	}
@@ -161,19 +167,13 @@ public class Vehicle implements IVehicle {
 		this.acceleration = acceleration;
 	}
 
-	
-	
 	public int getDirection() {
 		return direction;
 	}
 
-
-
 	public void setDirection(int direction) {
 		this.direction = direction;
 	}
-
-
 
 	public String getNext() {
 		return next;
@@ -181,6 +181,14 @@ public class Vehicle implements IVehicle {
 
 	public void setNext(String next) {
 		this.next = next;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	/**
@@ -195,40 +203,158 @@ public class Vehicle implements IVehicle {
 	 * @throws IOException
 	 */
 	void configureSensors() throws IOException {
-		if (this.getAngle() == 0) {
+		if (this.getAngle() == 0) {// the car is heading north
 			System.out.println("the car is heading north");
 			System.out.println("for sensors:position of the vehicle now is: ("
 					+ this.getLocation_x() + "," + this.getLocation_y() + ")");
-			/*
-			 * Sensor_withoutCircle s1 = new Sensor_withoutCircle();
-			 * Sensor_withoutCircle s2 = new Sensor_withoutCircle();
-			 * s1.setLocation_x(this.getLocation_x() - 19);
-			 * s1.setLocation_y(this.getLocation_y() + 14); s1.setSize_x(1);
-			 * s1.setSize_y(5); s2.setLocation_x(this.getLocation_x() + 20);
-			 * s2.setLocation_y(this.getLocation_y() - 14); s2.setSize_x(1);
-			 * s2.setSize_y(5);
-			 */
 
-			this.getS1().setLocation_x(this.getLocation_x() - 19);
-			this.getS1().setLocation_y(this.getLocation_y() + 14);
-			this.getS1().setSize_x(1);
-			this.getS1().setSize_y(30);
-			this.getS2().setLocation_x(this.getLocation_x() + 19);
-			this.getS2().setLocation_y(this.getLocation_y() - 14);
+			/* configuration for sensor1 */
+			this.getS1().setLocation_x(this.getLocation_x() - 41);
+			this.getS1().setLocation_y(this.getLocation_y());
+			this.getS1().setSize_x(35);
+			this.getS1().setSize_y(35);
+			/* configuration for sensor2 */
+			this.getS2().setLocation_x(this.getLocation_x() - 6);
+			this.getS2().setLocation_y(this.getLocation_y() - 30);
 			this.getS2().setSize_x(1);
 			this.getS2().setSize_y(30);
+			/* configuration for sensor3 */
+			this.getS3().setLocation_x(this.getLocation_x());
+			this.getS3().setLocation_y(this.getLocation_y() - 20);
+			this.getS3().setSize_x(26);
+			this.getS3().setSize_y(10);
+			/* configuration for sensor4 */
+			this.getS4().setLocation_x(this.getLocation_x());
+			this.getS4().setLocation_y(this.getLocation_y() - 38);
+			this.getS4().setSize_x(26);
+			this.getS4().setSize_y(1);
+			/* configuration for sensor5 */
+			this.getS5().setLocation_x(this.getLocation_x() + 31);
+			this.getS5().setLocation_y(this.getLocation_y() - 30);
+			this.getS5().setSize_x(1);
+			this.getS5().setSize_y(30);
+			/* configuration for sensor6 */
+			this.getS6().setLocation_x(this.getLocation_x() + 18);
+			this.getS6().setLocation_y(this.getLocation_y() - 30);
+			this.getS6().setSize_x(1);
+			this.getS6().setSize_y(30);
+			/* configuration for sensor7 */
+			this.getS7().setLocation_x(this.getLocation_x() - 5);
+			this.getS7().setLocation_y(this.getLocation_y() + 42);
+			this.getS7().setSize_x(36);
+			this.getS7().setSize_y(10);
 
-			/*
-			 * if (s1.areaColor() == Color.black && s2.areaColor() ==
-			 * Color.white) { this.setLocation_y((int) (this.getLocation_y() -
-			 * this .getSpeed() * 0.1)); } else { this.setAngle(90); }
-			 */
-		} else if (this.getAngle() == 90) {
+		} else if (this.getAngle() == 90) {// the car is heading east
 			System.out.println("the car is heading east");
-		} else if (this.getAngle() == 180) {
+			/* configuration for sensor1 */
+			this.getS1().setLocation_x(this.getLocation_x() - 35);
+			this.getS1().setLocation_y(this.getLocation_y() - 42);
+			this.getS1().setSize_x(35);
+			this.getS1().setSize_y(35);
+			/* configuration for sensor2 */
+			this.getS2().setLocation_x(this.getLocation_x() + 1);
+			this.getS2().setLocation_y(this.getLocation_y() - 6);
+			this.getS2().setSize_x(30);
+			this.getS2().setSize_y(1);
+			/* configuration for sensor3 */
+			this.getS3().setLocation_x(this.getLocation_x() + 11);
+			this.getS3().setLocation_y(this.getLocation_y());
+			this.getS3().setSize_x(10);
+			this.getS3().setSize_y(26);
+			/* configuration for sensor4 */
+			this.getS4().setLocation_x(this.getLocation_x() + 38);
+			this.getS4().setLocation_y(this.getLocation_y());
+			this.getS4().setSize_x(1);
+			this.getS4().setSize_y(26);
+			/* configuration for sensor5 */
+			this.getS5().setLocation_x(this.getLocation_x() + 1);
+			this.getS5().setLocation_y(this.getLocation_y() + 31);
+			this.getS5().setSize_x(30);
+			this.getS5().setSize_y(1);
+			/* configuration for sensor6 */
+			this.getS6().setLocation_x(this.getLocation_x() + 1);
+			this.getS6().setLocation_y(this.getLocation_y() + 68);
+			this.getS6().setSize_x(30);
+			this.getS6().setSize_y(1);
+			/* configuration for sensor7 */
+			this.getS7().setLocation_x(this.getLocation_x() - 51);
+			this.getS7().setLocation_y(this.getLocation_y() - 5);
+			this.getS7().setSize_x(10);
+			this.getS7().setSize_y(36);
+		} else if (this.getAngle() == 180) {// the car is heading south
 			System.out.println("the car is heading south");
-		} else {
+			/* configuration for sensor1 */
+			this.getS1().setLocation_x(this.getLocation_x() + 7);
+			this.getS1().setLocation_y(this.getLocation_y() - 35);
+			this.getS1().setSize_x(35);
+			this.getS1().setSize_y(35);
+			/* configuration for sensor2 */
+			this.getS2().setLocation_x(this.getLocation_x() + 6);
+			this.getS2().setLocation_y(this.getLocation_y() + 1);
+			this.getS2().setSize_x(1);
+			this.getS2().setSize_y(30);
+			/* configuration for sensor3 */
+			this.getS3().setLocation_x(this.getLocation_x() - 25);
+			this.getS3().setLocation_y(this.getLocation_y() + 11);
+			this.getS3().setSize_x(26);
+			this.getS3().setSize_y(10);
+			/* configuration for sensor4 */
+			this.getS4().setLocation_x(this.getLocation_x() - 25);
+			this.getS4().setLocation_y(this.getLocation_y() + 11);
+			this.getS4().setSize_x(26);
+			this.getS4().setSize_y(1);
+			/* configuration for sensor5 */
+			this.getS5().setLocation_x(this.getLocation_x() - 25);
+			this.getS5().setLocation_y(this.getLocation_y() + 38);
+			this.getS5().setSize_x(1);
+			this.getS5().setSize_y(30);
+			/* configuration for sensor6 */
+			this.getS6().setLocation_x(this.getLocation_x() - 68);
+			this.getS6().setLocation_y(this.getLocation_y() + 1);
+			this.getS6().setSize_x(1);
+			this.getS6().setSize_y(30);
+			/* configuration for sensor7 */
+			this.getS7().setLocation_x(this.getLocation_x() - 31);
+			this.getS7().setLocation_y(this.getLocation_y() - 51);
+			this.getS7().setSize_x(36);
+			this.getS7().setSize_y(10);
+		} else {// the car is heading west
 			System.out.println("the car is heading west");
+			/* configuration for sensor1 */
+			this.getS1().setLocation_x(this.getLocation_x());
+			this.getS1().setLocation_y(this.getLocation_y() + 7);
+			this.getS1().setSize_x(35);
+			this.getS1().setSize_y(35);
+			/* configuration for sensor2 */
+			this.getS2().setLocation_x(this.getLocation_x() - 30);
+			this.getS2().setLocation_y(this.getLocation_y() + 6);
+			this.getS2().setSize_x(30);
+			this.getS2().setSize_y(1);
+			/* configuration for sensor3 */
+			this.getS3().setLocation_x(this.getLocation_x() - 20);
+			this.getS3().setLocation_y(this.getLocation_y() - 26);
+			this.getS3().setSize_x(10);
+			this.getS3().setSize_y(26);
+			/* configuration for sensor4 */
+			this.getS4().setLocation_x(this.getLocation_x() - 38);
+			this.getS4().setLocation_y(this.getLocation_y() - 26);
+			this.getS4().setSize_x(1);
+			this.getS4().setSize_y(26);
+			/* configuration for sensor5 */
+			this.getS5().setLocation_x(this.getLocation_x() - 30);
+			this.getS5().setLocation_y(this.getLocation_y() - 31);
+			this.getS5().setSize_x(30);
+			this.getS5().setSize_y(1);
+			/* configuration for sensor6 */
+			this.getS6().setLocation_x(this.getLocation_x() - 30);
+			this.getS6().setLocation_y(this.getLocation_y() - 68);
+			this.getS6().setSize_x(30);
+			this.getS6().setSize_y(1);
+			/* configuration for sensor7 */
+			this.getS7().setLocation_x(this.getLocation_x() + 42);
+			this.getS7().setLocation_y(this.getLocation_y() - 30);
+			this.getS7().setSize_x(10);
+			this.getS7().setSize_y(36);
 		}
 
 	}
@@ -241,9 +367,29 @@ public class Vehicle implements IVehicle {
 	 *            the next,it can be: ahead,left,right,slow,stop
 	 * @param vehicle
 	 *            's parameters
+	 * @throws IOException
 	 */
-	void turnJudgement() {
+	void turnJudgement() throws IOException {
+		if (s7.areaColor() == Color.red) {
+			this.setStatus(1);
+		} else if (s1.areaColor() == Color.red// traffic light is red
+				|| s3.areaColor() != Color.gray// there is not the road in front
+												// of the vehicle, car or end of
+												// the road
+		) {
+			this.setStatus(1);
 
+		} else if (s6.areaColor() != Color.gray
+				&& s6.areaColor() != Color.black) {// not drive normally or
+													// there is a car come from
+													// the road behind it
+
+		} else if (s2.areaColor() == Color.black
+				&& s5.areaColor() == Color.white) {
+			this.setStatus(0);
+		} else {
+			this.setAngle(90);
+		}
 	}
 
 	/**
@@ -253,8 +399,34 @@ public class Vehicle implements IVehicle {
 	 */
 
 	void calculateNextPosition() throws IOException {
-		if (s1.areaColor() == Color.black && s2.areaColor() == Color.white) {
-			this.setLocation_x((int) (this.getLocation_x() + this.getSpeed() * 0.1));
+		if (this.status == 2) {// do nothing is stop
+
+		} else if (this.status == 1) {// emergency stop will make the vehicle
+										// stop on its left side close to the
+										// edge
+			switch (this.angle) {
+			case 0:
+				this.setLocation_x(this.getLocation_x() - 4);
+			case 90:
+				this.setLocation_y(this.getLocation_y() - 4);
+			case 180:
+				this.setLocation_x(this.getLocation_x() + 4);
+			case 270:
+				this.setLocation_y(this.getLocation_y() + 4);
+			}
+		} else if (this.status == 4) {// recover from emergency stop
+			switch (this.angle) {
+			case 0:
+				this.setLocation_x(this.getLocation_x() + 4);
+			case 90:
+				this.setLocation_y(this.getLocation_y() + 4);
+			case 180:
+				this.setLocation_x(this.getLocation_x() - 4);
+			case 270:
+				this.setLocation_y(this.getLocation_y() - 4);
+			}
+		} else if (this.angle == 0 && this.status == 0) {
+			this.setLocation_y((int) (this.getLocation_y() - this.getSpeed() * 0.1));
 		} else {
 			this.setAngle(90);
 		}
@@ -264,13 +436,16 @@ public class Vehicle implements IVehicle {
 		Vehicle v = new Vehicle();
 		v.setLocation_x(290);
 		v.setLocation_y(400);
+		v.setAngle(0);
 		v.setLength(32);
 		v.setWidth(26);
 		v.setSpeed(100);
+		// simulate
 		while (v.getAngle() == 0) {
 			System.out.println("position of the vehicle now is: ("
 					+ v.getLocation_x() + "," + v.getLocation_y() + ")");
 			v.configureSensors();
+			v.turnJudgement();
 			v.calculateNextPosition();
 			System.out.println("next position of the vehicle is: ("
 					+ v.getLocation_x() + "," + v.getLocation_y() + ")"
@@ -280,7 +455,7 @@ public class Vehicle implements IVehicle {
 
 	@Override
 	public int getId() {
-     return id;		
+		return id;
 	}
 
 }

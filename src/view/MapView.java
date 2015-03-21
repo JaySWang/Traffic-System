@@ -86,7 +86,6 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 		// lightList.add(light6);
 		// lightList.add(light7);
 
-		System.out.println(map.getIconWidth() + " " + map.getIconHeight());
 
 	}
 

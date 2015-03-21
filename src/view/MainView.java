@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import model.TrafficLight;
 import modelInterface.ITrafficLight;
 import Controller.TrafficLightController;
+import ControllerInterface.ITrafficConditionController;
 import ControllerInterface.ITrafficLightController;
 
 import observer.IVehicleObservable;
@@ -57,9 +58,18 @@ public class MainView implements IVehicleObserver{
     
  	JButton btnOn;
  	JButton btnOff;
- 	JButton btnSet;
+ 	JButton btnLightSet;
  	JComboBox comboBox;
     
+ 	
+ 	ITrafficConditionController tcc;
+ 	private JLabel lblSpeedlimit;
+ 	private JLabel label;
+ 	private JLabel lblDensityLevel;
+ 	private JComboBox comboBox_density;
+ 	private JButton btnDensitySet;
+ 	private JComboBox comboBox_speedLimit;
+ 	private JButton btnSpeedSet;
     
     
     
@@ -67,8 +77,9 @@ public class MainView implements IVehicleObserver{
 	/**
 	 * Create the application.
 	 */
-	public MainView(MapView mp) {
+	public MainView(MapView mp,ITrafficConditionController tcc) {
 		super();
+		this.tcc = tcc;
 		mapPanel = mp;
 		initialize();
 	}
@@ -83,6 +94,10 @@ public class MainView implements IVehicleObserver{
 		mapPanel = mp;
 	};
 
+	
+	
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -132,7 +147,7 @@ public class MainView implements IVehicleObserver{
 				btnOff.setEnabled(true);
 				comboBox.setEnabled(true);
 				comboBox.setSelectedIndex(0);
-				btnSet.setEnabled(true);
+				btnLightSet.setEnabled(true);
 
 				
 			}
@@ -149,7 +164,7 @@ public class MainView implements IVehicleObserver{
 				btnOn.setEnabled(true);
 				btnOff.setEnabled(false);
 				comboBox.setEnabled(false);
-				btnSet.setEnabled(false);
+				btnLightSet.setEnabled(false);
 
 			}
 		});
@@ -162,19 +177,66 @@ public class MainView implements IVehicleObserver{
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
 		controlPanel.add(comboBox);
 		
-		 btnSet = new JButton("Set");
+		btnLightSet = new JButton("Set");
 		
-		btnSet.addMouseListener(new MouseAdapter() {
+		btnLightSet.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mapPanel.setIntervalTime((String) comboBox.getSelectedItem());
 							
 			}
 		});
-		btnSet.setEnabled(false);
+		btnLightSet.setEnabled(false);
 		comboBox.setEnabled(false);
 
-		controlPanel.add(btnSet);
+		controlPanel.add(btnLightSet);
+		
+		lblSpeedlimit = new JLabel("SpeedLimit\uFF1A");
+		controlPanel.add(lblSpeedlimit);
+		
+		label = new JLabel("");
+		controlPanel.add(label);
+		
+		comboBox_speedLimit = new JComboBox();
+		comboBox_speedLimit.setModel(new DefaultComboBoxModel(new String[] {"N/A", "30", "40", "50", "60"}));
+		controlPanel.add(comboBox_speedLimit);
+		
+		btnSpeedSet = new JButton("Set");
+		btnSpeedSet.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String speedLimit = (String)comboBox_speedLimit.getSelectedItem();
+				tcc.setSpeedLimit(speedLimit);
+
+				
+			}
+		});
+		btnSpeedSet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		controlPanel.add(btnSpeedSet);
+		
+		lblDensityLevel = new JLabel("Density Level:");
+		controlPanel.add(lblDensityLevel);
+		
+		comboBox_density = new JComboBox();
+		comboBox_density.setModel(new DefaultComboBoxModel(new String[] {"low", "medium", "high"}));
+		controlPanel.add(comboBox_density);
+		
+		btnDensitySet = new JButton("Set");
+		btnDensitySet.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				String densityLevel = (String)comboBox_density.getSelectedItem();
+				
+				tcc.setDensity(densityLevel);
+
+				
+			}
+		});
+		controlPanel.add(btnDensitySet);
 		controlPanel.add(panel);
 		
 		JButton btnAnalysisResult = new JButton("Analysis Result");

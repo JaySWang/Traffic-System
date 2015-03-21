@@ -27,7 +27,6 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	
 	//timing for the simulation 
 	static int timing;
-	int speedLimit;
 	static VehicleManagement vm;
 	
 	
@@ -45,19 +44,10 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	
 	private VehicleManagement() {
 		timing = 0;
-		speedLimit = 100;
 		notifyTMPObservers();
 	}
 
-	public int getSpeedLimit() {
-		return speedLimit;
-	}
 
-	public void setSpeedLimit(int speedLimit) {
-		this.speedLimit = speedLimit;
-		notifyTMPObservers();
-
-	}
 
 	@Override
 	public void registerObserver(IVehicleObserver ob) {
