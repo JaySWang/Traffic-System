@@ -1,4 +1,4 @@
-package mapCondition;
+package mapInfo;
 
 public class Exit {
 	int no;

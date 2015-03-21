@@ -11,7 +11,7 @@ import observer.ITrafficConditionObservable;
 import constValue.ConstValues;
 
 import modelInterface.IVehicleGenerator;
-import mapCondition.Entrance;
+import mapInfo.Entrance;
 
 
 public class VehicleGenerator extends Thread implements IVehicleGenerator,ITrafficConditionObserver {
