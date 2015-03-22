@@ -18,11 +18,11 @@ public class ConstValues {
  public final static int SPEED_UP = 5;
  
  
- //direction
- public final static int EastToWest = 0;
- public final static int WastToEest = 1;
- public final  static int SouthToNorth = 2;
- public final static int NorthToSouth = 3;
+ //direction(angle)
+ public final static int EastToWest = 270;
+ public final static int WastToEest = 90;
+ public final  static int SouthToNorth = 0;
+ public final static int NorthToSouth = 180;
 
  
  //density level

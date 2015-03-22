@@ -2,14 +2,13 @@ package view;
 
 import java.awt.AWTException;
 import java.awt.Graphics;
-import java.awt.Panel;
-import java.awt.Rectangle;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 import javax.swing.JPanel;
 
 import Tools.ScreenShotofMap;
@@ -18,6 +17,7 @@ import ControllerInterface.ITrafficLightController;
 
 import constValue.ConstValues;
 
+import mapInfo.Light;
 import modelInterface.ITrafficLight;
 import modelInterface.IVehicle;
 import modelInterface.IVehicleManagement;
@@ -30,14 +30,9 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 	ScreenShotofMap s = new ScreenShotofMap();
 
 	List<IVehicle> vehicles;
-	ImageIcon map = new ImageIcon(getClass().getResource("/Icon/map.png"));;
+	ImageIcon map;
 
-	ImageIcon greenIcon = new ImageIcon(getClass().getResource(
-			"/Icon/green.jpg"));
-	ImageIcon redIcon = new ImageIcon(getClass().getResource("/Icon/red.jpg"));
-
-	
-	ImageIcon carIcon = new ImageIcon(getClass().getResource("/Icon/car.jpg"));
+	ImageIcon carIcon = new ImageIcon(getClass().getResource("/Icon/cars.jpg"));
 	
 	int trafficLightState = ConstValues.OFF;
 
@@ -48,7 +43,6 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 
 	public MapView(List<ITrafficLight> t, ITrafficLightController c) {
 		super();
-		initialLights();
 		trafficLights = t;
 		trafficLightController = c;
 
@@ -67,52 +61,7 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 
 	
 	
-	private void initialLights() {
 
-		Light light1 = new Light(296,245, 1);
-		Light light2 = new Light(296,360, 0);
-		Light light3 = new Light(409, 360,1);
-		
-		Light light4 = new Light(721,245,1);
-		Light light5 = new Light(721,360,0);
-		Light light6 = new Light(834,360,1);
-		Light light7 = new Light(834,245,1);
-
-		lightList.add(light1);
-		lightList.add(light2);
-		lightList.add(light3);
-		
-		 lightList.add(light4);
-		 lightList.add(light5);
-		 lightList.add(light6);
-		 lightList.add(light7);
-
-
-	}
-
-	class Light {
-		int location_x;
-		int location_y;
-		ImageIcon state;
-		int lightSize = 30;
-
-		public Light(double x, double y, int s) {
-
-			location_x = (int) x;
-			location_y = (int) y;
-
-			setState(s);
-		}
-
-		private void setState(int s) {
-			if (s == ConstValues.GREEN) {
-				state = greenIcon;
-			} else if (s == ConstValues.RED) {
-				state = redIcon;
-			}
-
-		}
-	}
 
 	
 	//screenShot
@@ -138,8 +87,8 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 		if (trafficLightState == ConstValues.ON) {
 			for (Light l : lightList) {
 
-				g.drawImage(l.state.getImage(), l.location_x, l.location_y,
-						l.lightSize, l.lightSize, this);
+				g.drawImage(l.getState().getImage(), l.getLocation_x(), l.getLocation_y(),
+						l.getLightSize(), l.getLightSize(), this);
 
 			}
 		}

@@ -106,8 +106,14 @@ public int getIntervalTime() {
 	}
 	@Override
 	public void setInterval(int sec) {
-		intervalTime = 1000*sec;	
+		
+		
+		intervalTime = 1000*sec;
+		
 
+		   for(ITrafficLight tl:trafficLights){
+			   tl.setInterval(sec);
+		   }
 			notifyTMPObservers();
 		
 		

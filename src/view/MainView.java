@@ -41,6 +41,9 @@ import constValue.ConstValues;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class MainView implements IVehicleObserver{
 
@@ -70,6 +73,11 @@ public class MainView implements IVehicleObserver{
  	private JButton btnDensitySet;
  	private JComboBox comboBox_speedLimit;
  	private JButton btnSpeedSet;
+ 	private JMenuBar menuBar;
+ 	private JMenu mnMaps;
+ 	private JMenuItem mntmTRoad;
+ 	private JMenuItem mntmCrossRoad;
+ 	private JMenuItem mntmTcrosslRoad;
     
     
     
@@ -77,10 +85,10 @@ public class MainView implements IVehicleObserver{
 	/**
 	 * Create the application.
 	 */
-	public MainView(MapView mp,ITrafficConditionController tcc) {
+	public MainView(MapView mapView,ITrafficConditionController tcc) {
 		super();
 		this.tcc = tcc;
-		mapPanel = mp;
+		mapPanel = mapView;
 		initialize();
 	}
 	
@@ -89,7 +97,7 @@ public class MainView implements IVehicleObserver{
 
 
 
-	public void setMapPanel(MapView mp){
+	public void setMapPanel(TLCrossMapView mp){
 		
 		mapPanel = mp;
 	};
@@ -257,6 +265,21 @@ public class MainView implements IVehicleObserver{
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		frame.getContentPane().add(mapPanel, gbc_panel);
+		
+		menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		
+		mnMaps = new JMenu("Maps");
+		menuBar.add(mnMaps);
+		
+		mntmTRoad = new JMenuItem("T Road");
+		mnMaps.add(mntmTRoad);
+		
+		mntmCrossRoad = new JMenuItem("Cross Road");
+		mnMaps.add(mntmCrossRoad);
+		
+		mntmTcrosslRoad = new JMenuItem("T&Cross&L Road");
+		mnMaps.add(mntmTcrosslRoad);
 		frame.setVisible(true);
 
 		

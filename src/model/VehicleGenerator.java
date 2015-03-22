@@ -19,31 +19,19 @@ public class VehicleGenerator extends Thread implements IVehicleGenerator,ITraff
      int state;
 	 int densityLevel = ConstValues.Low;
      
-     List<Entrance> entrances = new ArrayList<Entrance>();
+	 List<Entrance> entrances ;
      
      
      
      
-     
-	public VehicleGenerator(int intervalTime) {
-		super();
-		this.intervalTime = intervalTime*1000;
-		initial();
+	public VehicleGenerator(int intervalTime,List<Entrance> entrances) {
+		this.entrances = entrances;
+		this.intervalTime = intervalTime*200;
 	}
 	
 	
 	
 
-	private void initial() {
-		Entrance e1 = new Entrance(0,0,160,ConstValues.EastToWest);
-		entrances.add(e1);
-		Entrance e2 = new Entrance(1,1200,200,ConstValues.WastToEest);
-		entrances.add(e2);
-		
-		Entrance e3 = new Entrance(2,340,600,ConstValues.SouthToNorth);
-		entrances.add(e3);
-
-	}
 
 
 
