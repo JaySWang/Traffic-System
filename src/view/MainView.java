@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import model.TrafficLight;
 import modelInterface.ITrafficLight;
+import Controller.MainController;
 import Controller.TrafficLightController;
 import ControllerInterface.ITrafficConditionController;
 import ControllerInterface.ITrafficLightController;
@@ -78,15 +79,18 @@ public class MainView implements IVehicleObserver{
  	private JMenuItem mntmTRoad;
  	private JMenuItem mntmCrossRoad;
  	private JMenuItem mntmTcrosslRoad;
+	private MainController mainController;
     
     
     
     
 	/**
 	 * Create the application.
+	 * @param mainController 
 	 */
-	public MainView(MapView mapView,ITrafficConditionController tcc) {
+	public MainView(MapView mapView,MainController mainController, ITrafficConditionController tcc) {
 		super();
+		this.mainController = mainController;
 		this.tcc = tcc;
 		mapPanel = mapView;
 		initialize();

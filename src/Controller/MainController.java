@@ -109,7 +109,7 @@ public class MainController implements IMainController{
 			((TrafficCondition)tc).registerConditionObserver(vg);
 			 
 		
-			MainView mv = new MainView(mapView, tcc);
+			MainView mv = new MainView(mapView, this, tcc);
 	        VehicleManagement vm =VehicleManagement.getInstance();
 
 			vm.registerObserver(mv);

@@ -9,7 +9,6 @@ public class Light {
 	int location_x;
 	int location_y;
 	ImageIcon state;
-	int lightSize = 30;
 
 	ImageIcon greenIcon = new ImageIcon(getClass().getResource(
 			"/Icon/green.jpg"));
@@ -36,7 +35,7 @@ public class Light {
 	}
 
 	public int getLightSize() {
-		return lightSize;
+		return greenIcon.getIconWidth();
 	}
 
 	public ImageIcon getRedIcon() {
