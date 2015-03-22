@@ -28,13 +28,16 @@ public class Sensor_withoutCircle extends Sensor {
 	 * @throws AWTException
 	 */
 	int[] allPointsColor() throws IOException {
-		int[] pColor = new int[30];
+		int num=0;
+		num=this.getSize_x()*this.getSize_y();
+		int[] pColor = new int[num];
 		int n = 0;
-		for (int x = this.getX_min(); x < this.getX_min() + this.getSize_x()
-				; x++) {
-			int y = this.getY_min();
-			pColor[n] = GetColor2.getColorFromImage(x, y);
-			n++;
+		for (int x = this.getX_min(); x < this.getX_min() + this.getSize_x(); x++) {
+			for (int y = this.getY_min(); y < this.getY_min()
+					+ this.getSize_y(); y++) {
+				pColor[n] = GetColor2.getColorFromImage(x, y);
+				n++;
+			}
 		}
 		return pColor;
 	}
@@ -68,7 +71,8 @@ public class Sensor_withoutCircle extends Sensor {
 	 * @throws IOException
 	 */
 	Color areaColor() throws IOException {
-		int[] points = this.randomPointsColor();
+		//int[] points = this.randomPointsColor();
+		int[] points = this.allPointsColor();
 		int r = 0, g = 0, b = 0;
 		Color coa = null;
 		for (int i = 0; i < points.length; i++) {
@@ -108,6 +112,9 @@ public class Sensor_withoutCircle extends Sensor {
 				&& this.isRound(255, b)) {
 			coa = Color.cyan;
 		}
+		else{
+			System.out.println("Wrong");
+		}
 
 		return coa;
 	}
@@ -120,7 +127,6 @@ public class Sensor_withoutCircle extends Sensor {
 	 */
 	int countColor() throws IOException {
 		int distance = 0;
-		
 
 		int[] points = this.allPointsColor();
 		for (int i = 0; i < points.length; i++) {
@@ -141,14 +147,14 @@ public class Sensor_withoutCircle extends Sensor {
 
 	public static void main(String[] arg) throws IOException {
 		Sensor_withoutCircle n = new Sensor_withoutCircle();
-		n.setLocation_x(271);
-		n.setLocation_y(590);// 147,186
+		n.setLocation_x(328);
+		n.setLocation_y(519);// 147,186
 		n.setSize_x(1);
-		n.setSize_y(10);
+		n.setSize_y(1);
 		System.out.println("xmax: " + n.getX_max() + "xmin: " + n.getX_min()
 				+ "yman: " + n.getY_max() + "ymin: " + n.getY_min());
 		System.out.println("location x: " + n.getLocation_x() + "location y: "
-				+ n.getLocation_y() + "x: " + n.getSize_x() + "y: "
+				+ n.getLocation_y() + "x : " + n.getSize_x() + "y: "
 				+ n.getSize_y());
 		System.out.println("the position's color is " + n.areaColor());
 	}
