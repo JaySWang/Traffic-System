@@ -1,35 +1,58 @@
 package log;
 
+import constValue.ConstValues;
+
 public class AnalysisLog {
 	static int  count = 0;
 	int no;
-	int speedLimit;
+	String speedLimit;
 	
 	String trafficLightState;
-	int lightIntervalTime;
+	String densityLevel;
+	String lightIntervalTime;
 
+	
+	
+	
 	double averageSpeed;
 	double congestionRate;
 	
 	public AnalysisLog(int speedLimit, String trafficLightState,int lightIntervalTime
-,double averageSpeed, double congestionRate) {
+,double averageSpeed,String densityLevel, double congestionRate) {
 		super();
 		
 		this.no = count;
-		this.speedLimit = speedLimit;
+		if(speedLimit == ConstValues.NA){
+			this.speedLimit = "N/A";
+		}
+		else {
+		this.speedLimit = speedLimit+"";
+		}
 		this.trafficLightState = trafficLightState;
-		this.lightIntervalTime = lightIntervalTime;
-
+		
+		
+		if(lightIntervalTime == ConstValues.NA){
+			this.lightIntervalTime = "N/A";
+		}else {
+		this.lightIntervalTime = lightIntervalTime+"";
+		}
 		this.averageSpeed = averageSpeed;
+		this.densityLevel = densityLevel;
 		this.congestionRate = congestionRate;
 		count++;
 	}
+
+	
+	public String getDensityLevel() {
+		return densityLevel;
+	}
+
 
 	public int getNo() {
 		return no;
 	}
 
-	public int getSpeedLimit() {
+	public String getSpeedLimit() {
 		return speedLimit;
 	}
 
@@ -45,7 +68,7 @@ public class AnalysisLog {
 		return congestionRate;
 	}
 
-	public int getLightIntervalTime() {
+	public String getLightIntervalTime() {
 		return lightIntervalTime;
 	}
 	

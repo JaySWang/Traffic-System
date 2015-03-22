@@ -46,9 +46,9 @@ public class LogManagement {
 	}
 
 	
-	public void addLog(TrafficMgtPolicyLog tLog){
+	public void addLog(TrafficMgtPolicyLog tLog, int densityLevel){
 		tLogs.add(tLog);
-		addALog(tLog);
+		addALog(tLog,densityLevel);
 	}
 	
 	
@@ -61,7 +61,7 @@ public class LogManagement {
 	public void addCurrentTMP(){
 		
 		
-		addLog(tpm.getCurrentMgtPolicy());
+		addLog(tpm.getCurrentMgtPolicy(),tpm.getDensityLevel());
 	
 	}
 	
@@ -73,17 +73,17 @@ public class LogManagement {
 	}
 	
 	
-	private void addALog(TrafficMgtPolicyLog tLog) {
+	private void addALog(TrafficMgtPolicyLog tLog, int densityLevel) {
 		int speedLimit = tLog.getSpeedLimit();
 		int lightIntervalTime = tLog.getLightIntervalTime();
 
 				
 		String trafficLights;
 		if(tLog.getLightState() == ConstValues.ON){
-			trafficLights = "ON";
+			trafficLights = "On";
 			
 		}else{
-			trafficLights = "OFF";
+			trafficLights = "Off";
 		}
 		
 		IAnalysis a= new Analysis();
@@ -91,7 +91,17 @@ public class LogManagement {
 		double congestionRate = a.getCongestionRateByTMPId(tLog.getId());
 		
 		
-		AnalysisLog al = new AnalysisLog(speedLimit, trafficLights,lightIntervalTime, averageSpeed, congestionRate);	
+		String dLevel = "Low";
+		switch(densityLevel){
+		case ConstValues.Low: dLevel = "Low";
+		break;
+		case ConstValues.Medium: dLevel = "Medium";
+		break;
+		case ConstValues.High: dLevel = "High";
+		break;
+		}
+		
+		AnalysisLog al = new AnalysisLog(speedLimit, trafficLights,lightIntervalTime, averageSpeed,dLevel,congestionRate);	
 		aLogs.add(al);
 	
 	}

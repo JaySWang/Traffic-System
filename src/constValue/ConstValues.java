@@ -31,8 +31,8 @@ public class ConstValues {
  public final static int High = 3;
  
 
- 
- 
+ //analysis
+ public final static int NA = -1;
  
  
 

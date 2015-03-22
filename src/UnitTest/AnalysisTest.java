@@ -43,9 +43,9 @@ public class AnalysisTest {
 		lm.addLog(v2);
 		lm.addLog(v3);
 		TrafficMgtPolicyLog tl = new TrafficMgtPolicyLog(1,1,1,0,20);
-		lm.addLog(tl);
+		lm.addLog(tl,1);
 		
-		Assert.assertTrue(15.0 == a.getAverageSpeedByTMPId(1));
+		Assert.assertTrue(15.0 == a.getAverageSpeedByTMPId(0));
 		
 	
 

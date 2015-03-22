@@ -56,29 +56,30 @@ public class AnalysisView extends JFrame {
 
 		
 		
-		int colSize = 6;
+		int colSize = 7;
 	 Object[][] playerInfo = new Object[x][colSize];
 	 String[] s;
 	 
-	 String[] Names={"No","Speed Limit","Traffic Lights","Light Interval Time","Average Speed","Congestion Rate"}; 
+	 String[] Names={"No","Speed Limit","Traffic Lights","Light Interval Time","Average Speed","Density Level","Congestion Rate"}; 
 		
 	 for(int i = 0;i<aLogs.size();i++){
 		 s = new String[colSize];
-         s[0] = i+"";		 
+         s[0] = i+1+"";		 
          s[1] = aLogs.get(i).getSpeedLimit()+"";	
          s[2] = aLogs.get(i).getTrafficLightState();
          s[3] = aLogs.get(i).getLightIntervalTime()+"";	
 
          s[4] = aLogs.get(i).getAverageSpeed()+"";	
-         s[5] = aLogs.get(i).getCongestionRate()+"";	
+         s[5] = aLogs.get(i).getDensityLevel()+"";
+         s[6] = aLogs.get(i).getCongestionRate()+"";	
+
 		 playerInfo[i] = s;
 		 
 	 }
 	 
 	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		
+		setBounds(200, 100, 657, 171);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -97,7 +98,7 @@ public class AnalysisView extends JFrame {
 
 		
 		JScrollPane scrollPane=new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(500, 100));
+		scrollPane.setPreferredSize(new Dimension(800, 100));
 		this.getContentPane().add(scrollPane, BorderLayout.NORTH);
 		
 		panel = new JPanel();
@@ -113,7 +114,6 @@ close();
 		
 		});
 		panel.add(btnOk);
-		//this.getContentPane().add(table);
 		this.setTitle("Traffic Policies Analysis"); 
 		this.pack(); 
 		this.setVisible(true);

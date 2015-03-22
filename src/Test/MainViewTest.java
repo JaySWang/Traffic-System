@@ -11,6 +11,7 @@ import ControllerInterface.ITrafficLightController;
 import log.LogManagement;
 import model.TrafficCondition;
 import model.TrafficLight;
+import model.TrafficLightManagement;
 import model.TrafficPolicyManagement;
 import model.VehicleGenerator;
 import model.VehicleManagement;
@@ -24,23 +25,31 @@ public class MainViewTest {
 	public static void main(String args[]) {
 
 		VehicleManagement vm =VehicleManagement.getInstance();
-		TrafficLight t0 = new TrafficLight(3, 0);
-		// TrafficLight t1 = new TrafficLight(4,0);
+		TrafficLight t0 = new TrafficLight(3,0);
+	    TrafficLight t1 = new TrafficLight(4,1);
 
-		List<ITrafficLight> TrafficLights = new ArrayList();
-		TrafficLights.add(t0);
-		// TrafficLights.add(t1);
+		List<ITrafficLight> trafficLights = new ArrayList();
+		trafficLights.add(t0);
+		 trafficLights.add(t1);
 
+		 TrafficLightManagement tlm = new TrafficLightManagement(trafficLights);
+		 
+
+		 
+		 
 		TrafficPolicyManagement tp = new TrafficPolicyManagement();
-		t0.registerTMPObserver(tp);
+		 tlm.registerTMPObserver(tp);
 		
+		 
 		LogManagement lm = LogManagement.getInstance();
 		lm.setTrafficPolicyMgt(tp);
 		
-		ITrafficLightController tlc = new TrafficLightController(TrafficLights);
-		MapView mapPanel = new MapView(TrafficLights, tlc);
+		ITrafficLightController tlc = new TrafficLightController(tlm);
+		
+		MapView mapPanel = new MapView(trafficLights, tlc);
 
 		t0.registerObserver(mapPanel);
+		t1.registerObserver(mapPanel);
 
 		//generator
 				VehicleGenerator vg = new VehicleGenerator(1);

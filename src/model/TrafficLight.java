@@ -16,20 +16,18 @@ import modelInterface.ITrafficLight;
 
 
 
-public class TrafficLight extends Thread implements ITrafficLight,ITrafficLightObservable,ITrafficMgtPolicyObservable {
+public class TrafficLight extends Thread implements ITrafficLight,ITrafficLightObservable {
 
 
 ArrayList<ITrafficLightObserver> observers = new ArrayList<ITrafficLightObserver> ();
  
-LogManagement lm = LogManagement.getInstance();
-ArrayList<ITrafficMgtPolicyObserver> trafficMgtPolicyObservers = new ArrayList<ITrafficMgtPolicyObserver> ();
 
 
 
- int lightState = -1;
+  int lightState = ConstValues.OFF;
  ArrayList<Integer> lightStates;
  
- int  intervalTime;
+ int  intervalTime = ConstValues.NA;
 
  int numberOfLights;
  int no;
@@ -80,7 +78,7 @@ public int getIntervalTime() {
 			
 		}
 		lightState = ConstValues.OFF;
-		intervalTime = 1000;
+		intervalTime =  ConstValues.NA;
 	}
 
 
@@ -95,8 +93,7 @@ public int getIntervalTime() {
 	@Override
 	public void off() {
 		lightState = ConstValues.OFF;
-		   intervalTime = 0;
-			notifyTMPObservers();	
+		   intervalTime =  ConstValues.NA;
 
 		
 	}
@@ -106,17 +103,12 @@ public int getIntervalTime() {
 		lightState = ConstValues.ON;
 		   intervalTime = 1000;
 
-			notifyTMPObservers();
 
 	
 	}
 
 	
-	
-	
-	
-	
-	
+
 	public void run(){
 		
 while(true){
@@ -134,10 +126,6 @@ while(true){
 				
 					e.printStackTrace();
 				}
-				
-		
-			
-		
 			
 		}
 		
@@ -168,22 +156,12 @@ while(true){
 	
 	
 	
-	@Override
-	public void registerTMPObserver(ITrafficMgtPolicyObserver ob) {
-		trafficMgtPolicyObservers.add(ob);		
-	}
-	@Override
-	public void notifyTMPObservers() {
-		for(int i = 0;i<trafficMgtPolicyObservers.size();i++){
-			trafficMgtPolicyObservers.get(i).update(this);
-		}
-				
-	}
+
 	@Override
 	public void setInterval(int sec) {
 		intervalTime = 1000*sec;	
 
-			notifyTMPObservers();
+
 		
 		
 	}

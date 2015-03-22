@@ -14,7 +14,9 @@ public class TrafficPolicyManagement implements ITrafficMgtPolicyObserver {
 	int lightState;
 	int startTime = 0;
 	int endTime;
-	int lightIntervalTime ;
+	int lightIntervalTime =  ConstValues.NA;
+	int densityLevel = ConstValues.Low;
+	
 	TrafficMgtPolicyLog tpl ;
 	
 	
@@ -27,16 +29,20 @@ public class TrafficPolicyManagement implements ITrafficMgtPolicyObserver {
 
 		
 		
-		if(o instanceof TrafficLight ){
-			lightState = ((TrafficLight)o).getLightState();
-			lightIntervalTime =  ((TrafficLight)o).getIntervalTime()/1000;
-			
+		if(o instanceof TrafficLightManagement ){
+			lightState = ((TrafficLightManagement)o).getLightState();
+			if(((TrafficLightManagement)o).getIntervalTime() == ConstValues.NA){
+				lightIntervalTime = ConstValues.NA;
+			}
+			else{
+			lightIntervalTime =  ((TrafficLightManagement)o).getIntervalTime()/1000;
+			}
 		}
 		
 		if(o instanceof TrafficCondition ){
 	
 			speedLimit =  ((TrafficCondition)o).getSpeedLimit();
-			
+			densityLevel =  ((TrafficCondition)o).getDensity();
 			
 		}
 		startTime = VehicleManagement.getTiming();
@@ -47,10 +53,14 @@ public class TrafficPolicyManagement implements ITrafficMgtPolicyObserver {
 	private void addLog() {
 		endTime = VehicleManagement.getTiming();
 		 tpl = new TrafficMgtPolicyLog(lightState,lightIntervalTime, speedLimit,  startTime, endTime);
-		 lm.addLog(tpl);
+		 lm.addLog(tpl,densityLevel);
 	}
 
 	
+	public int getDensityLevel() {
+		return densityLevel;
+	}
+
 	public TrafficMgtPolicyLog getCurrentMgtPolicy(){
 		int eTime = VehicleManagement.getTiming();
 		 tpl = new TrafficMgtPolicyLog(lightState,lightIntervalTime, speedLimit,  startTime, eTime);
