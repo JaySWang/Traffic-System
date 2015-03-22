@@ -44,12 +44,7 @@ public class AnalysisView extends JFrame {
 	 */
 	public AnalysisView() {
 		
-	
 
-		
-		
-	
-		
 	
 		//initial table
 

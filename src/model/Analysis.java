@@ -46,7 +46,7 @@ public class Analysis implements IAnalysis {
 		
 		List<VehicleLog> vls = lm.getVLogByTrafficMgtPolicyId(TrafficMgtPolicyId);	
 		
-		
+	
         double averageSpeed = calculateAverageSpeed(vls);
         
 		return averageSpeed;

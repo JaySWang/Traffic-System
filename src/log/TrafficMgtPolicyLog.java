@@ -4,7 +4,8 @@ package log;
 
 public class TrafficMgtPolicyLog {
 
-static int id = 0;	
+static int count = 0;	
+int id;
 int lightState;
 int lightIntervalTime;
 
@@ -21,7 +22,8 @@ public TrafficMgtPolicyLog(int lightState,int lightIntervalTime, int speedLimit,
 	this.speedLimit = speedLimit;
 	this.startTime = startTime;
 	this.endTime = endTime;
-	this.id++;
+	this.id = count;
+	count++;
 }
 public int getId() {
 	return id;

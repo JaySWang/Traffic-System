@@ -48,7 +48,6 @@ public class TrafficPolicyManagement implements ITrafficMgtPolicyObserver {
 		endTime = VehicleManagement.getTiming();
 		 tpl = new TrafficMgtPolicyLog(lightState,lightIntervalTime, speedLimit,  startTime, endTime);
 		 lm.addLog(tpl);
-		 startTime = endTime;		
 	}
 
 	
