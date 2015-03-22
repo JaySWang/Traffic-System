@@ -327,7 +327,7 @@ public class Vehicle implements IVehicle {
 			this.getS1().setSize_y(35);
 			/* configuration for sensor2 */
 			this.getS2().setLocation_x(this.getLocation_x() - 30);
-			this.getS2().setLocation_y(this.getLocation_y() + 6);
+			this.getS2().setLocation_y(this.getLocation_y() + 8);
 			this.getS2().setSize_x(30);
 			this.getS2().setSize_y(1);
 			/* configuration for sensor3 */
@@ -370,6 +370,10 @@ public class Vehicle implements IVehicle {
 	 * @throws IOException
 	 */
 	void turnJudgement() throws IOException {
+		System.out.println("Color of sensor1 is : " + s1.areaColor() + "\n"
+				+ "Color of sensor2 is : " + s2.areaColor() + "\n"
+				+ "Color of sensor5 is : " + s5.areaColor() + "\n"
+				+"number of white pixel is : "+s5.countColor());
 		if (s7.areaColor() == Color.red) {
 			this.setStatus(1);
 		} else if (s1.areaColor() == Color.red// traffic light is red
@@ -387,8 +391,11 @@ public class Vehicle implements IVehicle {
 		} else if (s2.areaColor() == Color.black
 				&& s5.areaColor() == Color.white) {
 			this.setStatus(0);
+		} else if (s2.areaColor() == Color.gray && s5.areaColor() == Color.gray) {
+			System.out.println("I need to turn");
+			this.setAngle(0);
 		} else {
-			this.setAngle(90);
+			System.out.println("unknown");
 		}
 	}
 
@@ -425,23 +432,37 @@ public class Vehicle implements IVehicle {
 			case 270:
 				this.setLocation_y(this.getLocation_y() - 4);
 			}
-		} else if (this.angle == 0 && this.status == 0) {
-			this.setLocation_y((int) (this.getLocation_y() - this.getSpeed() * 0.1));
+		} else if (this.status == 0) {
+			switch (this.angle) {
+			case 0:
+				this.setLocation_y((int) (this.getLocation_y() - this
+						.getSpeed() * 0.1));
+			case 90:
+				this.setLocation_x((int) (this.getLocation_x() + this
+						.getSpeed() * 0.1));
+			case 180:
+				this.setLocation_y((int) (this.getLocation_y() + this
+						.getSpeed() * 0.1));
+			case 270:
+				this.setLocation_x((int) (this.getLocation_x() - this
+						.getSpeed() * 0.1));
+			}
+
 		} else {
-			this.setAngle(90);
+			System.out.println("There is something wrong");
 		}
 	}
 
 	public static void main(String[] arg) throws IOException {
 		Vehicle v = new Vehicle();
-		v.setLocation_x(290);
-		v.setLocation_y(400);
-		v.setAngle(0);
+		v.setLocation_x(1000);
+		v.setLocation_y(349);
+		v.setAngle(270);
 		v.setLength(32);
 		v.setWidth(26);
-		v.setSpeed(100);
+		v.setSpeed(80);
 		// simulate
-		while (v.getAngle() == 0) {
+		while (v.getAngle() == 270) {
 			System.out.println("position of the vehicle now is: ("
 					+ v.getLocation_x() + "," + v.getLocation_y() + ")");
 			v.configureSensors();
