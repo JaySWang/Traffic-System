@@ -36,6 +36,9 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 			"/Icon/green.jpg"));
 	ImageIcon redIcon = new ImageIcon(getClass().getResource("/Icon/red.jpg"));
 
+	
+	ImageIcon carIcon = new ImageIcon(getClass().getResource("/Icon/car.jpg"));
+	
 	int trafficLightState = ConstValues.OFF;
 
 	List<Light> lightList = new ArrayList();
@@ -145,9 +148,12 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 
 		if (vehicles != null) {
 			for (IVehicle v : vehicles) {
+				
+				g.drawImage(carIcon.getImage(), v.getLocation_x(), v.getLocation_y(),
+						v.getWidth(),v.getLength(), this);
 
-				g.drawRect(v.getLocation_x(), v.getLocation_y(), v.getWidth(),
-						v.getLength());
+				
+
 
 			}
 		}

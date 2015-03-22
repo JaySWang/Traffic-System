@@ -39,6 +39,10 @@ public class VehicleGenerator extends Thread implements IVehicleGenerator,ITraff
 		entrances.add(e1);
 		Entrance e2 = new Entrance(1,1200,200,ConstValues.WastToEest);
 		entrances.add(e2);
+		
+		Entrance e3 = new Entrance(2,340,600,ConstValues.SouthToNorth);
+		entrances.add(e3);
+
 	}
 
 
@@ -77,6 +81,7 @@ while(true){
 	    v1.setDirection(enrance.getDirection());
 		v1.setLocation_x(enrance.getLocation_x());
 		v1.setLocation_y(enrance.getLocation_y());
+		v1.setAngle(0);
 		VehicleManagement.getInstance().addVehicle(v1);
 		}		
 		

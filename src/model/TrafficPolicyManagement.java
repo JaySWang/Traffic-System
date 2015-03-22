@@ -1,11 +1,12 @@
 package model;
 
+import constValue.ConstValues;
 import log.LogManagement;
 import log.TrafficMgtPolicyLog;
 import observer.ITrafficMgtPolicyObservable;
 import observer.ITrafficMgtPolicyObserver;
 
-public class TrafficMgtPolicy implements ITrafficMgtPolicyObserver {
+public class TrafficPolicyManagement implements ITrafficMgtPolicyObserver {
 
 	LogManagement lm = LogManagement.getInstance();
 	
@@ -13,7 +14,7 @@ public class TrafficMgtPolicy implements ITrafficMgtPolicyObserver {
 	int lightState;
 	int startTime = 0;
 	int endTime;
-	int lightIntervalTime;
+	int lightIntervalTime ;
 	TrafficMgtPolicyLog tpl ;
 	
 	
@@ -43,9 +44,6 @@ public class TrafficMgtPolicy implements ITrafficMgtPolicyObserver {
 		
 	}
 
-
-
-
 	private void addLog() {
 		endTime = VehicleManagement.getTiming();
 		 tpl = new TrafficMgtPolicyLog(lightState,lightIntervalTime, speedLimit,  startTime, endTime);
@@ -53,4 +51,11 @@ public class TrafficMgtPolicy implements ITrafficMgtPolicyObserver {
 		 startTime = endTime;		
 	}
 
+	
+	public TrafficMgtPolicyLog getCurrentMgtPolicy(){
+		int eTime = VehicleManagement.getTiming();
+		 tpl = new TrafficMgtPolicyLog(lightState,lightIntervalTime, speedLimit,  startTime, eTime);
+	return tpl;
+	
+	}
 }

@@ -25,6 +25,8 @@ import java.util.List;
 
 import log.AnalysisLog;
 import log.LogManagement;
+import log.TrafficMgtPolicyLog;
+import model.VehicleManagement;
 
 public class AnalysisView extends JFrame {
 
@@ -33,6 +35,7 @@ public class AnalysisView extends JFrame {
 	private JPanel panel;
 	private JButton btnOk;
 
+	LogManagement lm = LogManagement.getInstance();
 
 	
 	
@@ -45,14 +48,15 @@ public class AnalysisView extends JFrame {
 
 		
 		
-		//initial table
-		LogManagement lm = LogManagement.getInstance();
-		
 	
 		
+	
+		//initial table
+
 		
-		
+		lm.addCurrentTMP();
 		List<AnalysisLog> aLogs = lm.getALogs();
+
 		int x = aLogs.size();
 
 		
@@ -65,7 +69,7 @@ public class AnalysisView extends JFrame {
 		
 	 for(int i = 0;i<aLogs.size();i++){
 		 s = new String[colSize];
-         s[0] = aLogs.get(i).getNo()+"";		 
+         s[0] = i+"";		 
          s[1] = aLogs.get(i).getSpeedLimit()+"";	
          s[2] = aLogs.get(i).getTrafficLightState();
          s[3] = aLogs.get(i).getLightIntervalTime()+"";	
@@ -121,6 +125,7 @@ close();
 	}
 	
 	private void close() {
+		lm.removeCurrentTMP();
 		this.setVisible(false);
 		
 	}

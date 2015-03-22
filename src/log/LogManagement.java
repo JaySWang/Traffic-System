@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Analysis;
+import model.TrafficPolicyManagement;
 import modelInterface.IAnalysis;
 
 import constValue.ConstValues;
@@ -21,10 +22,10 @@ public class LogManagement {
 	
 	static LogManagement  lm;
 
+	TrafficPolicyManagement tpm;
 	
 	
-	
-	
+
 	
 	private LogManagement() {
 		super();
@@ -40,8 +41,11 @@ public class LogManagement {
 		
 	};
 	
-	
+	public void setTrafficPolicyMgt(TrafficPolicyManagement tpm){
+		this.tpm = tpm;
+	}
 
+	
 	public void addLog(TrafficMgtPolicyLog tLog){
 		tLogs.add(tLog);
 		addALog(tLog);
@@ -52,6 +56,22 @@ public class LogManagement {
 		aLogs.add(aLog);
 		
 	}
+	
+	
+	public void addCurrentTMP(){
+		
+		
+		addLog(tpm.getCurrentMgtPolicy());
+	
+	}
+	
+	
+	public void removeCurrentTMP(){
+		
+		aLogs.remove(aLogs.size()-1);
+		tLogs.remove(tLogs.size()-1);
+	}
+	
 	
 	private void addALog(TrafficMgtPolicyLog tLog) {
 		int speedLimit = tLog.getSpeedLimit();

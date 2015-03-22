@@ -3,21 +3,19 @@ package Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import observer.ITrafficMgtPolicyObserver;
 
 import Controller.TrafficConditionController;
 import Controller.TrafficLightController;
 import ControllerInterface.ITrafficConditionController;
 import ControllerInterface.ITrafficLightController;
+import log.LogManagement;
 import model.TrafficCondition;
 import model.TrafficLight;
-import model.TrafficMgtPolicy;
-import model.Vehicle;
+import model.TrafficPolicyManagement;
 import model.VehicleGenerator;
 import model.VehicleManagement;
 import modelInterface.ITrafficCondition;
 import modelInterface.ITrafficLight;
-import modelInterface.IVehicle;
 import view.MainView;
 import view.MapView;
 
@@ -33,10 +31,11 @@ public class MainViewTest {
 		TrafficLights.add(t0);
 		// TrafficLights.add(t1);
 
-		TrafficMgtPolicy tp = new TrafficMgtPolicy();
+		TrafficPolicyManagement tp = new TrafficPolicyManagement();
 		t0.registerTMPObserver(tp);
 		
-		
+		LogManagement lm = LogManagement.getInstance();
+		lm.setTrafficPolicyMgt(tp);
 		
 		ITrafficLightController tlc = new TrafficLightController(TrafficLights);
 		MapView mapPanel = new MapView(TrafficLights, tlc);
