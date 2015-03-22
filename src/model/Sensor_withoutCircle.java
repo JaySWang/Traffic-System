@@ -31,18 +31,10 @@ public class Sensor_withoutCircle extends Sensor {
 		int[] pColor = new int[30];
 		int n = 0;
 		for (int x = this.getX_min(); x < this.getX_min() + this.getSize_x()
-				+ 1; x++) {
-			for (int y = this.getY_min(); y < this.getY_min()
-					+ this.getSize_y() + 1; y++) {
-				
-				try{
-				pColor[n] = GetColor2.getColorFromImage(x, y);
-				}
-				catch(IOException e){
-					throw e;
-					
-				}
-				}
+				; x++) {
+			int y = this.getY_min();
+			pColor[n] = GetColor2.getColorFromImage(x, y);
+			n++;
 		}
 		return pColor;
 	}
@@ -119,22 +111,24 @@ public class Sensor_withoutCircle extends Sensor {
 
 		return coa;
 	}
-/**
- * calculate the distance between vehicle and cross
- * @return
- * 			numbers of white pixels
- * @throws IOException
- */
+
+	/**
+	 * calculate the distance between vehicle and cross
+	 * 
+	 * @return numbers of white pixels
+	 * @throws IOException
+	 */
 	int countColor() throws IOException {
-		int distance=0;
-		int r = 0, g = 0, b = 0;
+		int distance = 0;
+		
 
 		int[] points = this.allPointsColor();
-		for (int i = 0; i <= points.length; i++) {
+		for (int i = 0; i < points.length; i++) {
+			int r = 0, g = 0, b = 0;
 			int rgb[] = seperateRGB.transfer16(points[i]);
-			r = rgb[0] + r;
-			g = rgb[1] + g;
-			b = rgb[2] + b;
+			r = rgb[0];
+			g = rgb[1];
+			b = rgb[2];
 			if (this.isRound(255, r) && this.isRound(255, g)
 					&& this.isRound(255, b)) {
 				distance++;

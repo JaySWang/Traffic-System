@@ -372,7 +372,8 @@ public class Vehicle implements IVehicle {
 	void turnJudgement() throws IOException {
 		System.out.println("Color of sensor1 is : " + s1.areaColor() + "\n"
 				+ "Color of sensor2 is : " + s2.areaColor() + "\n"
-				+ "Color of sensor5 is : " + s5.areaColor() + "\n");
+				+ "Color of sensor5 is : " + s5.areaColor() + "\n"
+				+"number of white pixel is : "+s5.countColor());
 		if (s7.areaColor() == Color.red) {
 			this.setStatus(1);
 		} else if (s1.areaColor() == Color.red// traffic light is red
