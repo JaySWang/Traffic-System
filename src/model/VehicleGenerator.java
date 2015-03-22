@@ -1,7 +1,6 @@
 package model;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import observer.ITrafficConditionObserver;
@@ -56,8 +55,8 @@ while(true){
 	 
 				
 		Vehicle v1 = new Vehicle();
-		v1.setLength(10);
-		v1.setWidth(10);
+		v1.setLength(32);
+		v1.setWidth(26);
 		v1.setSpeed(10);
         v1.setAcceleration(10);
         
@@ -67,9 +66,12 @@ while(true){
 		if(createOrNot()){
 	
 	    v1.setDirection(enrance.getDirection());
+	    
 		v1.setLocation_x(enrance.getLocation_x());
 		v1.setLocation_y(enrance.getLocation_y());
-		v1.setAngle(0);
+		v1.setAngle(enrance.getDirection());
+		
+		
 		VehicleManagement.getInstance().addVehicle(v1);
 		}		
 		

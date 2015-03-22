@@ -29,6 +29,9 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	static int timing;
 	static VehicleManagement vm;
 	
+	//for vehicle list   in case of "java.util.ConcurrentModificationException"
+	int synchronizedLock = 1;
+	
 	
 	public static VehicleManagement getInstance(){
 		if(vm==null){
@@ -71,6 +74,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	@Override
 	public List<IVehicle> getVehicles() {
 		return vehicles;
+	
 	}
 	
 
@@ -84,16 +88,19 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 
 	public void run(){
 		while(true){
+			synchronizedLock = 0;
+
 			for(IVehicle v:vehicles){
+
 				VehicleLog vLog = new VehicleLog(v.getId(), v.getLocation_x(), v.getLocation_y(),
 			v.getSpeed(),timing);
 				lm.addLog(vLog);
 				
 				switch(v.getDirection()){
-					case ConstValues.EastToWest : v.setLocation_x(v.getLocation_x()+v.getSpeed());
+					case ConstValues.EastToWest : v.setLocation_x(v.getLocation_x()-v.getSpeed());
 					break;
 					
-					case ConstValues.WastToEest : v.setLocation_x(v.getLocation_x()-v.getSpeed());
+					case ConstValues.WestToEest : v.setLocation_x(v.getLocation_x()+v.getSpeed());
 					break;
 
 					case ConstValues.SouthToNorth : v.setLocation_y(v.getLocation_y()-v.getSpeed());
@@ -112,7 +119,8 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 			
 			notifyObservers();
 			timing+=intervalTime;
-			
+
+			synchronizedLock = 1;
 				try {
 					sleep(intervalTime*1000);
 					
@@ -132,7 +140,9 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	
 	@Override
 	public void addVehicle(IVehicle v) {
-vehicles.add(v);		
+	//	System.out.println("add "+synchronizedLock);
+ 		if(synchronizedLock==1)
+          vehicles.add(v);		
 	}
 
 	@Override

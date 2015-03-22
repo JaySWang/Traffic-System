@@ -20,7 +20,7 @@ public class ConstValues {
  
  //direction(angle)
  public final static int EastToWest = 270;
- public final static int WastToEest = 90;
+ public final static int WestToEest = 90;
  public final  static int SouthToNorth = 0;
  public final static int NorthToSouth = 180;
 

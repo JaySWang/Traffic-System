@@ -68,20 +68,23 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 	
 	public void paint(Graphics g) {
 		super.paint(g);
-		
-    try {
-		s.updateScreenShot(this);
-	} catch (AWTException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	
 	}
 	
 	public void update(Graphics g){
 
+		System.out.println("lala");
+	    try {
+			s.updateScreenShot(this);
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		g.drawImage(map.getImage(), 0, 0, map.getIconWidth(),
 				map.getIconHeight(), this);
 		if (trafficLightState == ConstValues.ON) {
@@ -96,9 +99,15 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 		if (vehicles != null) {
 			for (IVehicle v : vehicles) {
 				
-				g.drawImage(carIcon.getImage(), v.getLocation_x(), v.getLocation_y(),
-						v.getWidth(),v.getLength(), this);
-
+				if(v.getDirection() == ConstValues.EastToWest || v.getDirection() == ConstValues.WestToEest){
+					g.drawImage(carIcon.getImage(), v.getLocation_x(), v.getLocation_y(),
+							v.getLength(),v.getWidth(), this);
+					
+				}
+				else{
+					g.drawImage(carIcon.getImage(), v.getLocation_x(), v.getLocation_y(),
+							v.getWidth(),v.getLength(), this);
+				}
 				
 
 
