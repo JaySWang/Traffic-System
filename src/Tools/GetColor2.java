@@ -123,10 +123,10 @@ public class GetColor2{
 		int[] result;
 		
 		result=seperateRGB.transfer16(getImageRGB(screenshot,x,y));
-		System.out.println("the color in position is : ");
+		/*System.out.println("the color in position is : ");
 		System.out.println(result[0]);
 		System.out.println(result[1]);
-		System.out.println(result[2]);
+		System.out.println(result[2]);*/
 		
 		return getImageRGB(screenshot,x,y);
 	} 

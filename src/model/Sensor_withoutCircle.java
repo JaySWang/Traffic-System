@@ -28,7 +28,7 @@ public class Sensor_withoutCircle extends Sensor {
 	 * @throws AWTException
 	 */
 	int[] allPointsColor() throws IOException {
-		int[] pColor = new int[5];
+		int[] pColor = new int[30];
 		int n = 0;
 		for (int x = this.getX_min(); x < this.getX_min() + this.getSize_x()
 				+ 1; x++) {
