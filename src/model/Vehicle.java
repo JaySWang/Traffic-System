@@ -413,24 +413,24 @@ public class Vehicle implements IVehicle {
 										// edge
 			switch (this.angle) {
 			case 0:
-				this.setLocation_x(this.getLocation_x() - 4);
+				this.setLocation_x(this.getLocation_x() - 6);
 			case 90:
-				this.setLocation_y(this.getLocation_y() - 4);
+				this.setLocation_y(this.getLocation_y() - 6);
 			case 180:
-				this.setLocation_x(this.getLocation_x() + 4);
+				this.setLocation_x(this.getLocation_x() + 6);
 			case 270:
-				this.setLocation_y(this.getLocation_y() + 4);
+				this.setLocation_y(this.getLocation_y() + 6);
 			}
 		} else if (this.status == 4) {// recover from emergency stop
 			switch (this.angle) {
 			case 0:
-				this.setLocation_x(this.getLocation_x() + 4);
+				this.setLocation_x(this.getLocation_x() + 6);
 			case 90:
-				this.setLocation_y(this.getLocation_y() + 4);
+				this.setLocation_y(this.getLocation_y() + 6);
 			case 180:
-				this.setLocation_x(this.getLocation_x() - 4);
+				this.setLocation_x(this.getLocation_x() - 6);
 			case 270:
-				this.setLocation_y(this.getLocation_y() - 4);
+				this.setLocation_y(this.getLocation_y() - 6);
 			}
 		} else if (this.status == 0) {
 			switch (this.angle) {
