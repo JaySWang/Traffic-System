@@ -9,6 +9,7 @@ import observer.ITrafficConditionObservable;
 
 import constValue.ConstValues;
 
+import modelInterface.IVehicle;
 import modelInterface.IVehicleGenerator;
 import mapInfo.Entrance;
 
@@ -54,12 +55,11 @@ while(true){
 	 
 		
 		
-		Vehicle v1 = new Vehicle();
+		IVehicle v1 = new Vehicle();
 		v1.setLength(32);
 		v1.setWidth(26);
 		v1.setSpeed(80);
-      //  v1.setAcceleration(10);
-        
+              
         Entrance enrance;
         int no = (int) (Math.random()*entrances.size());
        enrance = entrances.get(no);
@@ -67,7 +67,6 @@ while(true){
 	
 
 			
-	    v1.setDirection(enrance.getDirection());
 	    
 		v1.setLocation_x(enrance.getLocation_x());
 		v1.setLocation_y(enrance.getLocation_y());

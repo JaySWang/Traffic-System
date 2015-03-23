@@ -102,15 +102,34 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 		if (vehicles != null) {
 			for (IVehicle v : vehicles) {
 				
-				if(v.getDirection() == ConstValues.EastToWest || v.getDirection() == ConstValues.WestToEest){
-					g.drawImage(carIcon.getImage(), v.getLocation_x(), v.getLocation_y(),
-							v.getLength(),v.getWidth(), this);
-					
+				int x = v.getLocation_x();
+				int y = v.getLocation_y() ;
+				int width = v.getLength();
+                int height = v.getWidth();
+                
+				switch(v.getAngle()){
+				case ConstValues.EastToWest: x-=v.getLength();
+					break;
+				case ConstValues.WestToEest: y-=v.getWidth();
+				break;
+				case ConstValues.NorthToSouth: 
+					x-=v.getWidth();
+					y-=v.getLength();
+					int temp = height;
+					height = width;
+					width = temp;
+				break;
+				case ConstValues.SouthToNorth: 
+				int temp2 = height;
+				height = width;
+				width = temp2;
+				break;
+				
 				}
-				else{
-					g.drawImage(carIcon.getImage(), v.getLocation_x(), v.getLocation_y(),
-							v.getWidth(),v.getLength(), this);
-				}
+				g.drawImage(carIcon.getImage(), x, y,
+						width,height, this);
+				
+		
 				
 
 

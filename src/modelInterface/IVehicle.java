@@ -9,8 +9,8 @@ public interface IVehicle {
 	public int getId();
 	public int getSpeed();
 	public int getAcceleration();
-	public int getDirection();
-	
+
+	public int getAngle();
 	public void setAcceleration(int acceleration);
 	
 	public void setLocation_x(int location_x);
@@ -23,6 +23,7 @@ public interface IVehicle {
 
 	
 	public void setSpeed(int speed);
+	public void setAngle(int angle);
 
 
 	

@@ -1,11 +1,9 @@
 package model;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import constValue.ConstValues;
-
+¡Ý
 import log.LogManagement;
 import log.VehicleLog;
 import modelInterface.IVehicle;
@@ -109,31 +107,12 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 					vehiclesToLeave.add(v);
 					
 				}
-				
-				
-//				switch(v.getDirection()){
-//					case ConstValues.EastToWest : v.setLocation_x(v.getLocation_x()-v.getSpeed());
-//					break;
-//					
-//					case ConstValues.WestToEest : v.setLocation_x(v.getLocation_x()+v.getSpeed());
-//					break;
-//
-//					case ConstValues.SouthToNorth : v.setLocation_y(v.getLocation_y()-v.getSpeed());
-//					break;
-//
-//					case ConstValues.NorthToSouth : v.setLocation_y(v.getLocation_y()+v.getSpeed());
-//
-//				
-//				}
-//			
-//				v.setSpeed(v.getSpeed()+v.getAcceleration());
-				
-				
-
+	
 			}
+			
 			vehicles.remove(vehiclesToLeave);
 			
-			
+
 			notifyObservers();
 			timing+=intervalTime;
 
