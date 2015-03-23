@@ -20,6 +20,13 @@ import javax.swing.JFrame;
  * */
 
 public class GetColor2 {
+	File f = new File("screensho_current.png");
+	BufferedImage screenshot;
+
+	public GetColor2() throws IOException {
+		getImageRGB();
+	}
+
 	/**
 	 * »°µ√ÕºœÒ…œ÷∏∂®Œª÷√œÒÀÿµƒ rgb —’…´∑÷¡ø,≤¢±£¥ÊµΩ ˝◊Èrgb¿Ô√Ê°£
 	 * 
@@ -35,10 +42,18 @@ public class GetColor2 {
 	 *            Œª±Ì æ∫Ï…´÷µ£¨8-15 Œª±Ì æ¬Ã…´÷µ£¨0-7 Œª±Ì æ¿∂…´÷µ°£
 	 * @return ∑µªÿ∞¸∫¨ rgb —’…´∑÷¡ø÷µµƒ ˝◊È°£‘™Àÿ index ”…–°µΩ¥Û∑÷±∂‘”¶
 	 *         r£¨g£¨b°£
+	 * @throws IOException
 	 */
-	public static int getImageRGB(BufferedImage image, int x, int y) {
-		int pixel = image.getRGB(x, y);
-		return pixel;
+	public void getImageRGB() throws IOException {
+		this.setScreenshot(ImageIO.read(f));
+	}
+
+	public BufferedImage getScreenshot() {
+		return screenshot;
+	}
+
+	public void setScreenshot(BufferedImage screenshot) {
+		this.screenshot = screenshot;
 	}
 
 	/**
@@ -87,9 +102,9 @@ public class GetColor2 {
 		System.out.println("location y: " + point.y);
 		System.out.println("width: " + obj.getWidth());
 		System.out.println("length: " + obj.getHeight());
-		System.out.println("color of thi spoint is:"
-				+ getImageRGB(ScreenShot, x, y));
-		return getImageRGB(ScreenShot, x, y);
+		// System.out.println("color of thi spoint is:"
+		// +getImageRGB(ScreenShot,x,y));
+		return 12;// getImageRGB(ScreenShot,x,y);
 	}
 
 	/**
@@ -140,23 +155,9 @@ public class GetColor2 {
 	 * @return
 	 * @throws IOException
 	 */
-	public static int getColorFromImage(int x, int y) throws IOException {
-		long a = System.currentTimeMillis();
-		File f = new File("screensho_current.png");
-		BufferedImage screenshot = ImageIO.read(f);
-		int[] result;
-
-		result = seperateRGB.transfer16(getImageRGB(screenshot, x, y));
-		/*
-		 * System.out.println("the color in position is : ");
-		 * System.out.println(result[0]); System.out.println(result[1]);
-		 * System.out.println(result[2]);
-		 */
-		System.out.println("\r<br> Time Consuming: get screenshot : "
-				+ (System.currentTimeMillis() - a) / 1000f + " 秒 ");
-
-		return getImageRGB(screenshot, x, y);
-
+	public int getColorFromImage(int x, int y) throws IOException {
+		int result = this.getScreenshot().getRGB(x, y);
+		return result;
 	}
 
 	public static void main(String[] arg) throws IOException {

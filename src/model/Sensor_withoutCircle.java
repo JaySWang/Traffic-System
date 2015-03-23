@@ -30,13 +30,14 @@ public class Sensor_withoutCircle extends Sensor {
 	int[] allPointsColor() throws IOException {
 		int num=0;
 		long a=System.currentTimeMillis();
+		GetColor2 g=new GetColor2();
 		num=this.getSize_x()*this.getSize_y();
 		int[] pColor = new int[num];
 		int n = 0;
 		for (int x = this.getX_min(); x < this.getX_min() + this.getSize_x(); x++) {
 			for (int y = this.getY_min(); y < this.getY_min()
 					+ this.getSize_y(); y++) {
-				pColor[n] = GetColor2.getColorFromImage(x, y);
+				pColor[n] = g.getColorFromImage(x, y);
 				n++;
 			}
 		}
@@ -57,8 +58,9 @@ public class Sensor_withoutCircle extends Sensor {
 	 */
 	int[] randomPointsColor() throws IOException {
 		int[] pColor = new int[5];
+		GetColor2 g= new GetColor2();
 		for (int i = 0; i < 5; i++) {
-			pColor[i] = GetColor2.getColorFromImage(
+			pColor[i] = g.getColorFromImage(
 					randomInt(this.getX_min(), this.getX_max()),
 					randomInt(this.getY_min(), this.getY_max()));
 		}
