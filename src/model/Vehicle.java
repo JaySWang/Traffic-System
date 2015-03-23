@@ -485,13 +485,22 @@ public class Vehicle implements IVehicle {
 				+ (System.currentTimeMillis() - a) / 1000f + " 秒 ");
 	}
 
-	public void update() throws IOException {
+	public boolean update() {
+		boolean Ex_flag = true;
 		long a = System.currentTimeMillis();
-		this.configureSensors();
-		this.turnJudgement();
-		this.calculateNextPosition();
-		System.out.println("\r<br>总执行耗时 : "
-				+ (System.currentTimeMillis() - a) / 1000f + " 秒 ");
+		try {
+			this.configureSensors();
+			this.turnJudgement();
+			this.calculateNextPosition();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Ex_flag = false;
+		}
+
+		System.out.println("\r<br>总执行耗时 : " + (System.currentTimeMillis() - a)
+				/ 1000f + " 秒 ");
+		return Ex_flag;
 	}
 
 	public static void main(String[] arg) throws IOException {
