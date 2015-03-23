@@ -70,7 +70,7 @@ public class MainController implements IMainController{
 				Entrance e3 = new Entrance(2,761,539,ConstValues.SouthToNorth);
 				entrances.add(e3);
 				
-				Entrance e4 = new Entrance(3,1146,324,ConstValues.EastToWest);
+				Entrance e4 = new Entrance(3,1146,349,ConstValues.EastToWest);
 				entrances.add(e4);
 				
 				Entrance e5 = new Entrance(4,825,60,ConstValues.NorthToSouth);

@@ -108,9 +108,9 @@ public class MapView extends JPanel implements ITrafficLightObserver {
                 int height = v.getWidth();
                 
 				switch(v.getAngle()){
-				case ConstValues.EastToWest: x-=v.getLength();
+				case ConstValues.EastToWest: y-=v.getWidth();
 					break;
-				case ConstValues.WestToEest: y-=v.getWidth();
+				case ConstValues.WestToEest: x-=v.getLength();
 				break;
 				case ConstValues.NorthToSouth: 
 					x-=v.getWidth();

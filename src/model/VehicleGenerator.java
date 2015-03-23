@@ -55,10 +55,10 @@ while(true){
 	 
 		
 		
-		IVehicle v1 = new Vehicle();
+		IVehicle v1 = new VehicleWithRec();
 		v1.setLength(32);
 		v1.setWidth(26);
-		v1.setSpeed(80);
+		v1.setSpeed(400);
               
         Entrance enrance;
         int no = (int) (Math.random()*entrances.size());
