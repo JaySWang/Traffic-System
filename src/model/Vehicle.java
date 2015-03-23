@@ -203,33 +203,32 @@ public class Vehicle implements IVehicle {
 	 * @throws IOException
 	 */
 	void configureSensors() throws IOException {
+		long a=System.currentTimeMillis();
 		if (this.getAngle() == 0) {// the car is heading north
 			System.out.println("the car is heading north");
-			System.out.println("for sensors:position of the vehicle now is: ("
-					+ this.getLocation_x() + "," + this.getLocation_y() + ")");
 
 			/* configuration for sensor1 */
-			this.getS1().setLocation_x(this.getLocation_x() - 30);
-			this.getS1().setLocation_y(this.getLocation_y()+15);
-			this.getS1().setSize_x(5);
-			this.getS1().setSize_y(5);
+			this.getS1().setLocation_x(this.getLocation_x() - 8);
+			this.getS1().setLocation_y(this.getLocation_y() + 33);
+			this.getS1().setSize_x(1);
+			this.getS1().setSize_y(1);
 			/* configuration for sensor2 */
-			this.getS2().setLocation_x(this.getLocation_x() - 6);
+			this.getS2().setLocation_x(this.getLocation_x() - 7);
 			this.getS2().setLocation_y(this.getLocation_y() - 30);
 			this.getS2().setSize_x(1);
-			this.getS2().setSize_y(30);
+			this.getS2().setSize_y(1);
 			/* configuration for sensor3 */
 			this.getS3().setLocation_x(this.getLocation_x());
 			this.getS3().setLocation_y(this.getLocation_y() - 20);
-			this.getS3().setSize_x(26);
-			this.getS3().setSize_y(10);
+			this.getS3().setSize_x(2);
+			this.getS3().setSize_y(1);
 			/* configuration for sensor4 */
 			this.getS4().setLocation_x(this.getLocation_x());
 			this.getS4().setLocation_y(this.getLocation_y() - 38);
-			this.getS4().setSize_x(26);
+			this.getS4().setSize_x(2);
 			this.getS4().setSize_y(1);
 			/* configuration for sensor5 */
-			this.getS5().setLocation_x(this.getLocation_x() + 33);
+			this.getS5().setLocation_x(this.getLocation_x() + 32);
 			this.getS5().setLocation_y(this.getLocation_y() - 30);
 			this.getS5().setSize_x(1);
 			this.getS5().setSize_y(30);
@@ -237,12 +236,13 @@ public class Vehicle implements IVehicle {
 			this.getS6().setLocation_x(this.getLocation_x() + 18);
 			this.getS6().setLocation_y(this.getLocation_y() - 30);
 			this.getS6().setSize_x(1);
-			this.getS6().setSize_y(30);
+			this.getS6().setSize_y(3);
 			/* configuration for sensor7 */
 			this.getS7().setLocation_x(this.getLocation_x() - 5);
 			this.getS7().setLocation_y(this.getLocation_y() + 42);
-			this.getS7().setSize_x(36);
-			this.getS7().setSize_y(10);
+			this.getS7().setSize_x(3);
+			this.getS7().setSize_y(1);
+			System.out.println("configuration finished");
 
 		} else if (this.getAngle() == 90) {// the car is heading east
 			System.out.println("the car is heading east");
@@ -356,6 +356,8 @@ public class Vehicle implements IVehicle {
 			this.getS7().setSize_x(10);
 			this.getS7().setSize_y(36);
 		}
+		System.out.println("\r<br>配置传感器耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
+		
 
 	}
 
@@ -370,33 +372,47 @@ public class Vehicle implements IVehicle {
 	 * @throws IOException
 	 */
 	void turnJudgement() throws IOException {
-		System.out.println("Color of sensor1 is : " + s1.areaColor() + "\n"
-				+ "Color of sensor2 is : " + s2.areaColor() + "\n"
-				+ "Color of sensor5 is : " + s5.areaColor() + "\n"
-				+"number of white pixel is : "+s5.countColor());
-		if (s7.areaColor() == Color.red) {
+		
+		Color c1,c2,c3,c4,c5,c6,c7;
+		c1=s1.areaColor();
+		c2=s2.areaColor();
+		c3=s3.areaColor();
+		c4=s4.areaColor();
+		c5=s5.areaColor();
+		c6=s6.areaColor();
+		c7=s7.areaColor();
+		long a=System.currentTimeMillis();
+		System.out.println("Color of sensor1 is : " + c1 + "\n"
+				+ "Color of sensor2 is : " + c2 + "\n"
+				+ "Color of sensor5 is : " + c5 + "\n"
+				+ "number of white pixel is : " + s5.countColor());
+		if (c7 == Color.red) {
 			this.setStatus(1);
-		} else if (s1.areaColor() == Color.red// traffic light is red
-				|| s3.areaColor() != Color.gray// there is not the road in front
-												// of the vehicle, car or end of
-												// the road
+		} else if (c1 == Color.red// traffic light is red
+		// || s3.areaColor() != Color.gray// there is not the road in front
+		// of the vehicle, car or end of
+		// the road
 		) {
-			this.setStatus(1);
+			this.setStatus(2);
 
-		} else if (s6.areaColor() != Color.gray
-				&& s6.areaColor() != Color.black) {// not drive normally or
+		} else if (c6 != Color.gray
+				&& c6 != Color.black) {// not drive normally or
 													// there is a car come from
 													// the road behind it
 
-		} else if (s2.areaColor() == Color.black
-				&& s5.areaColor() == Color.white) {
+		} else if (c2 == Color.black
+				&& c5 == Color.white) {
 			this.setStatus(0);
-		} else if (s2.areaColor() == Color.gray && s5.areaColor() == Color.gray) {
+			System.out.println("vehicle is driving with status: "
+					+ this.getStatus());
+		} else if (c2 == Color.gray && c5 == Color.gray) {
 			System.out.println("I need to turn");
-			this.setAngle(0);
+			this.setAngle(90);
 		} else {
 			System.out.println("unknown");
 		}
+		System.out.println("\r<br>判断转向耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
+		
 	}
 
 	/**
@@ -406,8 +422,11 @@ public class Vehicle implements IVehicle {
 	 */
 
 	void calculateNextPosition() throws IOException {
+		long a=System.currentTimeMillis();
 		if (this.status == 2) {// do nothing is stop
-
+			System.out.println("vehicle is stoped because of: "
+					+ this.getStatus());
+			System.out.println("car is stop");
 		} else if (this.status == 1) {// emergency stop will make the vehicle
 										// stop on its left side close to the
 										// edge
@@ -437,6 +456,9 @@ public class Vehicle implements IVehicle {
 			case 0:
 				this.setLocation_y((int) (this.getLocation_y() - this
 						.getSpeed() * 0.1));
+				System.out.println("vehicle is driving with status: "
+						+ this.getStatus() + " and next pisotion is"
+						+ this.getLocation_y());
 			case 90:
 				this.setLocation_x((int) (this.getLocation_x() + this
 						.getSpeed() * 0.1));
@@ -451,11 +473,12 @@ public class Vehicle implements IVehicle {
 		} else {
 			System.out.println("There is something wrong");
 		}
+		System.out.println("\r<br>计算下一步位置耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
 	}
 
 	public static void main(String[] arg) throws IOException {
 		Vehicle v = new Vehicle();
-		v.setLocation_x(760);
+		v.setLocation_x(335);
 		v.setLocation_y(539);
 		v.setAngle(0);
 		v.setLength(32);
@@ -463,14 +486,14 @@ public class Vehicle implements IVehicle {
 		v.setSpeed(80);
 		// simulate
 		while (v.getAngle() == 0) {
-			System.out.println("position of the vehicle now is: ("
-					+ v.getLocation_x() + "," + v.getLocation_y() + ")");
+			long a=System.currentTimeMillis();
 			v.configureSensors();
 			v.turnJudgement();
 			v.calculateNextPosition();
-			System.out.println("next position of the vehicle is: ("
+			System.out.println("\r<br>总执行耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
+			/*System.out.println("next position of the vehicle is: ("
 					+ v.getLocation_x() + "," + v.getLocation_y() + ")"
-					+ v.getAngle());
+					+ v.getAngle());*/
 		}
 	}
 
@@ -480,9 +503,3 @@ public class Vehicle implements IVehicle {
 	}
 
 }
-
-
-
-
-
-
