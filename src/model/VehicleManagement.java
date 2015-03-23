@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-¡Ý
+
 import log.LogManagement;
 import log.VehicleLog;
 import modelInterface.IVehicle;
