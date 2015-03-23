@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,22 +103,30 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 			v.getSpeed(),timing);
 				lm.addLog(vLog);
 				
-				switch(v.getDirection()){
-					case ConstValues.EastToWest : v.setLocation_x(v.getLocation_x()-v.getSpeed());
-					break;
-					
-					case ConstValues.WestToEest : v.setLocation_x(v.getLocation_x()+v.getSpeed());
-					break;
-
-					case ConstValues.SouthToNorth : v.setLocation_y(v.getLocation_y()-v.getSpeed());
-					break;
-
-					case ConstValues.NorthToSouth : v.setLocation_y(v.getLocation_y()+v.getSpeed());
-
-				
+				try {
+					((Vehicle)v).update();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			
-				v.setSpeed(v.getSpeed()+v.getAcceleration());
+				
+				
+//				switch(v.getDirection()){
+//					case ConstValues.EastToWest : v.setLocation_x(v.getLocation_x()-v.getSpeed());
+//					break;
+//					
+//					case ConstValues.WestToEest : v.setLocation_x(v.getLocation_x()+v.getSpeed());
+//					break;
+//
+//					case ConstValues.SouthToNorth : v.setLocation_y(v.getLocation_y()-v.getSpeed());
+//					break;
+//
+//					case ConstValues.NorthToSouth : v.setLocation_y(v.getLocation_y()+v.getSpeed());
+//
+//				
+//				}
+//			
+//				v.setSpeed(v.getSpeed()+v.getAcceleration());
 				
 				
 
@@ -128,7 +137,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 
 			synchronizedLock = 1;
 				try {
-					sleep(intervalTime*1000);
+					sleep(intervalTime*100);
 					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -147,7 +156,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	@Override
 	public void addVehicle(IVehicle v) {
 	//	System.out.println("add "+synchronizedLock);
- 		if(synchronizedLock==1)
+ 	if(synchronizedLock==1)
           vehicles.add(v);		
 	}
 
