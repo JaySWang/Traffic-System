@@ -55,7 +55,7 @@ while(true){
 	 
 		
 		
-		IVehicle v1 = new VehicleWithRec();
+		IVehicle v1 = new Vehicle();
 		v1.setLength(32);
 		v1.setWidth(26);
 		v1.setSpeed(400);

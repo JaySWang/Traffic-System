@@ -20,6 +20,9 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	ArrayList<ITrafficMgtPolicyObserver> trafficMgtPolicyObservers = new ArrayList<ITrafficMgtPolicyObserver> ();
 
 	List<IVehicle>  vehicles = new ArrayList<IVehicle>();
+	List<IVehicle>  cloneVehicles = new ArrayList<IVehicle>();
+
+	
 	LogManagement lm = LogManagement.getInstance();
 	
 	int intervalTime;
@@ -96,6 +99,8 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 			synchronizedLock = 0;
 			List<IVehicle> vehiclesToLeave = new ArrayList<IVehicle>();
 			
+			cloneVehicles = (List<IVehicle>) ((ArrayList)vehicles).clone();
+
 			for(IVehicle v:vehicles){
 
 				VehicleLog vLog = new VehicleLog(v.getId(), v.getLocation_x(), v.getLocation_y(),
@@ -103,7 +108,8 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 				lm.addLog(vLog);
 				
 				//vehicle leave
-				if(!((Vehicle)v).update()){
+				
+				if(!v.update()){
 					vehiclesToLeave.add(v);
 					
 				}
@@ -158,6 +164,13 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 		for(int i = 0;i<trafficMgtPolicyObservers.size();i++){
 			trafficMgtPolicyObservers.get(i).update(this);
 		}		
+	}
+
+
+	@Override
+	public List<IVehicle> getCloneVehicles() {
+
+		return cloneVehicles;
 	}
 	
 	
