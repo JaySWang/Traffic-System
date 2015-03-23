@@ -520,7 +520,7 @@ public class Vehicle implements IVehicle {
 		v.setWidth(26);
 		v.setSpeed(80);
 		// simulate
-		while (v.getAngle() == 0) {
+		while (v.getAngle() ==180) {
 			long a = System.currentTimeMillis();
 			v.configureSensors();
 			v.turnJudgement();
