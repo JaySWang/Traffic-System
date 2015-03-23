@@ -138,7 +138,10 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 		int position = getLightPosition(no);
 		for (int i = 0; i < states.size(); i++) {
 
-			lightList.get(position + i).setState((Integer) states.get(i));
+
+Light l = lightList.get(position + i);
+
+			l.setState((Integer) states.get(i));
 
 		}
 

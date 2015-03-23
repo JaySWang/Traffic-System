@@ -39,8 +39,8 @@ public class CrossMapView extends MapView {
 	
 	private void initialLights() {
 
-		lightList  = new ArrayList();
-		
+		lightList = new ArrayList();
+
 		Light light1 = new Light(294,244, 1);
 		Light light2 = new Light(294,357, 0);
 		Light light3 = new Light(407, 357,1);
