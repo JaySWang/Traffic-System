@@ -29,7 +29,7 @@ public class Sensor_withoutCircle extends Sensor {
 	 */
 	int[] allPointsColor() throws IOException {
 		int num=0;
-		long a=System.currentTimeMillis();
+		//long a=System.currentTimeMillis();
 		GetColor2 g=new GetColor2();
 		num=this.getSize_x()*this.getSize_y();
 		int[] pColor = new int[num];
@@ -41,7 +41,7 @@ public class Sensor_withoutCircle extends Sensor {
 				n++;
 			}
 		}
-		System.out.println("\r<br>获取像素点耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
+		//System.out.println("\r<br>获取像素点耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
 		
 		return pColor;
 		
@@ -78,7 +78,7 @@ public class Sensor_withoutCircle extends Sensor {
 	 */
 	Color areaColor() throws IOException {
 		//int[] points = this.randomPointsColor();
-		long a=System.currentTimeMillis();
+		//long a=System.currentTimeMillis();
 		int[] points = this.allPointsColor();
 		int r = 0, g = 0, b = 0;
 		Color coa = null;
@@ -122,7 +122,7 @@ public class Sensor_withoutCircle extends Sensor {
 		else{
 			System.out.println("Wrong");
 		}
-		System.out.println("\r<br>计算区域颜色耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
+		//System.out.println("\r<br>计算区域颜色耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
 		
 		return coa;
 	}

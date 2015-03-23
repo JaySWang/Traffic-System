@@ -24,6 +24,7 @@ public interface IVehicle {
 	
 	public void setSpeed(int speed);
 	public void setAngle(int angle);
+	public boolean update();
 
 
 	
