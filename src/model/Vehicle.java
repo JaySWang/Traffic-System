@@ -209,7 +209,7 @@ public class Vehicle implements IVehicle {
 
 			/* configuration for sensor1 */
 			this.getS1().setLocation_x(this.getLocation_x() - 8);
-			this.getS1().setLocation_y(this.getLocation_y() + 33);
+			this.getS1().setLocation_y(this.getLocation_y() + 34);
 			this.getS1().setSize_x(1);
 			this.getS1().setSize_y(1);
 			/* configuration for sensor2 */
