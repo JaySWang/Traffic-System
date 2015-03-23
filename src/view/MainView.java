@@ -101,9 +101,16 @@ public class MainView implements IVehicleObserver{
 
 
 
-	public void setMapPanel(TLCrossMapView mp){
-		
+	public void setMapPanel(MapView mp){
+		frame.getContentPane().remove(mapPanel);
 		mapPanel = mp;
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 1;
+		frame.getContentPane().add(mapPanel, gbc_panel);
+		
+		
 	};
 
 	
@@ -277,20 +284,52 @@ public class MainView implements IVehicleObserver{
 		menuBar.add(mnMaps);
 		
 		mntmTRoad = new JMenuItem("T Road");
+		mntmTRoad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				mainController.setMaps("TRoad");
+				mainController.start();
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mainController.setMaps("TRoad");
+				mainController.start();
+
+				
+				
+			}
+		});
+		
+		
+		
 		mnMaps.add(mntmTRoad);
 		
 		mntmCrossRoad = new JMenuItem("Cross Road");
 		mntmCrossRoad.addMouseListener(new MouseAdapter() {
+		
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
+			public void mousePressed(MouseEvent e) {
 				mainController.setMaps("CrossRoad");
+				mainController.start();
+
+				
 				
 			}
 		});
 		mnMaps.add(mntmCrossRoad);
 		
 		mntmTcrosslRoad = new JMenuItem("T&Cross&L Road");
+		mntmTcrosslRoad.addMouseListener(new MouseAdapter() {
+		
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mainController.setMaps("TLCrossRoad");
+				mainController.start();
+
+			}
+		});
 		mnMaps.add(mntmTcrosslRoad);
 		frame.setVisible(true);
 
@@ -306,4 +345,8 @@ public class MainView implements IVehicleObserver{
 		mapPanel.update(o);
 		
 	}
+	
+	
+	
+	
 }

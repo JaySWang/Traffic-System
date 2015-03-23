@@ -35,12 +35,8 @@ public class ScreenShotofMap {
 				point.x, point.y, obj.getWidth(), obj.getHeight()));
 		// BufferedImage image = MyScreenShot.this.robot.createScreenCapture(new
 		// Rectangle(0, 0,screenSize.width, screenSize.height));
-		System.out.println("location x: " + point.x);
-		System.out.println("location y: " + point.y);
-		System.out.println("width: " + obj.getWidth());
-		System.out.println("length: " + obj.getHeight());
+	
 		ImageIO.write(ScreenShot, "png", new File("screensho_current.png"));
-		System.out.println("screensho_current.png");
 	}
 
 	/**

@@ -44,6 +44,11 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	};
 	
 	
+	public void clean(){
+		vehicles.clear();
+		vehicleObservers.clear();
+		trafficMgtPolicyObservers.clear();
+	}
 	
 	private VehicleManagement() {
 		timing = 0;

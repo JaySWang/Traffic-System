@@ -2,6 +2,7 @@ package view;
 
 import java.awt.AWTException;
 import java.awt.Graphics;
+import java.awt.IllegalComponentStateException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 	
 	int trafficLightState = ConstValues.OFF;
 
-	List<Light> lightList = new ArrayList();
+	List<Light> lightList;
 
 	List<ITrafficLight> trafficLights;
 	ITrafficLightController trafficLightController;
@@ -73,8 +74,8 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 	
 	public void update(Graphics g){
 
-		System.out.println("lala");
 	    try {
+
 			s.updateScreenShot(this);
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
@@ -82,11 +83,13 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch(IllegalComponentStateException e){
+			e.printStackTrace();
+
 		}
 		
+		g.drawImage(map.getImage(), 0, 0, map.getIconWidth(),map.getIconHeight(), this);
 		
-		g.drawImage(map.getImage(), 0, 0, map.getIconWidth(),
-				map.getIconHeight(), this);
 		if (trafficLightState == ConstValues.ON) {
 			for (Light l : lightList) {
 

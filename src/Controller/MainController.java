@@ -7,9 +7,11 @@ import constValue.ConstValues;
 
 import observer.ITrafficLightObservable;
 
+import view.CrossMapView;
 import view.MainView;
 import view.MapView;
 import view.TLCrossMapView;
+import view.TMapView;
 
 import log.LogManagement;
 import mapInfo.Entrance;
@@ -36,21 +38,23 @@ public class MainController implements IMainController{
 	
 	ITrafficLightController tlc;
 	MapView mapView;
-
+	MainView mv; 
 	
 	
 	
 	@Override
 	public void setMaps(String map) {
   
-		if(map.endsWith("TLCrossMap")){
+		if(map.equals("TLCrossRoad")){
 			TrafficLight t0 = new TrafficLight(3,0);
 		    TrafficLight t1 = new TrafficLight(4,1);
+			trafficLights.clear();
 
 			trafficLights.add(t0);
 			 trafficLights.add(t1);
 			
 			 initial();
+			 
 			 mapView = new TLCrossMapView(trafficLights, tlc);
 		 
 	
@@ -70,8 +74,61 @@ public class MainController implements IMainController{
 				entrances.add(e5);
 
 	 
-		}
+		} else if(map.equals("CrossRoad")){
+			TrafficLight t0 = new TrafficLight(3,0);
+			trafficLights.clear();
+			trafficLights.add(t0);
+			
+			 initial();
+			 mapView = new CrossMapView(trafficLights, tlc);
+		 
+	
 
+				Entrance e1 = new Entrance(0,95,28,ConstValues.NorthToSouth);
+				entrances.add(e1);
+				Entrance e2 = new Entrance(1,336,539,ConstValues.SouthToNorth);
+				entrances.add(e2);
+				
+				Entrance e3 = new Entrance(2,761,539,ConstValues.SouthToNorth);
+				entrances.add(e3);
+				
+				Entrance e4 = new Entrance(3,1146,324,ConstValues.EastToWest);
+				entrances.add(e4);
+				
+				Entrance e5 = new Entrance(4,800,28,ConstValues.NorthToSouth);
+				entrances.add(e5);
+
+	 
+		}
+		 else if(map.equals("TRoad")){
+				TrafficLight t1 = new TrafficLight(4,0);
+				trafficLights.clear();
+
+				trafficLights.add(t1);
+				
+				 initial();
+				 mapView = new TMapView(trafficLights, tlc);
+			 
+		
+
+					Entrance e1 = new Entrance(0,95,28,ConstValues.NorthToSouth);
+					entrances.add(e1);
+					Entrance e2 = new Entrance(1,336,539,ConstValues.SouthToNorth);
+					entrances.add(e2);
+					
+					Entrance e3 = new Entrance(2,761,539,ConstValues.SouthToNorth);
+					entrances.add(e3);
+					
+					Entrance e4 = new Entrance(3,1146,324,ConstValues.EastToWest);
+					entrances.add(e4);
+					
+					Entrance e5 = new Entrance(4,800,28,ConstValues.NorthToSouth);
+					entrances.add(e5);
+
+		 
+			}
+		
+		
 		for(ITrafficLight tl:trafficLights){
 			((ITrafficLightObservable)tl).registerObserver(mapView);
 		}
@@ -87,6 +144,9 @@ public class MainController implements IMainController{
 		 tlm.registerTMPObserver(tp);
 		 
 			LogManagement lm = LogManagement.getInstance();
+			lm.clean();
+			
+		
 		 lm.setTrafficPolicyMgt(tp);	
 	     tlc = new TrafficLightController(tlm);
 	     
@@ -109,13 +169,20 @@ public class MainController implements IMainController{
 			((TrafficCondition)tc).registerConditionObserver(vg);
 			 
 		
-			MainView mv = new MainView(mapView, this, tcc);
+		
+				 mv = new MainView(mapView, this, tcc);
+
+			
 	        VehicleManagement vm =VehicleManagement.getInstance();
 
+	        vm.clean();
+	        
 			vm.registerObserver(mv);
 			vm.setIntervalTime(1);
-			vm.start();
 			
+			if(!vm.isAlive()){
+			vm.start();
+			}
 			
 			
 	}

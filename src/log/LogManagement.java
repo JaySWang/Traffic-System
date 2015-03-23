@@ -31,6 +31,14 @@ public class LogManagement {
 		super();
 	}
 	
+	//
+	public void clean(){
+		tLogs.clear();
+		vLogs.clear();
+		aLogs.clear();
+	}
+	
+	
 	public static LogManagement getInstance(){
 		if(lm==null){
 			lm = new LogManagement();

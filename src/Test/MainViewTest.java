@@ -30,7 +30,7 @@ public class MainViewTest {
 		
 		IMainController mainController = new MainController();
 		
-		mainController.setMaps("TLCrossMap");
+		mainController.setMaps("TLCrossRoad");
 		mainController.start();
 	}
 }
