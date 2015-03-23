@@ -280,6 +280,14 @@ public class MainView implements IVehicleObserver{
 		mnMaps.add(mntmTRoad);
 		
 		mntmCrossRoad = new JMenuItem("Cross Road");
+		mntmCrossRoad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				mainController.setMaps("CrossRoad");
+				
+			}
+		});
 		mnMaps.add(mntmCrossRoad);
 		
 		mntmTcrosslRoad = new JMenuItem("T&Cross&L Road");
