@@ -410,6 +410,7 @@ public class Vehicle implements IVehicle {
 			System.out.println("I need to turn");
 			this.setAngle(80);
 		} else {
+			this.setStatus(0);
 			System.out.println("unknown");
 		}
 		System.out.println("\r<br>判断转向耗时 : " + (System.currentTimeMillis() - a)
