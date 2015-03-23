@@ -284,7 +284,7 @@ public class Vehicle implements IVehicle {
 		} else if (this.getAngle() == 180) {// the car is heading south
 			System.out.println("the car is heading south");
 			/* configuration for sensor1 */
-			this.getS1().setLocation_x(this.getLocation_x() + 78);
+			this.getS1().setLocation_x(this.getLocation_x() + 8);
 			this.getS1().setLocation_y(this.getLocation_y() - 33);
 			this.getS1().setSize_x(1);
 			this.getS1().setSize_y(1);
@@ -321,40 +321,40 @@ public class Vehicle implements IVehicle {
 		} else {// the car is heading west
 			System.out.println("the car is heading west");
 			/* configuration for sensor1 */
-			this.getS1().setLocation_x(this.getLocation_x());
-			this.getS1().setLocation_y(this.getLocation_y() + 7);
-			this.getS1().setSize_x(35);
-			this.getS1().setSize_y(35);
+			this.getS1().setLocation_x(this.getLocation_x() + 33);
+			this.getS1().setLocation_y(this.getLocation_y() + 8);
+			this.getS1().setSize_x(1);
+			this.getS1().setSize_y(1);
 			/* configuration for sensor2 */
-			this.getS2().setLocation_x(this.getLocation_x() - 30);
-			this.getS2().setLocation_y(this.getLocation_y() + 8);
-			this.getS2().setSize_x(30);
+			this.getS2().setLocation_x(this.getLocation_x());
+			this.getS2().setLocation_y(this.getLocation_y() + 7);
+			this.getS2().setSize_x(1);
 			this.getS2().setSize_y(1);
 			/* configuration for sensor3 */
 			this.getS3().setLocation_x(this.getLocation_x() - 20);
 			this.getS3().setLocation_y(this.getLocation_y() - 26);
-			this.getS3().setSize_x(10);
-			this.getS3().setSize_y(26);
+			this.getS3().setSize_x(1);
+			this.getS3().setSize_y(2);
 			/* configuration for sensor4 */
 			this.getS4().setLocation_x(this.getLocation_x() - 38);
 			this.getS4().setLocation_y(this.getLocation_y() - 26);
 			this.getS4().setSize_x(1);
-			this.getS4().setSize_y(26);
+			this.getS4().setSize_y(2);
 			/* configuration for sensor5 */
 			this.getS5().setLocation_x(this.getLocation_x() - 30);
-			this.getS5().setLocation_y(this.getLocation_y() - 31);
+			this.getS5().setLocation_y(this.getLocation_y() - 32);
 			this.getS5().setSize_x(30);
 			this.getS5().setSize_y(1);
 			/* configuration for sensor6 */
 			this.getS6().setLocation_x(this.getLocation_x() - 30);
 			this.getS6().setLocation_y(this.getLocation_y() - 68);
-			this.getS6().setSize_x(30);
+			this.getS6().setSize_x(3);
 			this.getS6().setSize_y(1);
 			/* configuration for sensor7 */
 			this.getS7().setLocation_x(this.getLocation_x() + 42);
 			this.getS7().setLocation_y(this.getLocation_y() - 30);
-			this.getS7().setSize_x(10);
-			this.getS7().setSize_y(36);
+			this.getS7().setSize_x(1);
+			this.getS7().setSize_y(3);
 		}
 		System.out.println("\r<br>配置传感器耗时 : "
 				+ (System.currentTimeMillis() - a) / 1000f + " 秒 ");
@@ -513,14 +513,14 @@ public class Vehicle implements IVehicle {
 
 	public static void main(String[] arg) throws IOException {
 		Vehicle v = new Vehicle();
-		v.setLocation_x(121);
-		v.setLocation_y(60);
-		v.setAngle(180);
+		v.setLocation_x(1146);
+		v.setLocation_y(349);
+		v.setAngle(270);
 		v.setLength(32);
 		v.setWidth(26);
 		v.setSpeed(80);
 		// simulate
-		while (v.getAngle() ==180) {
+		while (v.getAngle() == 270) {
 			long a = System.currentTimeMillis();
 			v.configureSensors();
 			v.turnJudgement();
