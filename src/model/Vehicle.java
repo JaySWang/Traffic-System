@@ -148,7 +148,7 @@ public class Vehicle implements IVehicle {
 	}
 
 	public void setSpeed(int speed) {
-		this.speed = speed;
+		this.speed = 80;
 	}
 
 	public int getAngle() {
