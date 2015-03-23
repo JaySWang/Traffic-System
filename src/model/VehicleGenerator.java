@@ -52,13 +52,13 @@ public class VehicleGenerator extends Thread implements IVehicleGenerator,ITraff
 	public void run(){
 while(true){
 	 
-	if(VehicleManagement.getInstance().getVehicles().size()<1){
+//	if(VehicleManagement.getInstance().getVehicles().size()<2){
 		
 		
 		Vehicle v1 = new Vehicle();
 		v1.setLength(32);
 		v1.setWidth(26);
-		v1.setSpeed(40);
+		v1.setSpeed(80);
       //  v1.setAcceleration(10);
         
         Entrance enrance;
@@ -91,7 +91,7 @@ while(true){
 			
 		
 			
-		}
+	//	}
 }	
 }
 
