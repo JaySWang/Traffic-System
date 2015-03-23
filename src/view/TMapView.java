@@ -40,7 +40,8 @@ public class TMapView extends MapView {
 	private void initialLights() {
 
 
-		lightList  = new ArrayList();
+		lightList = new ArrayList();
+		
 		Light light4 = new Light(720,244,1);
 		Light light5 = new Light(720,357,0);
 		Light light6 = new Light(833,357,1);

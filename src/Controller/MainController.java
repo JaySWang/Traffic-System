@@ -48,6 +48,9 @@ public class MainController implements IMainController{
 		if(map.equals("TLCrossRoad")){
 			TrafficLight t0 = new TrafficLight(3,0);
 		    TrafficLight t1 = new TrafficLight(4,1);
+		    for(ITrafficLight tl:trafficLights){
+		    	((TrafficLight)tl).clean();
+		    }
 			trafficLights.clear();
 
 			trafficLights.add(t0);
@@ -76,6 +79,9 @@ public class MainController implements IMainController{
 	 
 		} else if(map.equals("CrossRoad")){
 			TrafficLight t0 = new TrafficLight(3,0);
+			 for(ITrafficLight tl:trafficLights){
+			    	((TrafficLight)tl).clean();
+			    }
 			trafficLights.clear();
 			trafficLights.add(t0);
 			
@@ -101,10 +107,13 @@ public class MainController implements IMainController{
 	 
 		}
 		 else if(map.equals("TRoad")){
-				TrafficLight t1 = new TrafficLight(4,0);
+				TrafficLight t0 = new TrafficLight(4,0);
+				
+				 for(ITrafficLight tl:trafficLights){
+				    	((TrafficLight)tl).clean();
+				    }
 				trafficLights.clear();
-
-				trafficLights.add(t1);
+				trafficLights.add(t0);
 				
 				 initial();
 				 mapView = new TMapView(trafficLights, tlc);

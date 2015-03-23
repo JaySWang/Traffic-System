@@ -45,7 +45,9 @@ ArrayList<ITrafficLightObserver> observers = new ArrayList<ITrafficLightObserver
 
 
 
- 
+ public void clean(){
+	 observers.clear();
+ }
 
 public int getLightState() {
 	return lightState;

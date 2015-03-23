@@ -292,13 +292,11 @@ public class MainView implements IVehicleObserver{
 				mainController.start();
 			}
 			
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				mainController.setMaps("TRoad");
 				mainController.start();
-
-				
-				
 			}
 		});
 		
