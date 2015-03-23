@@ -408,7 +408,8 @@ public class Vehicle implements IVehicle {
 					+ this.getStatus());
 		} else if (c2 == Color.gray && c5 == Color.gray) {
 			System.out.println("I need to turn");
-			this.setAngle(80);
+			this.setAngle(90);
+			this.setStatus(0);
 		} else {
 			this.setStatus(0);
 			System.out.println("unknown");
