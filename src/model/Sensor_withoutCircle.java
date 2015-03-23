@@ -29,17 +29,22 @@ public class Sensor_withoutCircle extends Sensor {
 	 */
 	int[] allPointsColor() throws IOException {
 		int num=0;
+		long a=System.currentTimeMillis();
+		GetColor2 g=new GetColor2();
 		num=this.getSize_x()*this.getSize_y();
 		int[] pColor = new int[num];
 		int n = 0;
 		for (int x = this.getX_min(); x < this.getX_min() + this.getSize_x(); x++) {
 			for (int y = this.getY_min(); y < this.getY_min()
 					+ this.getSize_y(); y++) {
-				pColor[n] = GetColor2.getColorFromImage(x, y);
+				pColor[n] = g.getColorFromImage(x, y);
 				n++;
 			}
 		}
+		System.out.println("\r<br>获取像素点耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
+		
 		return pColor;
+		
 	}
 
 	/**
@@ -53,8 +58,9 @@ public class Sensor_withoutCircle extends Sensor {
 	 */
 	int[] randomPointsColor() throws IOException {
 		int[] pColor = new int[5];
+		GetColor2 g= new GetColor2();
 		for (int i = 0; i < 5; i++) {
-			pColor[i] = GetColor2.getColorFromImage(
+			pColor[i] = g.getColorFromImage(
 					randomInt(this.getX_min(), this.getX_max()),
 					randomInt(this.getY_min(), this.getY_max()));
 		}
@@ -72,6 +78,7 @@ public class Sensor_withoutCircle extends Sensor {
 	 */
 	Color areaColor() throws IOException {
 		//int[] points = this.randomPointsColor();
+		long a=System.currentTimeMillis();
 		int[] points = this.allPointsColor();
 		int r = 0, g = 0, b = 0;
 		Color coa = null;
@@ -115,7 +122,8 @@ public class Sensor_withoutCircle extends Sensor {
 		else{
 			System.out.println("Wrong");
 		}
-
+		System.out.println("\r<br>计算区域颜色耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
+		
 		return coa;
 	}
 

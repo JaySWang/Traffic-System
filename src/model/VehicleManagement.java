@@ -93,6 +93,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 
 	public void run(){
 		while(true){
+		
 			synchronizedLock = 0;
 
 			for(IVehicle v:vehicles){
@@ -137,7 +138,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 		
 			
 		
-			
+				
 		}
 		
 }

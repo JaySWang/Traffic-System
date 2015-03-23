@@ -13,128 +13,157 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 /**
- * this class different from GetColor, the return value is hexadecimal
- * it will be simplified in the end
+ * this class different from GetColor, the return value is hexadecimal it will
+ * be simplified in the end
  * 
  * @author qutong
  * */
 
-public class GetColor2{
-	/**
-	 * È¡µÃÍ¼ÏñÉÏÖ¸¶¨Î»ÖÃÏñËØµÄ rgb ÑÕÉ«·ÖÁ¿,²¢±£´æµ½Êı×érgbÀïÃæ¡£
-	 * 
-	 * @param image
-	 *            Ô´Í¼Ïñ¡£
-	 * @param x
-	 *            Í¼ÏñÉÏÖ¸¶¨ÏñËØÎ»ÖÃµÄ x ×ø±ê¡£
-	 * @param y
-	 *            Í¼ÏñÉÏÖ¸¶¨ÏñËØÎ»ÖÃµÄ y ×ø±ê¡£
-	 * @param rgb 
-	 * 			  ÑÕÉ«µÄºì¡¢ÂÌºÍÀ¶É«³É·Ö±»·Ö±ğËõ·ÅÎªÎ»ÓÚ 0 ( È±ÉÙÕâ¸ö»ùÉ« ) ºÍ 255 ( ÍêÈ«±¥ºÍ ) Ö®¼äµÄÖµ¡£
-	 * 			  ·µ»ØÕûÊıµÄ 24-31 Î»ÊÇ 0xff £¬16-23 Î»±íÊ¾ºìÉ«Öµ£¬8-15 Î»±íÊ¾ÂÌÉ«Öµ£¬0-7 Î»±íÊ¾À¶É«Öµ¡£
-	 * @return ·µ»Ø°üº¬ rgb ÑÕÉ«·ÖÁ¿ÖµµÄÊı×é¡£ÔªËØ index ÓÉĞ¡µ½´ó·Ö±ğ¶ÔÓ¦ r£¬g£¬b¡£
-	 */
-	public static int getImageRGB(BufferedImage image, int x, int y) {
-		int pixel = image.getRGB(x, y);
-		return pixel;
+public class GetColor2 {
+	File f = new File("screensho_current.png");
+	BufferedImage screenshot;
+
+	public GetColor2() throws IOException {
+		getImageRGB();
 	}
 
 	/**
-	 * È¡µÃJFrameÉÏÖ¸¶¨Î»ÖÃÏñËØµÄ rgb ÑÕÉ«·ÖÁ¿¡£
-	 * @param obj
-	 *            JFrame ÊµÌå¡£
+	 * Â»Â°ÂµâˆšÃ•ÂºÅ“Ã’â€¦Å“Ã·âˆâˆ‚Â®Å’ÂªÃ·âˆšÅ“Ã’Ã€Ã¿ÂµÆ’ rgb â€”â€™â€¦Â´âˆ‘Ã·Â¡Ã¸,â‰¤Â¢Â±Â£Â¥ÃŠÂµÎ©Â Ëâ—ŠÃˆrgbÂ¿Ã”âˆšÃŠÂ°Â£
+	 * 
+	 * @param image
+	 *            â€˜Â¥Ã•ÂºÅ“Ã’Â°Â£
 	 * @param x
-	 *            JFrameÉÏÖ¸¶¨ÏñËØÎ»ÖÃµÄ x ×ø±ê¡£
+	 *            Ã•ÂºÅ“Ã’â€¦Å“Ã·âˆâˆ‚Â®Å“Ã’Ã€Ã¿Å’ÂªÃ·âˆšÂµÆ’ x â—ŠÂ¯Â±ÃÂ°Â£
 	 * @param y
-	 *            JFrameÉÏÖ¸¶¨ÏñËØÎ»ÖÃµÄ y ×ø±ê¡£
-	 * @return ·µ»Ø RGB ÑÕÉ«¡£
-	 * @throws AWTException 
+	 *            Ã•ÂºÅ“Ã’â€¦Å“Ã·âˆâˆ‚Â®Å“Ã’Ã€Ã¿Å’ÂªÃ·âˆšÂµÆ’ y â—ŠÂ¯Â±ÃÂ°Â£
+	 * @param rgb
+	 *            â€”â€™â€¦Â´ÂµÆ’âˆ«ÃÂ°Â¢Â¬Ãƒâˆ«Ã•Â¿âˆ‚â€¦Â´â‰¥â€¦âˆ‘Ã·Â±Âªâˆ‘Ã·Â±ï£¿Ã€Ä±âˆ‘â‰ˆÅ’â„¢Å’Âªâ€â„ 0 ( Â»Â±â€¦Å¸â€™â€šâˆË†ÂªË˜â€¦Â´ ) âˆ«Ã•
+	 *            255 ( Ã•ÃÂ»Â´Â±â€¢âˆ«Ã• ) Ã·Ã†Âºâ€°ÂµÆ’Ã·ÂµÂ°Â£ âˆ‘ÂµÂªÃ¿â€™ËšÂ ËÂµÆ’ 24-31 Å’ÂªÂ Â« 0xff Â£Â¨16-23
+	 *            Å’ÂªÂ±ÃŒÂ Ã¦âˆ«Ãâ€¦Â´Ã·ÂµÂ£Â¨8-15 Å’ÂªÂ±ÃŒÂ Ã¦Â¬Ãƒâ€¦Â´Ã·ÂµÂ£Â¨0-7 Å’ÂªÂ±ÃŒÂ Ã¦Â¿âˆ‚â€¦Â´Ã·ÂµÂ°Â£
+	 * @return âˆ‘ÂµÂªÃ¿âˆÂ¸âˆ«Â¨ rgb â€”â€™â€¦Â´âˆ‘Ã·Â¡Ã¸Ã·ÂµÂµÆ’Â Ëâ—ŠÃˆÂ°Â£â€˜â„¢Ã€Ã¿ index â€â€¦â€“Â°ÂµÎ©Â¥Ã›âˆ‘Ã·Â±ï£¿âˆ‚â€˜â€Â¶
+	 *         rÂ£Â¨gÂ£Â¨bÂ°Â£
+	 * @throws IOException
 	 */
-	public  Color getJframeRGB(JFrame obj, int x, int y) throws AWTException {
+	public void getImageRGB() throws IOException {
+		this.setScreenshot(ImageIO.read(f));
+	}
+
+	public BufferedImage getScreenshot() {
+		return screenshot;
+	}
+
+	public void setScreenshot(BufferedImage screenshot) {
+		this.screenshot = screenshot;
+	}
+
+	/**
+	 * Â»Â°ÂµâˆšJFrameâ€¦Å“Ã·âˆâˆ‚Â®Å’ÂªÃ·âˆšÅ“Ã’Ã€Ã¿ÂµÆ’ rgb â€”â€™â€¦Â´âˆ‘Ã·Â¡Ã¸Â°Â£
+	 * 
+	 * @param obj
+	 *            JFrame Â ÂµÃƒÃ‚Â°Â£
+	 * @param x
+	 *            JFrameâ€¦Å“Ã·âˆâˆ‚Â®Å“Ã’Ã€Ã¿Å’ÂªÃ·âˆšÂµÆ’ x â—ŠÂ¯Â±ÃÂ°Â£
+	 * @param y
+	 *            JFrameâ€¦Å“Ã·âˆâˆ‚Â®Å“Ã’Ã€Ã¿Å’ÂªÃ·âˆšÂµÆ’ y â—ŠÂ¯Â±ÃÂ°Â£
+	 * @return âˆ‘ÂµÂªÃ¿ RGB â€”â€™â€¦Â´Â°Â£
+	 * @throws AWTException
+	 */
+	public Color getJframeRGB(JFrame obj, int x, int y) throws AWTException {
 		Robot rbt = new Robot();
 		Color selectedColor = rbt.getPixelColor(x, y);
 		return selectedColor;
 	}
+
 	/**
-	 * ÀûÓÃrobot»ñÈ¡´°¿Ú½ØÍ¼£¬²¢Ê¹ÓÃµÚÒ»ÖÖ·½·¨¶Ô½ØÍ¼ÉÏµÄÏñËØ½øĞĞ¶ÁÈ¡£¬²¢±£´ærgb ÑÕÉ«·ÖÁ¿µ½Êı×érgbÀïÃæ
-	 * advantage£ºÎŞÂÛÊÇ×Ô¼º»­µÄµØÍ¼»¹ÊÇÏÖ´æµØÍ¼´¦ÀíºóÖ±½ÓÊ¹ÓÃµÄÍ¼Æ¬¶¼¿ÉÒÔ½øĞĞÊ¶±ğ
+	 * Â¿Ëšâ€âˆšrobotÂªÃ’Â»Â°Â¥âˆÃ¸â„Î©Ã¿Ã•ÂºÂ£Â¨â‰¤Â¢Â Ï€â€âˆšÂµâ„â€œÂªÃ·Ã·âˆ‘Î©âˆ‘Â®âˆ‚â€˜Î©Ã¿Ã•Âºâ€¦Å“ÂµÆ’Å“Ã’Ã€Ã¿Î©Â¯â€“â€“âˆ‚Â¡Â»Â°Â£Â¨â‰¤Â¢Â±Â£Â¥ÃŠrgb
+	 * â€”â€™â€¦Â´âˆ‘Ã·Â¡Ã¸ÂµÎ©Â Ëâ—ŠÃˆrgbÂ¿Ã”âˆšÃŠ
+	 * advantageÂ£âˆ«Å’ï¬Â¬â‚¬Â Â«â—Šâ€˜Âºâˆ«Âªâ‰ ÂµÆ’ÂµÃ¿Ã•ÂºÂªÏ€Â Â«Å“Ã·Â¥ÃŠÂµÃ¿Ã•ÂºÂ¥Â¶Â¿ÃŒâˆ«Ã›Ã·Â±Î©â€Â 
+	 * Ï€â€âˆšÂµÆ’Ã•Âºâˆ†Â¨âˆ‚ÂºÃ¸â€¦â€œâ€˜Î©Â¯â€“â€“Â âˆ‚Â±ï£¿
+	 * 
 	 * @param ScreenShot
-	 *            ¶ÔµØÍ¼µÄ½ØÍ¼¡£
+	 *            âˆ‚â€˜ÂµÃ¿Ã•ÂºÂµÆ’Î©Ã¿Ã•ÂºÂ°Â£
 	 * @param obj
-	 *            JFrame ÊµÌå¡£
+	 *            JFrame Â ÂµÃƒÃ‚Â°Â£
 	 * @param x
-	 *            JFrameÉÏÖ¸¶¨ÏñËØÎ»ÖÃµÄ x ×ø±ê¡£
+	 *            JFrameâ€¦Å“Ã·âˆâˆ‚Â®Å“Ã’Ã€Ã¿Å’ÂªÃ·âˆšÂµÆ’ x â—ŠÂ¯Â±ÃÂ°Â£
 	 * @param y
-	 *            JFrameÉÏÖ¸¶¨ÏñËØÎ»ÖÃµÄ y ×ø±ê¡£
-	 * @return ·µ»Ø°üº¬ rgb ÑÕÉ«·ÖÁ¿ÖµµÄÊı×é¡£ÔªËØ index ÓÉĞ¡µ½´ó·Ö±ğ¶ÔÓ¦ r£¬g£¬b¡£
-	 * @throws AWTException 
+	 *            JFrameâ€¦Å“Ã·âˆâˆ‚Â®Å“Ã’Ã€Ã¿Å’ÂªÃ·âˆšÂµÆ’ y â—ŠÂ¯Â±ÃÂ°Â£
+	 * @return âˆ‘ÂµÂªÃ¿âˆÂ¸âˆ«Â¨ rgb â€”â€™â€¦Â´âˆ‘Ã·Â¡Ã¸Ã·ÂµÂµÆ’Â Ëâ—ŠÃˆÂ°Â£â€˜â„¢Ã€Ã¿ index â€â€¦â€“Â°ÂµÎ©Â¥Ã›âˆ‘Ã·Â±ï£¿âˆ‚â€˜â€Â¶
+	 *         rÂ£Â¨gÂ£Â¨bÂ°Â£
+	 * @throws AWTException
 	 */
-	public static  int getJframebySt(JFrame obj, int x, int y) throws AWTException {
+	public static int getJframebySt(JFrame obj, int x, int y)
+			throws AWTException {
 		Robot rbt = new Robot();
 		Point point = obj.getLocationOnScreen();
-		BufferedImage ScreenShot = rbt.createScreenCapture(new Rectangle(point.x,
-				point.y, obj.getWidth(), obj.getHeight()));
-		System.out.println("location x: "+point.x);
-		System.out.println("location y: "+point.y);
-		System.out.println("width: "+obj.getWidth());
-		System.out.println("length: "+obj.getHeight());
-		System.out.println("color of thi spoint is:" +getImageRGB(ScreenShot,x,y));
-		return getImageRGB(ScreenShot,x,y);
+		BufferedImage ScreenShot = rbt.createScreenCapture(new Rectangle(
+				point.x, point.y, obj.getWidth(), obj.getHeight()));
+		System.out.println("location x: " + point.x);
+		System.out.println("location y: " + point.y);
+		System.out.println("width: " + obj.getWidth());
+		System.out.println("length: " + obj.getHeight());
+		// System.out.println("color of thi spoint is:"
+		// +getImageRGB(ScreenShot,x,y));
+		return 12;// getImageRGB(ScreenShot,x,y);
 	}
+
 	/**
-	 * ÀûÓÃrobot»ñÈ¡´°¿Ú½ØÍ¼£¬²¢Ê¹ÓÃµÚÒ»ÖÖ·½·¨¶Ô½ØÍ¼ÉÏµÄÏñËØ½øĞĞ¶ÁÈ¡£¬²¢±£´ærgb ÑÕÉ«·ÖÁ¿µ½Êı×érgbArrayÀïÃæ
-	 * advantage£ºÎŞÂÛÊÇ×Ô¼º»­µÄµØÍ¼»¹ÊÇÏÖ´æµØÍ¼´¦ÀíºóÖ±½ÓÊ¹ÓÃµÄÍ¼Æ¬¶¼¿ÉÒÔ½øĞĞÊ¶±ğ
+	 * Â¿Ëšâ€âˆšrobotÂªÃ’Â»Â°Â¥âˆÃ¸â„Î©Ã¿Ã•ÂºÂ£Â¨â‰¤Â¢Â Ï€â€âˆšÂµâ„â€œÂªÃ·Ã·âˆ‘Î©âˆ‘Â®âˆ‚â€˜Î©Ã¿Ã•Âºâ€¦Å“ÂµÆ’Å“Ã’Ã€Ã¿Î©Â¯â€“â€“âˆ‚Â¡Â»Â°Â£Â¨â‰¤Â¢Â±Â£Â¥ÃŠrgb
+	 * â€”â€™â€¦Â´âˆ‘Ã·Â¡Ã¸ÂµÎ©Â Ëâ—ŠÃˆrgbArrayÂ¿Ã”âˆšÃŠ
+	 * advantageÂ£âˆ«Å’ï¬Â¬â‚¬Â Â«â—Šâ€˜Âºâˆ«Âªâ‰ ÂµÆ’ÂµÃ¿Ã•ÂºÂªÏ€Â Â«Å“Ã·Â¥ÃŠÂµÃ¿Ã•ÂºÂ¥Â¶Â¿ÃŒâˆ«Ã›
+	 * Ã·Â±Î©â€Â Ï€â€âˆšÂµÆ’Ã•Âºâˆ†Â¨âˆ‚ÂºÃ¸â€¦â€œâ€˜Î©Â¯â€“â€“Â âˆ‚Â±ï£¿
+	 * 
 	 * @param ScreenShot
-	 *            ¶ÔµØÍ¼µÄ½ØÍ¼¡£
+	 *            âˆ‚â€˜ÂµÃ¿Ã•ÂºÂµÆ’Î©Ã¿Ã•ÂºÂ°Â£
 	 * @param obj
-	 *            JFrame ÊµÌå¡£
+	 *            JFrame Â ÂµÃƒÃ‚Â°Â£
 	 * @param rgbArray
-	 *            rgb ÑÕÉ«·ÖÁ¿
+	 *            rgb â€”â€™â€¦Â´âˆ‘Ã·Â¡Ã¸
 	 * @param offset
-	 *            ÊÇÊı×éÖĞ½ÓÊÕµÚÒ»¸öÏñËØÖµµÄÎ»ÖÃµÄË÷Òı
+	 *            Â Â«Â Ëâ—ŠÃˆÃ·â€“Î©â€Â â€™Âµâ„â€œÂªâˆË†Å“Ã’Ã€Ã¿Ã·ÂµÂµÆ’Å’ÂªÃ·âˆšÂµÆ’Ã€Ëœâ€œË
 	 * @param scansize
-	 *            ÊÇÍ¼ÏñÖĞÏàÁÚÁ½ĞĞÖĞ¾ßÓĞÏàÍ¬ĞĞË÷ÒıµÄÏñËØµÄË÷ÒıÆ«ÒÆÖµ¡£
-	 *            Èç¹ûÕâ¸öÖµÓëÒªÌáÈ¡µÄÇøÓòµÄ¿í¶ÈÏàÍ¬£¬ÄÇÃ´Ò»ĞĞµÄµÚÒ»¸öÏñËØ¾Í»á´æ´¢ÔÚÊı×éÖĞÇ°Ò»ĞĞ×îºóÒ»¸öÏñËØºó ÃæµÄË÷ÒıÎ»ÖÃ¡£
-	 *            Èç¹ûÕâ¸öÖµ´óÓÚÌáÈ¡ÇøÓòµÄ¿í¶È£¬ÄÇÃ´Êı×éÖĞ£¬ÔÚÒ»ĞĞ×îºóºÍÏÂÒ»ĞĞ¿ªÊ¼Ö®¼ä¾Í»áÓĞÒ»Ğ©Î´Ê¹ÓÃµÄË÷Òı   
-	 * @return rgbÑÕÉ«·ÖÁ¿
-	 * @throws AWTException 
+	 *            Â Â«Ã•ÂºÅ“Ã’Ã·â€“Å“â€¡Â¡â„Â¡Î©â€“â€“Ã·â€“Ã¦ï¬‚â€â€“Å“â€¡Ã•Â¨â€“â€“Ã€Ëœâ€œËÂµÆ’Å“Ã’Ã€Ã¿ÂµÆ’Ã€Ëœâ€œËâˆ†Â´â€œâˆ†Ã·ÂµÂ°Â£
+	 *            Â»ÃÏ€Ëšâ€™â€šâˆË†Ã·Âµ
+	 *            â€Ãâ€œâ„¢ÃƒÂ·Â»Â°ÂµÆ’Â«Â¯â€ÃšÂµÆ’Ã¸ÃŒâˆ‚Â»Å“â€¡Ã•Â¨Â£Â¨Æ’Â«âˆšÂ¥â€œÂªâ€“â€“ÂµÆ’Âµâ„â€œÂªâˆË†Å“Ã’Ã€Ã¿Ã¦Ã•ÂªÂ·Â¥ÃŠÂ¥Â¢
+	 *            â€˜â„Â Ëâ—ŠÃˆÃ·â€“Â«âˆâ€œÂªâ€“â€“â—ŠÃ“âˆ«Ã›â€œÂªâˆË†Å“Ã’Ã€Ã¿âˆ«Ã› âˆšÃŠÂµÆ’Ã€Ëœâ€œËÅ’ÂªÃ·âˆšÂ°Â£
+	 *            Â»ÃÏ€Ëšâ€™â€šâˆË†Ã·ÂµÂ¥Ã›â€â„ÃƒÂ·Â»Â°Â«
+	 *            Â¯â€ÃšÂµÆ’Ã¸ÃŒâˆ‚Â»Â£Â¨Æ’Â«âˆšÂ¥Â Ëâ—ŠÃˆÃ·â€“Â£Â¨â€˜â„â€œÂªâ€“â€“â—ŠÃ“âˆ«Ã›âˆ«Ã•Å“Â¬â€œÂªâ€“â€“Ã¸â„¢Â 
+	 *            ÂºÃ·Ã†Âºâ€°Ã¦Ã•ÂªÂ·â€â€“â€œÂªâ€“Â©Å’Â¥Â Ï€â€âˆšÂµÆ’Ã€Ëœâ€œË
+	 * @return rgbâ€”â€™â€¦Â´âˆ‘Ã·Â¡Ã¸
+	 * @throws AWTException
 	 */
-	public static int[] getJframebySt2(JFrame obj, int x, int y) throws AWTException{
+	public static int[] getJframebySt2(JFrame obj, int x, int y)
+			throws AWTException {
 		int[] rgbArray = null;
 		int offset = 0;
 		int scansize = 0;
 		Robot rbt = new Robot();
 		Point point = obj.getLocationOnScreen();
-		BufferedImage ScreenShot = rbt.createScreenCapture(new Rectangle(point.x,
-				point.y, obj.getWidth(), obj.getHeight()));
-		ScreenShot.getRGB(point.x, point.y, obj.getWidth(), obj.getHeight(),rgbArray, offset, scansize);
+		BufferedImage ScreenShot = rbt.createScreenCapture(new Rectangle(
+				point.x, point.y, obj.getWidth(), obj.getHeight()));
+		ScreenShot.getRGB(point.x, point.y, obj.getWidth(), obj.getHeight(),
+				rgbArray, offset, scansize);
 		return rgbArray;
 	}
+
 	/**
-	 * this method get image from the screenshot got by View and store in local path.
+	 * this method get image from the screenshot got by View and store in local
+	 * path.
+	 * 
 	 * @param x
 	 * @param y
 	 * @return
 	 * @throws IOException
 	 */
-	public static int getColorFromImage(int x, int y) throws IOException{
-		File f= new File("screensho_current.png");
-		BufferedImage screenshot =ImageIO.read(f);
+	public int getColorFromImage(int x, int y) throws IOException {
+		int result = this.getScreenshot().getRGB(x, y);
+		return result;
+	}
+
+	public static void main(String[] arg) throws IOException {
+		GetColor2 g = new GetColor2();
 		int[] result;
-		
-		result=seperateRGB.transfer16(getImageRGB(screenshot,x,y));
-		/*System.out.println("the color in position is : ");
-		System.out.println(result[0]);
-		System.out.println(result[1]);
-		System.out.println(result[2]);*/
-		
-		return getImageRGB(screenshot,x,y);
-	} 
-	
-	public static void main(String[] arg) throws IOException{
-		GetColor2 g= new GetColor2();
-		int[] result;
-		result=seperateRGB.transfer16(g.getColorFromImage(1,113 ));
+		result = seperateRGB.transfer16(g.getColorFromImage(1, 113));
 		System.out.println("the color in position is : ");
 		System.out.println(result[0]);
 		System.out.println(result[1]);
