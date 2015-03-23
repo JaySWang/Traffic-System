@@ -35,6 +35,9 @@ public class ConstValues {
  public final static int NA = -1;
  
  
+//collision state
+ public final static int Clear = 0;
+ public final static int VehicleCollision = 1;
 
  
 	

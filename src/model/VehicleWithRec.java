@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Rectangle;
+import java.util.List;
 
 import constValue.ConstValues;
 
@@ -51,10 +52,6 @@ public class VehicleWithRec implements IVehicle {
 	
 	
 	
-	
-	public VehicleWithRec() {
-		// TODO Auto-generated constructor stub
-	}
 
 
 
@@ -104,13 +101,6 @@ public class VehicleWithRec implements IVehicle {
 		
 		}
 
-		
-
-		
-
-
-	
-		
 		
 		rectangle = new Rectangle( x, y,width,height);
 	}
@@ -273,6 +263,85 @@ public class VehicleWithRec implements IVehicle {
 
 	public void setNext(String next) {
 		this.next = next;
+	}
+
+
+
+
+
+	@Override
+	public boolean update() {
+		
+		
+		
+	int collisionState = collisionDetect();
+		
+		
+		if(collisionState == ConstValues.Clear){
+			
+			if(location_y<200){
+				return true;
+			}
+			
+		
+        double  increment = getSpeed()*updateIntervar;
+
+		switch(getAngle()){
+		case ConstValues.EastToWest:
+			location_x = (int)(location_x - increment);
+		break;
+    	case ConstValues.WestToEest:
+			location_x = (int)(location_x + increment);
+
+		break;
+		case ConstValues.NorthToSouth: 
+			location_y = (int)(location_y + increment);
+
+		break;
+		case ConstValues.SouthToNorth: 
+			location_y = (int)(location_y - increment);
+
+		break;
+		
+		}
+		
+		//update rectangle
+		setRectangle();
+		
+		}
+		
+		else if (collisionState == ConstValues.VehicleCollision){
+			
+		}
+		
+		
+		return true;
+	}
+
+
+
+
+
+	private int collisionDetect() {
+		
+		List<IVehicle>  vehicles = VehicleManagement.getInstance().getCloneVehicles();
+		vehicles.remove(this);
+		
+		for(IVehicle v:vehicles){
+			
+			
+			if(this.getRectangle().intersects(((VehicleWithRec)v).getRectangle())){
+				if(this.location_y>=v.getLocation_y()){
+					return ConstValues.VehicleCollision;
+				}
+				
+			}
+			
+			
+		}
+		
+		
+		return	ConstValues.Clear;	
 	}
 
 

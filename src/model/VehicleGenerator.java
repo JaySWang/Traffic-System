@@ -21,7 +21,7 @@ public class VehicleGenerator extends Thread implements IVehicleGenerator,ITraff
      
 	 List<Entrance> entrances ;
      
-     
+     int vehicleCount;
      
      
 	public VehicleGenerator(int intervalTime,List<Entrance> entrances) {
@@ -53,12 +53,8 @@ public class VehicleGenerator extends Thread implements IVehicleGenerator,ITraff
 	public void run(){
 while(true){
 	 
-		
-		
-		IVehicle v1 = new Vehicle();
-		v1.setLength(32);
-		v1.setWidth(26);
-		v1.setSpeed(400);
+	
+	
               
         Entrance enrance;
         int no = (int) (Math.random()*entrances.size());
@@ -66,12 +62,15 @@ while(true){
 		if(createOrNot()){
 	
 
-			
-	    
-		v1.setLocation_x(enrance.getLocation_x());
-		v1.setLocation_y(enrance.getLocation_y());
-		v1.setAngle(enrance.getDirection());
-		
+			vehicleCount++;
+
+			int length = 32;
+			int width =26;
+			int speed = 200;
+			IVehicle v1 = 
+					new Vehicle(vehicleCount, width, length, enrance.getLocation_x(),
+					enrance.getLocation_y(), enrance.getDirection(), speed);
+	
 		
 		VehicleManagement.getInstance().addVehicle(v1);
 		
