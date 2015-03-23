@@ -214,7 +214,7 @@ public class Vehicle implements IVehicle {
 			this.getS1().setSize_y(1);
 			/* configuration for sensor2 */
 			this.getS2().setLocation_x(this.getLocation_x() - 7);
-			this.getS2().setLocation_y(this.getLocation_y() - 30);
+			this.getS2().setLocation_y(this.getLocation_y());
 			this.getS2().setSize_x(1);
 			this.getS2().setSize_y(1);
 			/* configuration for sensor3 */
@@ -407,7 +407,7 @@ public class Vehicle implements IVehicle {
 					+ this.getStatus());
 		} else if (c2 == Color.gray && c5 == Color.gray) {
 			System.out.println("I need to turn");
-			this.setAngle(90);
+			this.setAngle(80);
 		} else {
 			System.out.println("unknown");
 		}
@@ -457,17 +457,21 @@ public class Vehicle implements IVehicle {
 				this.setLocation_y((int) (this.getLocation_y() - this
 						.getSpeed() * 0.1));
 				System.out.println("vehicle is driving with status: "
-						+ this.getStatus() + " and next pisotion is"
+						+ this.getStatus() + " and next pisotion is: "
 						+ this.getLocation_y());
+				break;
 			case 90:
 				this.setLocation_x((int) (this.getLocation_x() + this
 						.getSpeed() * 0.1));
+				break;
 			case 180:
 				this.setLocation_y((int) (this.getLocation_y() + this
 						.getSpeed() * 0.1));
+				break;
 			case 270:
 				this.setLocation_x((int) (this.getLocation_x() - this
 						.getSpeed() * 0.1));
+				break;
 			}
 
 		} else {

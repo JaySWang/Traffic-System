@@ -160,7 +160,7 @@ public class GetColor2 {
 		return result;
 	}
 
-	public static void main(String[] arg) throws IOException {
+	/*public static void main(String[] arg) throws IOException {
 		GetColor2 g = new GetColor2();
 		int[] result;
 		result = seperateRGB.transfer16(g.getColorFromImage(1, 113));
@@ -168,6 +168,6 @@ public class GetColor2 {
 		System.out.println(result[0]);
 		System.out.println(result[1]);
 		System.out.println(result[2]);
-	}
+	}*/
 
 }
