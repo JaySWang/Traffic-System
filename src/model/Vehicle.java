@@ -148,7 +148,7 @@ public class Vehicle implements IVehicle {
 	}
 
 	public void setSpeed(int speed) {
-		this.speed = 80;
+		this.speed = speed;
 	}
 
 	public int getAngle() {
@@ -397,7 +397,8 @@ public class Vehicle implements IVehicle {
 				+ "Color of sensor5 is : " + c5 + "\n"
 				+ "number of white pixel is : " + s5.countColor());
 
-		// System.out.println("\r<br>��ゆ��杞���������� : " + (System.currentTimeMillis() -
+		// System.out.println("\r<br>��ゆ��杞���������� : " +
+		// (System.currentTimeMillis() -
 		// a)
 		// / 1000f + " 绉� ");
 		if (c1 == Color.red && c2 == Color.gray) {// s1 read the traffic light
@@ -469,7 +470,7 @@ public class Vehicle implements IVehicle {
 
 		} else if (this.status == 2) {// stop because of the traffic light
 
-		} else if (this.getStatus() == 3) {//jumped on the cross
+		} else if (this.getStatus() == 3) {// jumped on the cross
 			if (c1 == Color.red) {
 				System.out.println("car is stop");
 				this.setStatus(2);
@@ -547,8 +548,8 @@ public class Vehicle implements IVehicle {
 			Ex_flag = false;
 		}
 
-		System.out.println("\r<br>��绘�ц�������� : " + (System.currentTimeMillis() - a)
-				/ 1000f + " 绉� ");
+		System.out.println("\r<br>��绘�ц�������� : "
+				+ (System.currentTimeMillis() - a) / 1000f + " 绉� ");
 		return Ex_flag;
 	}
 
