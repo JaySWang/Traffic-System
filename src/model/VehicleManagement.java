@@ -96,18 +96,18 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 		while(true){
 		
 			synchronizedLock = 0;
-
+			List<IVehicle> vehiclesToLeave = new ArrayList<IVehicle>();
+			
 			for(IVehicle v:vehicles){
 
 				VehicleLog vLog = new VehicleLog(v.getId(), v.getLocation_x(), v.getLocation_y(),
 			v.getSpeed(),timing);
 				lm.addLog(vLog);
 				
-				try {
-					((Vehicle)v).update();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				//vehicle leave
+				if(!((Vehicle)v).update()){
+					vehiclesToLeave.add(v);
+					
 				}
 				
 				
@@ -131,6 +131,8 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 				
 
 			}
+			vehicles.remove(vehiclesToLeave);
+			
 			
 			notifyObservers();
 			timing+=intervalTime;

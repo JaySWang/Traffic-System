@@ -66,13 +66,13 @@ public class MainController implements IMainController{
 //				entrances.add(e1);
 				Entrance e2 = new Entrance(1,335,539,ConstValues.SouthToNorth);
 				entrances.add(e2);
-				
+//				
 				Entrance e3 = new Entrance(2,761,539,ConstValues.SouthToNorth);
 				entrances.add(e3);
-//				
-//				Entrance e4 = new Entrance(3,1146,324,ConstValues.EastToWest);
-//				entrances.add(e4);
-//				
+				
+				Entrance e4 = new Entrance(3,1146,324,ConstValues.EastToWest);
+				entrances.add(e4);
+				
 //				Entrance e5 = new Entrance(4,800,28,ConstValues.NorthToSouth);
 //				entrances.add(e5);
 

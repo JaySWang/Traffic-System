@@ -52,7 +52,6 @@ public class VehicleGenerator extends Thread implements IVehicleGenerator,ITraff
 	public void run(){
 while(true){
 	 
-//	if(VehicleManagement.getInstance().getVehicles().size()<2){
 		
 		
 		Vehicle v1 = new Vehicle();
@@ -91,9 +90,9 @@ while(true){
 			
 		
 			
-	//	}
+	}
 }	
-}
+
 
 
 
