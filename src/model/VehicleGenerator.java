@@ -66,7 +66,7 @@ while(true){
 
 			int length = 32;
 			int width =26;
-			int speed = 200;
+			int speed = 80;
 			IVehicle v1 = 
 					new Vehicle(vehicleCount, width, length, enrance.getLocation_x(),
 					enrance.getLocation_y(), enrance.getDirection(), speed);

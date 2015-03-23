@@ -44,7 +44,7 @@ public class Vehicle implements IVehicle {
 	}
 
 	public Vehicle(int id, int width, int length, int location_x,
-			int location_y, int direction, int speed) {
+			int location_y, int angle, int speed) {
 		super();
 		this.id = id;
 		this.width = width;
@@ -52,7 +52,7 @@ public class Vehicle implements IVehicle {
 		this.location_x = location_x;
 		this.location_y = location_y;
 		this.speed = speed;
-		this.direction = direction;
+		this.angle = angle;
 	}
 
 	public Sensor_withoutCircle getS1() {
@@ -356,8 +356,8 @@ public class Vehicle implements IVehicle {
 			this.getS7().setSize_x(1);
 			this.getS7().setSize_y(3);
 		}
-		// System.out.println("\r<br>配置传感器耗时 : "
-		// + (System.currentTimeMillis() - a) / 1000f + " 秒 ");
+		// System.out.println("\r<br>���缃�浼������ㄨ����� : "
+		// + (System.currentTimeMillis() - a) / 1000f + " 绉� ");
 
 	}
 
@@ -397,9 +397,9 @@ public class Vehicle implements IVehicle {
 				+ "Color of sensor5 is : " + c5 + "\n"
 				+ "number of white pixel is : " + s5.countColor());
 
-		// System.out.println("\r<br>判断转向耗时 : " + (System.currentTimeMillis() -
+		// System.out.println("\r<br>��ゆ��杞���������� : " + (System.currentTimeMillis() -
 		// a)
-		// / 1000f + " 秒 ");
+		// / 1000f + " 绉� ");
 		if (c1 == Color.red && c2 == Color.gray) {// s1 read the traffic light
 			this.setStatus(2); // when enter a lane, it
 			// doesn't need to stop;do
@@ -530,8 +530,8 @@ public class Vehicle implements IVehicle {
 		} else {
 			System.out.println("There is something wrong");
 		}
-		// System.out.println("\r<br>计算下一步位置耗时 : "
-		// + (System.currentTimeMillis() - a) / 1000f + " 秒 ");
+		// System.out.println("\r<br>璁＄��涓�涓�姝ヤ��缃������� : "
+		// + (System.currentTimeMillis() - a) / 1000f + " 绉� ");
 	}
 
 	public boolean update() {
@@ -547,8 +547,8 @@ public class Vehicle implements IVehicle {
 			Ex_flag = false;
 		}
 
-		System.out.println("\r<br>总执行耗时 : " + (System.currentTimeMillis() - a)
-				/ 1000f + " 秒 ");
+		System.out.println("\r<br>��绘�ц�������� : " + (System.currentTimeMillis() - a)
+				/ 1000f + " 绉� ");
 		return Ex_flag;
 	}
 
@@ -566,8 +566,8 @@ public class Vehicle implements IVehicle {
 			v.configureSensors();
 			v.turnJudgement();
 			v.calculateNextPosition();
-			System.out.println("\r<br>总执行耗时 : "
-					+ (System.currentTimeMillis() - a) / 1000f + " 秒 ");
+			System.out.println("\r<br>��绘�ц�������� : "
+					+ (System.currentTimeMillis() - a) / 1000f + " 绉� ");
 
 			System.out.println("next position of the vehicle is: ("
 					+ v.getLocation_x() + "," + v.getLocation_y() + ")"
