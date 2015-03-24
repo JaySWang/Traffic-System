@@ -95,8 +95,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 
 	public void run(){
 		while(true){
-		
-			synchronizedLock = 0;
+				synchronizedLock = 0;
 			List<IVehicle> vehiclesToLeave = new ArrayList<IVehicle>();
 			
 			cloneVehicles = (List<IVehicle>) ((ArrayList)vehicles).clone();
@@ -110,13 +109,18 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 				//vehicle leave
 				
 				if(!v.update()){
+					
+					
 					vehiclesToLeave.add(v);
 					
 				}
 	
 			}
 			
-			vehicles.remove(vehiclesToLeave);
+			for(IVehicle v:vehiclesToLeave){
+				vehicles.remove(v);
+			}
+			
 			
 
 			notifyObservers();

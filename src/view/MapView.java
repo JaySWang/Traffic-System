@@ -3,6 +3,7 @@ package view;
 import java.awt.AWTException;
 import java.awt.Graphics;
 import java.awt.IllegalComponentStateException;
+import java.awt.Rectangle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import ControllerInterface.ITrafficLightController;
 import constValue.ConstValues;
 
 import mapInfo.Light;
+import model.vehicles.VehicleWithRec;
 import modelInterface.ITrafficLight;
 import modelInterface.IVehicle;
 import modelInterface.IVehicleManagement;
@@ -33,11 +35,10 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 	List<IVehicle> vehicles;
 	ImageIcon map;
 
-	ImageIcon carIcon = new ImageIcon(getClass().getResource("/Icon/cars.jpg"));
 	
 	int trafficLightState = ConstValues.OFF;
 
-	List<Light> lightList;
+	public static List<Light> lightList;
 
 	List<ITrafficLight> trafficLights;
 	ITrafficLightController trafficLightController;
@@ -48,6 +49,22 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 		trafficLightController = c;
 
 	}
+	
+	
+	
+	
+	
+	
+
+	public static List<Light> getLightList() {
+		return lightList;
+	}
+
+
+
+
+
+
 
 	public void setTrafficLightState(int tls) {
 		trafficLightState = tls;
@@ -90,13 +107,28 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 		
 		g.drawImage(map.getImage(), 0, 0, map.getIconWidth(),map.getIconHeight(), this);
 		
+		
+		//draw lights
+		
 		if (trafficLightState == ConstValues.ON) {
 			for (Light l : lightList) {
 
-				g.drawImage(l.getState().getImage(), l.getLocation_x(), l.getLocation_y(),
+//				Rectangle r = l.getRectangle();
+//				g.drawImage(l.getIcon().getImage(), r.x, r.y,
+//						r.width, r.height, this);
+				
+				l.setOn(true);
+				g.drawImage(l.getIcon().getImage(), l.getLocation_x(), l.getLocation_y(),
 						l.getLightSize(), l.getLightSize(), this);
 
 			}
+		}else if(trafficLightState == ConstValues.OFF){
+		
+			
+			for (Light l : lightList) {
+				l.setOn(false);
+			}
+			
 		}
 
 		if (vehicles != null) {
@@ -126,10 +158,15 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 				break;
 				
 				}
-				g.drawImage(carIcon.getImage(), x, y,
+				
+				
+				
+				g.drawImage(v.getCarIcon().getImage(), x, y,
 						width,height, this);
 				
-		
+//				Rectangle r = ((VehicleWithRec) v).getRectangle();
+//				g.drawImage(v.getCarIcon().getImage(), r.x, r.y,
+//						r.width, r.height, this);
 				
 
 
