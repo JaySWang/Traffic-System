@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import constValue.ConstValues;
+
 
 import ControllerInterface.ITrafficLightController;
 
@@ -41,9 +43,9 @@ public class CrossMapView extends MapView {
 
 		lightList = new ArrayList();
 
-		Light light1 = new Light(294,244, 1);
-		Light light2 = new Light(294,357, 0);
-		Light light3 = new Light(407, 357,1);
+		Light light1 = new Light(294,244, 1,ConstValues.NorthToSouth);
+		Light light2 = new Light(294,357, 0,ConstValues.WestToEest);
+		Light light3 = new Light(407, 357,1,ConstValues.SouthToNorth);
 		
 //		Light light4 = new Light(721,245,1);
 //		Light light5 = new Light(721,360,0);

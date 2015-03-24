@@ -15,6 +15,9 @@ import view.TMapView;
 
 import log.LogManagement;
 import mapInfo.Entrance;
+import mapInfo.Exit;
+import mapInfo.Junction;
+import mapInfo.MapInfoManagement;
 import model.TrafficCondition;
 import model.TrafficLight;
 import model.TrafficLightManagement;
@@ -64,19 +67,54 @@ public class MainController implements IMainController{
 
 				Entrance e1 = new Entrance(0,121,60,ConstValues.NorthToSouth);
 				entrances.add(e1);
-				Entrance e2 = new Entrance(1,335,539,ConstValues.SouthToNorth);
-				entrances.add(e2);
+				Exit exit1 = new Exit(1,60,0);
+				MapInfoManagement.getInstance().addExit(exit1);
+			 
+			 
+//				Entrance e2 = new Entrance(1,335,539,ConstValues.SouthToNorth);
+//				entrances.add(e2);
 				
+				Exit exit2 = new Exit(2,385,600);
+				MapInfoManagement.getInstance().addExit(exit2);
+
 				Entrance e3 = new Entrance(2,761,539,ConstValues.SouthToNorth);
 				entrances.add(e3);
+				
+				Exit exit3 = new Exit(3,810,600);
+				MapInfoManagement.getInstance().addExit(exit3);
 				
 				Entrance e4 = new Entrance(3,1146,349,ConstValues.EastToWest);
 				entrances.add(e4);
 				
+				Exit exit4 = new Exit(4,385,600);
+				MapInfoManagement.getInstance().addExit(exit4);
+				
 				Entrance e5 = new Entrance(4,825,60,ConstValues.NorthToSouth);
 				entrances.add(e5);
-
+				
+				Exit exit5 = new Exit(5,1195,300);
+				MapInfoManagement.getInstance().addExit(exit5);
+				
+				
+				
+				
+			
+				
+				Exit exit6 = new Exit(6,770,0);
+				MapInfoManagement.getInstance().addExit(exit6);
+				
+				
+				
+				Junction j1 = new Junction(55,345,ConstValues.SouthToNorth,1);
 	 
+				MapInfoManagement.getInstance().addJunction(j1);
+				
+				Junction j2 = new Junction(100,280,ConstValues.WestToEest,1);
+				 
+				MapInfoManagement.getInstance().addJunction(j2);
+				
+				
+				
 		} else if(map.equals("CrossRoad")){
 			TrafficLight t0 = new TrafficLight(3,0);
 			 for(ITrafficLight tl:trafficLights){

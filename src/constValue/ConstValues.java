@@ -39,6 +39,21 @@ public class ConstValues {
  public final static int Clear = 0;
  public final static int VehicleCollision = 1;
 
+ //vehicle types;
+ public final static int Car = 0;
+ public final static int Coach = 1;
+ public final static int Bus = 2;
+ public final static int NumOfTypes = 3;
+
+ //vehicle speed;
+ public final static int CarSpeed = 200;
+ public final static int CoachSpeed = 150;
+ public final static int BusSpeed = 100;
+ 
+ 
+ //road info
+ public final static int roadWidth = 36;
+ public final static int trafficLightArea = 60;
  
 	
 }

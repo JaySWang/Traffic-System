@@ -1,5 +1,7 @@
 package modelInterface;
 
+import javax.swing.ImageIcon;
+
 public interface IVehicle {
 
 	public int getLocation_x();
@@ -25,7 +27,8 @@ public interface IVehicle {
 	public void setSpeed(int speed);
 	public void setAngle(int angle);
 	public boolean update();
-
+	
+	public ImageIcon getCarIcon();
 
 	
 }

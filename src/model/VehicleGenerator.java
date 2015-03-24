@@ -1,6 +1,7 @@
 package model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import observer.ITrafficConditionObserver;
@@ -9,6 +10,10 @@ import observer.ITrafficConditionObservable;
 
 import constValue.ConstValues;
 
+import model.vehicles.Bus;
+import model.vehicles.Car;
+import model.vehicles.Coach;
+import model.vehicles.VehicleWithRec;
 import modelInterface.IVehicle;
 import modelInterface.IVehicleGenerator;
 import mapInfo.Entrance;
@@ -51,29 +56,47 @@ public class VehicleGenerator extends Thread implements IVehicleGenerator,ITraff
 
 
 	public void run(){
+		
+		
+		
 while(true){
-	 
 	
-	
+	  Entrance enrance;
+      int no = (int) (Math.random()*entrances.size());
+     enrance = entrances.get(no);
+
+
               
-        Entrance enrance;
-        int no = (int) (Math.random()*entrances.size());
-       enrance = entrances.get(no);
+      
+       
+       
 		if(createOrNot()){
 	
 
 			vehicleCount++;
 
-			int length = 32;
-			int width =26;
-			int speed = 80;
-			IVehicle v1 = 
-					new Vehicle(vehicleCount, width, length, enrance.getLocation_x(),
-					enrance.getLocation_y(), enrance.getDirection(), speed);
+			IVehicle v = null;
+			  int type = (int) (Math.random()*ConstValues.NumOfTypes);
+			  
+			  switch(type){
+			  case ConstValues.Car: 
+				  v = new Car(vehicleCount, enrance.getLocation_x(),
+								enrance.getLocation_y(), enrance.getDirection());
+				  break;
+			  case ConstValues.Coach: 
+				  v = new Coach(vehicleCount, enrance.getLocation_x(),
+								enrance.getLocation_y(), enrance.getDirection());
+				  break;  
+			  case ConstValues.Bus: 
+				  v = new Bus(vehicleCount, enrance.getLocation_x(),
+								enrance.getLocation_y(), enrance.getDirection());
+				  break; 
+				  
+			  }
 	
-		
-		VehicleManagement.getInstance().addVehicle(v1);
-		
+				VehicleManagement.getInstance().addVehicle(v);
+
+
 
 		}		
 		
@@ -96,7 +119,7 @@ while(true){
 
 
 	private boolean createOrNot() {
-    if(Math.random()<0.3*densityLevel)
+    if(Math.random()<0.2*densityLevel)
     	return true;
 		
 		return false;
