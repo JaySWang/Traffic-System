@@ -397,10 +397,6 @@ public class Vehicle implements IVehicle {
 				+ "Color of sensor5 is : " + c5 + "\n"
 				+ "number of white pixel is : " + s5.countColor());
 
-		// System.out.println("\r<br>��ゆ��杞���������� : " +
-		// (System.currentTimeMillis() -
-		// a)
-		// / 1000f + " 绉� ");
 		if (c1 == Color.red && c2 == Color.gray) {// s1 read the traffic light
 			this.setStatus(2); // when enter a lane, it
 			// doesn't need to stop;do
@@ -412,20 +408,7 @@ public class Vehicle implements IVehicle {
 			if (overLine(n5)) {
 				this.setStatus(0);
 			} else {
-				switch (this.angle) {
-				case 0:
-					this.setLocation_y((int) (this.getLocation_y() - n5));
-					break;
-				case 90:
-					this.setLocation_x((int) (this.getLocation_x() + n5));
-					break;
-				case 180:
-					this.setLocation_y((int) (this.getLocation_y() + n5));
-					break;
-				case 270:
-					this.setLocation_x((int) (this.getLocation_x() - n5));
-					break;
-				}
+
 				this.setStatus(3);
 			}
 		} else if (c3 != Color.gray) {
@@ -445,6 +428,7 @@ public class Vehicle implements IVehicle {
 	void calculateNextPosition() throws IOException {
 		// long a = System.currentTimeMillis();
 		Color c1 = s1.areaColor();
+		int n5 = s5.countColor();
 		if (this.status == 0) {
 			switch (this.angle) {
 			case 0:
@@ -469,8 +453,6 @@ public class Vehicle implements IVehicle {
 										// it
 
 		} else if (this.status == 2) {// stop because of the traffic light
-
-		} else if (this.getStatus() == 3) {// jumped on the cross
 			if (c1 == Color.red) {
 				System.out.println("car is stop");
 				this.setStatus(2);
@@ -495,7 +477,22 @@ public class Vehicle implements IVehicle {
 				}
 				this.setStatus(0);// need to be changde
 			}
-
+		} else if (this.getStatus() == 3) {// jumped on the cross
+			switch (this.angle) {
+			case 0:
+				this.setLocation_y((int) (this.getLocation_y() - n5));
+				break;
+			case 90:
+				this.setLocation_x((int) (this.getLocation_x() + n5));
+				break;
+			case 180:
+				this.setLocation_y((int) (this.getLocation_y() + n5));
+				break;
+			case 270:
+				this.setLocation_x((int) (this.getLocation_x() - n5));
+				break;
+			}
+			this.setStatus(2);
 		} else if (this.status == 10) {// emergency stop will make the vehicle
 			// stop on its left side close to the
 			// edge
