@@ -112,9 +112,10 @@ public int getIntervalTime() {
 	
 
 	public void run(){
-		System.out.println();
 		
 while(true){
+	System.out.print("");
+
 			for(int i = 0;i < numberOfLights&&(lightState == ConstValues.ON);i++){
 					
 				for(int j = 0;j < numberOfLights;j++){
