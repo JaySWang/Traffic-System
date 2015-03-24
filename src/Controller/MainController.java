@@ -71,8 +71,8 @@ public class MainController implements IMainController{
 				MapInfoManagement.getInstance().addExit(exit1);
 			 
 			 
-//				Entrance e2 = new Entrance(1,335,539,ConstValues.SouthToNorth);
-//				entrances.add(e2);
+				Entrance e2 = new Entrance(1,335,539,ConstValues.SouthToNorth);
+				entrances.add(e2);
 				
 				Exit exit2 = new Exit(2,385,600);
 				MapInfoManagement.getInstance().addExit(exit2);
@@ -105,14 +105,25 @@ public class MainController implements IMainController{
 				
 				
 				
-				Junction j1 = new Junction(55,345,ConstValues.SouthToNorth,1);
+				Junction j1 = new Junction(55,325,ConstValues.SouthToNorth,1,30,30);
 	 
 				MapInfoManagement.getInstance().addJunction(j1);
 				
-				Junction j2 = new Junction(100,280,ConstValues.WestToEest,1);
+				Junction j2 = new Junction(90,280,ConstValues.WestToEest,1,30,30);
 				 
 				MapInfoManagement.getInstance().addJunction(j2);
 				
+				Junction j3 = new Junction(330,320,ConstValues.EastToWest,1,40,30);
+				 
+				MapInfoManagement.getInstance().addJunction(j3);
+				
+				Junction j4 = new Junction(755,320,ConstValues.EastToWest,0.2,40,30);
+				 
+				MapInfoManagement.getInstance().addJunction(j4);
+				
+				Junction j5 = new Junction(368,320,ConstValues.NorthToSouth,0.5,10,40);
+				 
+				MapInfoManagement.getInstance().addJunction(j5);
 				
 				
 		} else if(map.equals("CrossRoad")){

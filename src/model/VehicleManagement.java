@@ -21,6 +21,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 
 	List<IVehicle>  vehicles = new ArrayList<IVehicle>();
 	List<IVehicle>  cloneVehicles = new ArrayList<IVehicle>();
+	List<IVehicle>  newVehicles = new ArrayList<IVehicle>();
 
 	
 	LogManagement lm = LogManagement.getInstance();
@@ -30,10 +31,9 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	//timing for the simulation 
 	static int timing;
 	static VehicleManagement vm;
-	
-	//for vehicle list   in case of "java.util.ConcurrentModificationException"
-	int synchronizedLock = 1;
-	
+	int leaveCount=0;
+	int newCount=0;
+
 	
 	public static VehicleManagement getInstance(){
 		if(vm==null){
@@ -95,7 +95,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 
 	public void run(){
 		while(true){
-				synchronizedLock = 0;
+
 			List<IVehicle> vehiclesToLeave = new ArrayList<IVehicle>();
 			
 			cloneVehicles = (List<IVehicle>) ((ArrayList)vehicles).clone();
@@ -109,7 +109,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 				//vehicle leave
 				
 				if(!v.update()){
-					
+					leaveCount++;
 					
 					vehiclesToLeave.add(v);
 					
@@ -120,13 +120,15 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 			for(IVehicle v:vehiclesToLeave){
 				vehicles.remove(v);
 			}
-			
+			for(IVehicle v:newVehicles){
+				newCount++;
+				vehicles.add(v);
+			}
+			newVehicles =new ArrayList<IVehicle>();
 			
 
 			notifyObservers();
 			timing+=intervalTime;
-
-			synchronizedLock = 1;
 				try {
 					sleep(intervalTime*100);
 					
@@ -147,8 +149,7 @@ public class VehicleManagement extends Thread implements IVehicleObservable,IVeh
 	@Override
 	public void addVehicle(IVehicle v) {
 	//	System.out.println("add "+synchronizedLock);
- 	if(synchronizedLock==1)
-          vehicles.add(v);		
+		newVehicles.add(v);		
 	}
 
 	@Override

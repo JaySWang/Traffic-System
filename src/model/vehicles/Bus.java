@@ -13,8 +13,9 @@ public class Bus extends VehicleWithRec{
 		  
 				width = 30;
 				length = 40;
-				speed = ConstValues.BusSpeed;
-				desireSpeed = speed;
+				speedLimit = ConstValues.BusSpeedLimit;
+				acceleration = ConstValues.BusAcceleration;
+				
 		carIcon = new ImageIcon(getClass().getResource("/Icon/bus.jpg"));
 
 		// TODO Auto-generated constructor stub

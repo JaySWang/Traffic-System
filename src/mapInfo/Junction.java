@@ -12,14 +12,26 @@ public class Junction {
 	int direction;
 	
 	int width;
-	int hight;
+	int height;
 	
 	int location_x;
 	int location_y;
-	
-	
 	//  for a vehicle to change direction
 	double possibility;
+	
+	
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+
+
+
+
 	
 	
 	
@@ -74,14 +86,14 @@ public class Junction {
 		this.possibility = possibility;
 	}
 
-	public Junction(int location_x,int location_y,int direction,double possibility){
-		width = 20;
-		hight = 20;
+	public Junction(int location_x,int location_y,int direction,double possibility,int width,int height){
+		this.width = width;
+		this.height = height;
 		this.location_x = location_x;
 		this.location_y = location_y;
 		this.possibility = possibility;
 		this.direction = direction;
-		rectangle = new Rectangle(location_x,location_y,width,hight);
+		rectangle = new Rectangle(location_x,location_y,width,height);
 		
 	}
 
