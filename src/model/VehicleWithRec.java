@@ -1,10 +1,13 @@
 package model;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 
 import constValue.ConstValues;
 
+import mapInfo.Junction;
+import mapInfo.MapInfoManagement;
 import modelInterface.IVehicle;
 
 public class VehicleWithRec implements IVehicle {
@@ -19,6 +22,7 @@ public class VehicleWithRec implements IVehicle {
 	private int angle;// 0-360
 	private int acceleration;
 
+	private static int  count = 0;
 	
 	private double updateIntervar = 0.1;
 	
@@ -31,13 +35,21 @@ public class VehicleWithRec implements IVehicle {
 	
 	
 	private Rectangle rectangle;
+	private Rectangle carRectangle;
+
+	
+	
+	
+	private  boolean vehicleCollision = false;
 	
 	
 	
 	public VehicleWithRec(int id, int width, int length, int location_x,
 			int location_y, int angle, int speed) {
 		super();
-		this.id = id;
+		this.id = count;
+		count++;
+
 		this.width = width;
 		this.length = length;
 		this.location_x = location_x;
@@ -57,6 +69,54 @@ public class VehicleWithRec implements IVehicle {
 
 
 
+	public boolean isVehicleCollision() {
+		return vehicleCollision;
+	}
+
+
+
+
+
+
+
+
+
+	public void setVehicleCollision(boolean vehicleCollision) {
+		this.vehicleCollision = vehicleCollision;
+	}
+
+
+
+
+
+
+
+
+
+	public Rectangle getCarRectangle() {
+		return carRectangle;
+	}
+
+
+
+
+
+
+
+
+
+	public void setCarRectangle(Rectangle carRectangle) {
+		this.carRectangle = carRectangle;
+	}
+
+
+
+
+
+
+
+
+
 	public Rectangle getRectangle() {
 		return rectangle;
 	}
@@ -70,32 +130,51 @@ public class VehicleWithRec implements IVehicle {
 
 		
 		int x = getLocation_x();
+		int cX = getLocation_x();
 		int y = getLocation_y() ;
+		int cY = getLocation_y() ;
 		int width = getLength();
         int height = getWidth();
+        int cWidth = getLength();
+        int cHeight = getWidth();
         
         double  increment = getSpeed()*updateIntervar;
 		switch(getAngle()){
 		case ConstValues.EastToWest:
 			y-=getWidth();
-			x = (int)(x - increment);
-			width = (int)(width+increment);
+			cY = y;
+			x = (int)(x - increment-1);
+			width = (int)(width+increment+1);
 		break;
     	case ConstValues.WestToEest:
     		x-=getLength();
-    	    width = (int)(width+increment);
+    		cX = x;
+    	    width = (int)(width+increment+1);
 		break;
 		case ConstValues.NorthToSouth: 
 			x-=getWidth();
 			y-=getLength();
+			cX = x;
+			cY = y;
+
 			int temp = height;
-			height =(int)(width + increment) ;
+			int cTemp = cHeight;
+			
+			height =(int)(width + increment+1) ;
+			cHeight =cWidth; 
 			width = temp;
+			cWidth = cTemp;
 		break;
 		case ConstValues.SouthToNorth: 
 		int temp2 = height;
-		height =(int)(width + increment) ;
+		int cTemp2 = cHeight;
+		height =(int)(width + increment+1) ;
+		cHeight =cWidth; 
+
 		width = temp2;
+		cWidth = cTemp2;
+		cY = y;
+
 		y = (int)(y - increment);
 		break;
 		
@@ -103,6 +182,8 @@ public class VehicleWithRec implements IVehicle {
 
 		
 		rectangle = new Rectangle( x, y,width,height);
+		carRectangle = new Rectangle( cX, cY,cWidth,cHeight);
+
 	}
 
 
@@ -272,17 +353,17 @@ public class VehicleWithRec implements IVehicle {
 	@Override
 	public boolean update() {
 		
-		
+//		   System.out.println("angle: "+this.id +" "+this.angle);
+
 		
 	int collisionState = collisionDetect();
 		
 		
 		if(collisionState == ConstValues.Clear){
 			
-			if(location_y<200){
-				return true;
-			}
-			
+		
+	         speed = 80;
+
 		
         double  increment = getSpeed()*updateIntervar;
 
@@ -299,6 +380,7 @@ public class VehicleWithRec implements IVehicle {
 
 		break;
 		case ConstValues.SouthToNorth: 
+
 			location_y = (int)(location_y - increment);
 
 		break;
@@ -311,7 +393,7 @@ public class VehicleWithRec implements IVehicle {
 		}
 		
 		else if (collisionState == ConstValues.VehicleCollision){
-			
+         speed = 0;
 		}
 		
 		
@@ -325,19 +407,92 @@ public class VehicleWithRec implements IVehicle {
 	private int collisionDetect() {
 		
 		List<IVehicle>  vehicles = VehicleManagement.getInstance().getCloneVehicles();
-		vehicles.remove(this);
+		// passed by reference
 		
-		for(IVehicle v:vehicles){
+		List<IVehicle>  tempVehicles =  (List<IVehicle>) ((ArrayList)vehicles).clone();
+		tempVehicles.remove(this);
+		
+		List<Junction> junctions = MapInfoManagement.getInstance().getJunctions();
+
+	for(IVehicle v:tempVehicles){
 			
 			
-			if(this.getRectangle().intersects(((VehicleWithRec)v).getRectangle())){
-				if(this.location_y>=v.getLocation_y()){
-					return ConstValues.VehicleCollision;
+		if(this.getRectangle().intersects(((VehicleWithRec)v).getRectangle())){
+				
+				
+			switch(this.getAngle()){
+				case ConstValues.EastToWest:
+					if(v.getAngle()==ConstValues.NorthToSouth){
+					
+						if(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle())){
+							vehicleCollision = true;
+							return ConstValues.VehicleCollision;
+
+						}
+						vehicleCollision = false;
+
+						
+					}else if((v.getAngle() == ConstValues.SouthToNorth)){
+						if(!((VehicleWithRec) v).isVehicleCollision()){
+							return ConstValues.VehicleCollision;
+							
+						}
+						
+				
+					}else if(this.location_x>v.getLocation_x()){
+					
+						
+						return ConstValues.VehicleCollision;
+					}
+					break;
+				case ConstValues.WestToEest:
+					if(this.location_x<v.getLocation_x()){
+						return ConstValues.VehicleCollision;
+					}
+
+				break;
+				case ConstValues.NorthToSouth: 
+					
+			
+						if((v.getAngle() == ConstValues.EastToWest)){
+							if(!((VehicleWithRec) v).isVehicleCollision()){
+								return ConstValues.VehicleCollision;
+								
+							}
+							
+					
+						}else if(this.location_y<v.getLocation_y()){
+						return ConstValues.VehicleCollision;
+				
+					}
+
+				break;
+				
+				case ConstValues.SouthToNorth: 
+					if(v.getAngle()==ConstValues.EastToWest){
+						
+						if(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle())){
+							vehicleCollision = true;
+							return ConstValues.VehicleCollision;
+
+						}
+						vehicleCollision = false;
+
+						
+					}else if(this.location_y>v.getLocation_y()){
+						return ConstValues.VehicleCollision;
+					}
+
+					
+				break;
+				
 				}
+				
+				
 				
 			}
 			
-			
+
 		}
 		
 		
