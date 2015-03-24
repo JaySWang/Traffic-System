@@ -3,6 +3,8 @@ package model;
 import java.awt.Color;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
+
 import modelInterface.IVehicle;
 
 /**
@@ -590,6 +592,12 @@ public class Vehicle implements IVehicle {
 	@Override
 	public int getId() {
 		return id;
+	}
+
+	@Override
+	public ImageIcon getCarIcon() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
