@@ -29,6 +29,9 @@ public class VehicleWithRec implements IVehicle {
 						// every pixel represent 0.1 meter
 	 
 	 
+	 int gap = 10; //between vehicles;
+	 int collisionCount=0;
+	 
 	 int speedLimit;//varies from vehivles to vehicles
 	 
 	private int angle;// 0-360
@@ -120,13 +123,13 @@ public class VehicleWithRec implements IVehicle {
 		case ConstValues.EastToWest:
 			y-=getWidth();
 			cY = y;
-			x = (int)(x - increment-3);
-			width = (int)(width+increment+3);
+			x = (int)(x - increment-gap);
+			width = (int)(width+increment+gap);
 		break;
     	case ConstValues.WestToEest:
     		x-=getLength();
     		cX = x;
-    	    width = (int)(width+increment+3);
+    	    width = (int)(width+increment+gap);
 		break;
 		case ConstValues.NorthToSouth: 
 			x-=getWidth();
@@ -137,7 +140,7 @@ public class VehicleWithRec implements IVehicle {
 			int temp = height;
 			int cTemp = cHeight;
 			
-			height =(int)(width + increment+3) ;
+			height =(int)(width + increment+gap) ;
 			cHeight =cWidth; 
 			width = temp;
 			cWidth = cTemp;
@@ -145,14 +148,14 @@ public class VehicleWithRec implements IVehicle {
 		case ConstValues.SouthToNorth: 
 		int temp2 = height;
 		int cTemp2 = cHeight;
-		height =(int)(width + increment+3) ;
+		height =(int)(width + increment+gap) ;
 		cHeight =cWidth; 
 
 		width = temp2;
 		cWidth = cTemp2;
 		cY = y;
 
-		y = (int)(y - increment-3);
+		y = (int)(y - increment-gap);
 		break;
 		
 		}
@@ -349,12 +352,12 @@ public class VehicleWithRec implements IVehicle {
 		
 		//detect junctions and decide whether to turn.
 		
-		
-		
 	int collisionState = collisionDetect();
 		
+	if(!(collisionState == ConstValues.Clear)&&collisionCount>10){
+		turn();
 		
-		if(collisionState == ConstValues.Clear){
+	}else if(collisionState == ConstValues.Clear){
 			turn();
 			
 			
@@ -406,7 +409,7 @@ public class VehicleWithRec implements IVehicle {
 
 		 List<Junction> junctions = MapInfoManagement.getInstance().getJunctions();
 			for(Junction j:junctions){
-				if(this.getRectangle().intersects(j.getRectangle())){
+				if(this.getCarRectangle().intersects(j.getRectangle())){
 					
 					//it is a turing junction with a possibility for the vehicle to change direction
 					
@@ -415,7 +418,7 @@ public class VehicleWithRec implements IVehicle {
 					switch(angle){
 					case ConstValues.EastToWest:
 						location_x = j.getLocation_x()+j.getWidth()-getLength();
-						location_y = j.getLocation_y()+getWidth();
+						location_y = j.getLocation_y()+getWidth()-gap;
 					     setRectangle();
 						
 					
@@ -428,10 +431,11 @@ public class VehicleWithRec implements IVehicle {
 					break;
 					case ConstValues.NorthToSouth: 
 						location_x = j.getLocation_x()+getWidth();
-						location_y = j.getLocation_x()+getLength();
+						location_y = j.getLocation_y()+getLength();
 					     setRectangle();
 
 					
+					     
 					break;
 					
 					case ConstValues.SouthToNorth: 
@@ -527,7 +531,7 @@ public class VehicleWithRec implements IVehicle {
 
 				}
 				
-				
+			collisionCount=0;
 				return	ConstValues.Clear;	
 			
 		}
@@ -543,7 +547,7 @@ public class VehicleWithRec implements IVehicle {
 			if((v.getLocation_x())<836&&(755<v.getLocation_x())){
 				if((v.getLocation_y())<360&&(280<v.getLocation_y())){
 					System.out.println(" crash:"+v.getLocation_x()+" "+v.getLocation_y	());
-
+				//	return	ConstValues.Clear;	
 				}
 			}
 		}		
@@ -593,6 +597,7 @@ public class VehicleWithRec implements IVehicle {
 				case ConstValues.NorthToSouth: 
 					
 								if(v.getAngle()==ConstValues.WestToEest){
+
 								
 								if(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle())){
 									vehicleCollision = true;
@@ -609,6 +614,13 @@ public class VehicleWithRec implements IVehicle {
 				break;
 				
 				case ConstValues.SouthToNorth: 
+					
+					// try to turn in congestion
+					if(v.getAngle()==ConstValues.WestToEest){
+						collisionCount++;
+
+					}
+					
 					if(v.getAngle()==ConstValues.EastToWest){
 						
 						if(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle())){
@@ -637,7 +649,7 @@ public class VehicleWithRec implements IVehicle {
 
 		}
 		
-		
+	  collisionCount=0;
 		return	ConstValues.Clear;	
 	}
 

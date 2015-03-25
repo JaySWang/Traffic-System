@@ -10,8 +10,8 @@ public class Coach extends VehicleWithRec{
 			int angle) {
 		super(id, location_x, location_y, angle);
         
-		width = 30;
-		length = 45;
+		width = 25;
+		length = 30;
 		speedLimit = ConstValues.CoachSpeedLimit;
 		acceleration = ConstValues.CoachAcceleration;
 		

@@ -65,34 +65,34 @@ public class MainController implements IMainController{
 		 
 	
 
-				Entrance e1 = new Entrance(0,121,60,ConstValues.NorthToSouth);
+				Entrance e1 = new Entrance(0,121,0,ConstValues.NorthToSouth);
 				entrances.add(e1);
 				Exit exit1 = new Exit(1,60,0);
 				MapInfoManagement.getInstance().addExit(exit1);
 			 
 			 
-				Entrance e2 = new Entrance(1,335,539,ConstValues.SouthToNorth);
+				Entrance e2 = new Entrance(1,335,600,ConstValues.SouthToNorth);
 				entrances.add(e2);
 				
 				Exit exit2 = new Exit(2,385,600);
 				MapInfoManagement.getInstance().addExit(exit2);
 
-				Entrance e3 = new Entrance(2,761,539,ConstValues.SouthToNorth);
+				Entrance e3 = new Entrance(2,761,600,ConstValues.SouthToNorth);
 				entrances.add(e3);
 				
 				Exit exit3 = new Exit(3,810,600);
 				MapInfoManagement.getInstance().addExit(exit3);
 				
-				Entrance e4 = new Entrance(3,1146,349,ConstValues.EastToWest);
+				Entrance e4 = new Entrance(3,1280,349,ConstValues.EastToWest);
 				entrances.add(e4);
 				
-				Exit exit4 = new Exit(4,385,600);
+				Exit exit4 = new Exit(4,1195,295);
 				MapInfoManagement.getInstance().addExit(exit4);
 				
-				Entrance e5 = new Entrance(4,825,60,ConstValues.NorthToSouth);
+				Entrance e5 = new Entrance(4,825,0,ConstValues.NorthToSouth);
 				entrances.add(e5);
 				
-				Exit exit5 = new Exit(5,1195,300);
+				Exit exit5 = new Exit(5,800,0);
 				MapInfoManagement.getInstance().addExit(exit5);
 				
 				
@@ -113,15 +113,15 @@ public class MainController implements IMainController{
 				 
 				MapInfoManagement.getInstance().addJunction(j2);
 				
-				Junction j3 = new Junction(330,320,ConstValues.EastToWest,1,40,30);
+				Junction j3 = new Junction(320,330,ConstValues.EastToWest,1,40,1);
 				 
 				MapInfoManagement.getInstance().addJunction(j3);
 				
-				Junction j4 = new Junction(755,320,ConstValues.EastToWest,0.2,40,30);
+				Junction j4 = new Junction(755,330,ConstValues.EastToWest,0.1,40,1);
 				 
 				MapInfoManagement.getInstance().addJunction(j4);
 				
-				Junction j5 = new Junction(368,320,ConstValues.NorthToSouth,0.5,10,40);
+				Junction j5 = new Junction(370,330,ConstValues.NorthToSouth,0.1,40,30);
 				 
 				MapInfoManagement.getInstance().addJunction(j5);
 				
