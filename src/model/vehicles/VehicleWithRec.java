@@ -598,16 +598,22 @@ public class VehicleWithRec implements IVehicle {
 		
 		//List<Junction> junctions = MapInfoManagement.getInstance().getJunctions();
 	
+		for(IVehicle v:tempVehicles){
+			
+			
+			// priority detect
+			if(v instanceof VehicleWithPriority){
+			if(priorityDetect(v)==ConstValues.VehicleCollision){
+				return ConstValues.VehicleCollision;
+			  }
+			}
+		}
+		
+		
+		
+		//there is no priority vehicles
 			for(IVehicle v:tempVehicles){
 		
-				
-				// priority detect
-				if(v instanceof VehicleWithPriority){
-				if(priorityDetect(v)==ConstValues.VehicleCollision){
-					return ConstValues.VehicleCollision;
-				  }
-				}
-				
 				
 				if(this.getRectangle().intersects(v.getCarRectangle())){			
 					switch(this.getAngle()){

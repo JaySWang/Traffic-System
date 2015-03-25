@@ -1,4 +1,4 @@
-package model;
+package model.vehicles;
 
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 
+import model.Sensor_withoutCircle;
 import modelInterface.IVehicle;
 
 /**
@@ -16,7 +17,7 @@ import modelInterface.IVehicle;
  * @version 1.0
  * 
  */
-public class Vehicle implements IVehicle {
+public class VehicleWithSensors implements IVehicle {
 	private int id;
 	private int width;
 	private int length;
@@ -42,11 +43,11 @@ public class Vehicle implements IVehicle {
 	Sensor_withoutCircle s6 = new Sensor_withoutCircle();
 	Sensor_withoutCircle s7 = new Sensor_withoutCircle();
 
-	public Vehicle() {
+	public VehicleWithSensors() {
 
 	}
 
-	public Vehicle(int id, int width, int length, int location_x,
+	public VehicleWithSensors(int id, int width, int length, int location_x,
 			int location_y, int angle, int speed) {
 		super();
 		this.id = id;
@@ -567,7 +568,7 @@ public class Vehicle implements IVehicle {
 	}
 
 	public static void main(String[] arg) throws IOException {
-		Vehicle v = new Vehicle();
+		VehicleWithSensors v = new VehicleWithSensors();
 		v.setLocation_x(761);
 		v.setLocation_y(539);
 		v.setAngle(0);

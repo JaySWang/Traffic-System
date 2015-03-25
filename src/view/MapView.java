@@ -92,20 +92,6 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 	
 	public void update(Graphics g){
 
-	    try {
-
-			s.updateScreenShot(this);
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch(IllegalComponentStateException e){
-			e.printStackTrace();
-
-		}
-		
 		g.drawImage(map.getImage(), 0, 0, map.getIconWidth(),map.getIconHeight(), this);
 		
 		
