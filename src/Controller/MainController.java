@@ -92,7 +92,7 @@ public class MainController implements IMainController{
 				Entrance e5 = new Entrance(4,825,0,ConstValues.NorthToSouth);
 				entrances.add(e5);
 				
-				Exit exit5 = new Exit(5,800,0);
+				Exit exit5 = new Exit(5,755,0);
 				MapInfoManagement.getInstance().addExit(exit5);
 				
 				
@@ -105,7 +105,7 @@ public class MainController implements IMainController{
 				
 				
 				
-				Junction j1 = new Junction(55,325,ConstValues.SouthToNorth,1,30,30);
+				Junction j1 = new Junction(55,325,ConstValues.SouthToNorth,1,40,40);
 	 
 				MapInfoManagement.getInstance().addJunction(j1);
 				
@@ -113,11 +113,11 @@ public class MainController implements IMainController{
 				 
 				MapInfoManagement.getInstance().addJunction(j2);
 				
-				Junction j3 = new Junction(320,330,ConstValues.EastToWest,1,40,1);
+				Junction j3 = new Junction(320,330,ConstValues.EastToWest,1,40,10);
 				 
 				MapInfoManagement.getInstance().addJunction(j3);
 				
-				Junction j4 = new Junction(755,330,ConstValues.EastToWest,0.1,40,1);
+				Junction j4 = new Junction(755,330,ConstValues.EastToWest,0.1,40,10);
 				 
 				MapInfoManagement.getInstance().addJunction(j4);
 				
