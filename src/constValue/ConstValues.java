@@ -45,10 +45,15 @@ public class ConstValues {
  public final static int Bus = 2;
  public final static int NumOfTypes = 3;
 
- //vehicle speed;
- public final static int CarSpeed = 200;
- public final static int CoachSpeed = 150;
- public final static int BusSpeed = 100;
+ //vehicle 
+ //speedLimit;
+ public final static int CarSpeedLimit = 300;
+ public final static int CoachSpeedLimit = 250;
+ public final static int BusSpeedLimit = 200;
+ //acceleration  
+ public final static int CarAcceleration = 40;
+ public final static int CoachAcceleration = 30;
+ public final static int BusAcceleration= 20;
  
  
  //road info

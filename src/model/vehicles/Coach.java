@@ -10,11 +10,12 @@ public class Coach extends VehicleWithRec{
 			int angle) {
 		super(id, location_x, location_y, angle);
         
-		width = 30;
-		length = 45;
-		speed = ConstValues.CoachSpeed;
-		desireSpeed = speed;
-
+		width = 25;
+		length = 30;
+		speedLimit = ConstValues.CoachSpeedLimit;
+		acceleration = ConstValues.CoachAcceleration;
+		
+		
 		carIcon = new ImageIcon(getClass().getResource("/Icon/coach.jpg"));
 		setRectangle();
 

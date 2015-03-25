@@ -1,5 +1,6 @@
 package model;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import log.LogManagement;
@@ -10,6 +11,7 @@ public class Analysis implements IAnalysis {
 
 	LogManagement lm = LogManagement.getInstance();
 	
+	int congestionSpeed = 100; 
 	
 	@Override
 	public double getAverageSpeedByVId(int VehicleId) {
@@ -55,8 +57,29 @@ public class Analysis implements IAnalysis {
 
 	@Override
 	public double getCongestionRateByTMPId(int TrafficMgtPolicyId) {
-		// TODO Auto-generated method stub
+		List<VehicleLog> vls = lm.getVLogByTrafficMgtPolicyId(TrafficMgtPolicyId);	
+
+		
+	double count = 0;
+		
+		for(VehicleLog vl:vls){
+            if(vl.getSpeed()<congestionSpeed){
+            	count++;
+            }
+            
+		}
+		
+		
+	if(vls.size()==0)
 		return 0;
+	
+	
+	double  rate = count/vls.size();
+	
+	
+	
+	return rate;
+		
 	}
 	
 }

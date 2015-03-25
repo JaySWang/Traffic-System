@@ -14,6 +14,7 @@ import mapInfo.Exit;
 import mapInfo.Junction;
 import mapInfo.Light;
 import mapInfo.MapInfoManagement;
+import model.TrafficCondition;
 import model.VehicleManagement;
 import modelInterface.IVehicle;
 
@@ -24,12 +25,18 @@ public class VehicleWithRec implements IVehicle {
 	 int length;
 	private int location_x;
 	private int location_y;
-	 int speed;// if the refresh 0.1s,the min speed is 1m/s therefore
+	 private int speed;// if the refresh 0.1s,the min speed is 1m/s therefore
 						// every pixel represent 0.1 meter
 	 
-	 int desireSpeed;
+	 
+	 int gap = 10; //between vehicles;
+	 int collisionCount=0;
+	 
+	 int speedLimit;//varies from vehivles to vehicles
+	 
 	private int angle;// 0-360
-	private int acceleration;
+	
+	int acceleration;
 
 	private static int  count = 0;
 	
@@ -116,13 +123,13 @@ public class VehicleWithRec implements IVehicle {
 		case ConstValues.EastToWest:
 			y-=getWidth();
 			cY = y;
-			x = (int)(x - increment-3);
-			width = (int)(width+increment+3);
+			x = (int)(x - increment-gap);
+			width = (int)(width+increment+gap);
 		break;
     	case ConstValues.WestToEest:
     		x-=getLength();
     		cX = x;
-    	    width = (int)(width+increment+3);
+    	    width = (int)(width+increment+gap);
 		break;
 		case ConstValues.NorthToSouth: 
 			x-=getWidth();
@@ -133,7 +140,7 @@ public class VehicleWithRec implements IVehicle {
 			int temp = height;
 			int cTemp = cHeight;
 			
-			height =(int)(width + increment+3) ;
+			height =(int)(width + increment+gap) ;
 			cHeight =cWidth; 
 			width = temp;
 			cWidth = cTemp;
@@ -141,14 +148,14 @@ public class VehicleWithRec implements IVehicle {
 		case ConstValues.SouthToNorth: 
 		int temp2 = height;
 		int cTemp2 = cHeight;
-		height =(int)(width + increment+3) ;
+		height =(int)(width + increment+gap) ;
 		cHeight =cWidth; 
 
 		width = temp2;
 		cWidth = cTemp2;
 		cY = y;
 
-		y = (int)(y - increment-3);
+		y = (int)(y - increment-gap);
 		break;
 		
 		}
@@ -244,17 +251,29 @@ public class VehicleWithRec implements IVehicle {
 
 
 	public int getSpeed() {
+	
+		
 		return speed;
 	}
 
 
-
+ 
 
 
 	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
+		int limit = TrafficCondition.getInstance().getSpeedLimit();
+		if(limit!=-1){
+    		if(speed>10*limit){
+    			this.speed = 10*limit;
+    		}else if (speed<speedLimit){
+    			this.speed = speed;
+    		}
+    	}else{
+			this.speed = speed;
 
+    	}
+		
+	}
 
 
 
@@ -327,21 +346,24 @@ public class VehicleWithRec implements IVehicle {
 	public boolean update() {
 		
 		
-		if(exit()){
+		if(exitDetect()){
 			return false;
 		}
 		
 		//detect junctions and decide whether to turn.
-		turn();
-		
 		
 	int collisionState = collisionDetect();
 		
+	if(!(collisionState == ConstValues.Clear)&&collisionCount>10){
+		turn();
 		
-		if(collisionState == ConstValues.Clear){
+	}else if(collisionState == ConstValues.Clear){
+			turn();
+			
+			
+			setSpeed(speed+acceleration);
 			
 		
-	         speed = desireSpeed;
 
 		
         double  increment = getSpeed()*updateIntervar;
@@ -395,21 +417,30 @@ public class VehicleWithRec implements IVehicle {
 						angle = j.getDirection();
 					switch(angle){
 					case ConstValues.EastToWest:
+						location_x = j.getLocation_x()+j.getWidth()-getLength();
+						location_y = j.getLocation_y()+getWidth()-gap;
+					     setRectangle();
+						
 					
 						break;
 					case ConstValues.WestToEest:
-						location_x = j.getLocation_x()+length;
+						location_x = j.getLocation_x()+getLength();
 						location_y = j.getLocation_y();
 					     setRectangle();
 					
 					break;
 					case ConstValues.NorthToSouth: 
+						location_x = j.getLocation_x()+getWidth();
+						location_y = j.getLocation_y()+getLength();
+					     setRectangle();
+
 					
+					     
 					break;
 					
 					case ConstValues.SouthToNorth: 
 						location_x = j.getLocation_x();
-						location_y = j.getLocation_y()-length;
+						location_y = j.getLocation_y()+j.getHeight()-getLength();
 					     setRectangle();
 					break;			
 					}
@@ -424,11 +455,11 @@ public class VehicleWithRec implements IVehicle {
 	}
 
 
-	private boolean exit() {
+	private boolean exitDetect() {
 
 		  List<Exit> exits = MapInfoManagement.getInstance().getExits();
 		for(Exit e:exits){
-			if(this.getCarRectangle().intersects(e.getRetangle())){
+			if(this.getRectangle().intersects(e.getRetangle())){
 				return true;
 			}
 			
@@ -442,7 +473,7 @@ public class VehicleWithRec implements IVehicle {
 	private int collisionDetect() {
 		
 		
-		if(trafficLightCollision()){
+		if(trafficLightDetect()){
 			return ConstValues.VehicleCollision;
 
 		}
@@ -500,7 +531,7 @@ public class VehicleWithRec implements IVehicle {
 
 				}
 				
-				
+			collisionCount=0;
 				return	ConstValues.Clear;	
 			
 		}
@@ -516,7 +547,7 @@ public class VehicleWithRec implements IVehicle {
 			if((v.getLocation_x())<836&&(755<v.getLocation_x())){
 				if((v.getLocation_y())<360&&(280<v.getLocation_y())){
 					System.out.println(" crash:"+v.getLocation_x()+" "+v.getLocation_y	());
-
+				//	return	ConstValues.Clear;	
 				}
 			}
 		}		
@@ -539,18 +570,7 @@ public class VehicleWithRec implements IVehicle {
 
 						
 					}
-//					else if((v.getAngle() == ConstValues.SouthToNorth)){
-//						
-//						
-////						return ConstValues.VehicleCollision;
-//
-////						if(!((VehicleWithRec) v).isVehicleCollision()){
-////							return ConstValues.VehicleCollision;
-////							
-////						}
-//						
-//				
-//					}
+
 			else if(this.location_x>v.getLocation_x()&&(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle()))){
 					
 						
@@ -560,14 +580,6 @@ public class VehicleWithRec implements IVehicle {
 					
 				case ConstValues.WestToEest:
 					
-//					if((v.getAngle() == ConstValues.NorthToSouth)){
-//				//		return ConstValues.VehicleCollision;
-////						if(!((VehicleWithRec) v).isVehicleCollision()){
-////							return ConstValues.VehicleCollision;
-////							
-////						}
-//					}
-//						else
 							if(v.getAngle()==ConstValues.SouthToNorth){
 						
 						if(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle())){
@@ -578,22 +590,14 @@ public class VehicleWithRec implements IVehicle {
 						vehicleCollision = false;
 
 						
-					}else if(this.location_x<v.getLocation_x()&&(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle()))){
+					}else if((this.location_x<v.getLocation_x())&&(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle()))){
 						return ConstValues.VehicleCollision;
 					}
 				break;
 				case ConstValues.NorthToSouth: 
 					
-			
-//						if((v.getAngle() == ConstValues.EastToWest)){
-//					//		return ConstValues.VehicleCollision;
-////							if(!((VehicleWithRec) v).isVehicleCollision()){
-////								return ConstValues.VehicleCollision;
-////								
-////							}
-//						}
-//							else
 								if(v.getAngle()==ConstValues.WestToEest){
+
 								
 								if(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle())){
 									vehicleCollision = true;
@@ -602,7 +606,7 @@ public class VehicleWithRec implements IVehicle {
 								}
 								vehicleCollision = false;
 
-						}else if(this.location_y<v.getLocation_y()&&(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle()))){
+						}else if((this.location_y<v.getLocation_y())&&(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle()))){
 						return ConstValues.VehicleCollision;
 				
 					}
@@ -610,6 +614,13 @@ public class VehicleWithRec implements IVehicle {
 				break;
 				
 				case ConstValues.SouthToNorth: 
+					
+					// try to turn in congestion
+					if(v.getAngle()==ConstValues.WestToEest){
+						collisionCount++;
+
+					}
+					
 					if(v.getAngle()==ConstValues.EastToWest){
 						
 						if(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle())){
@@ -621,17 +632,7 @@ public class VehicleWithRec implements IVehicle {
 
 						
 					}
-//					else if((v.getAngle() == ConstValues.WestToEest)){
-//				//		return ConstValues.VehicleCollision;
-////						if(!((VehicleWithRec) v).isVehicleCollision()){
-////							return ConstValues.VehicleCollision;
-////							
-////						}
-//						
-//				
-//					}
 	
-						
 					else if((this.location_y>v.getLocation_y())&&(this.getRectangle().intersects(((VehicleWithRec)v).getCarRectangle()))){
 						return ConstValues.VehicleCollision;
 					}
@@ -648,7 +649,7 @@ public class VehicleWithRec implements IVehicle {
 
 		}
 		
-		
+	  collisionCount=0;
 		return	ConstValues.Clear;	
 	}
 
@@ -660,7 +661,7 @@ public class VehicleWithRec implements IVehicle {
 
 
 
-	private boolean trafficLightCollision() {
+	private boolean trafficLightDetect() {
 
 		
 		

@@ -18,7 +18,7 @@ public class TrafficCondition implements ITrafficCondition,ITrafficConditionObse
 
 	
 	int speedLimit = -1;
-	int density;
+	int density = 1;
 	
 	public static TrafficCondition getInstance(){
 		if(tc == null){

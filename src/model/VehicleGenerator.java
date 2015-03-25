@@ -93,7 +93,6 @@ while(true){
 				  break; 
 				  
 			  }
-	
 				VehicleManagement.getInstance().addVehicle(v);
 
 
@@ -119,9 +118,11 @@ while(true){
 
 
 	private boolean createOrNot() {
-    if(Math.random()<0.2*densityLevel)
+		double r = Math.random();
+
+    if(r<0.1*densityLevel){
     	return true;
-		
+    }
 		return false;
 	}
 
@@ -131,6 +132,7 @@ while(true){
 	@Override
 	public void update(ITrafficConditionObservable o) {
 		densityLevel = 	((TrafficCondition)o).getDensity();	
+
 	}
 
 

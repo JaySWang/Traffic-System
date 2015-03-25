@@ -1,5 +1,6 @@
 package log;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +110,13 @@ public class LogManagement {
 		break;
 		}
 		
-		AnalysisLog al = new AnalysisLog(speedLimit, trafficLights,lightIntervalTime, averageSpeed,dLevel,congestionRate);	
+		
+		DecimalFormat    df   = new DecimalFormat("######0.00");   
+		String rate = df.format(congestionRate*100); 
+		
+		String speed = df.format(averageSpeed/10); 
+		
+		AnalysisLog al = new AnalysisLog(speedLimit, trafficLights,lightIntervalTime, speed,dLevel,rate);	
 		aLogs.add(al);
 	
 	}

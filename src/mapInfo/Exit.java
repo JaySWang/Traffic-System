@@ -17,7 +17,7 @@ public class Exit {
 		this.location_x = location_x;
 		this.location_y = location_y;
 		
-		retangle = new Rectangle(location_x,location_y,20,20);
+		retangle = new Rectangle(location_x,location_y,30,30);
 	}
 
 	public int getCount() {

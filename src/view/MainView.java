@@ -80,6 +80,8 @@ public class MainView implements IVehicleObserver{
  	private JMenuItem mntmCrossRoad;
  	private JMenuItem mntmTcrosslRoad;
 	private MainController mainController;
+	private JLabel lblMs;
+	private JLabel lblSec;
     
     
     
@@ -207,6 +209,9 @@ public class MainView implements IVehicleObserver{
 		});
 		btnLightSet.setEnabled(false);
 		comboBox.setEnabled(false);
+		
+		lblSec = new JLabel("sec");
+		controlPanel.add(lblSec);
 
 		controlPanel.add(btnLightSet);
 		
@@ -217,7 +222,7 @@ public class MainView implements IVehicleObserver{
 		controlPanel.add(label);
 		
 		comboBox_speedLimit = new JComboBox();
-		comboBox_speedLimit.setModel(new DefaultComboBoxModel(new String[] {"N/A", "30", "40", "50", "60"}));
+		comboBox_speedLimit.setModel(new DefaultComboBoxModel(new String[] {"N/A", "4", "8", "16", "32"}));
 		controlPanel.add(comboBox_speedLimit);
 		
 		btnSpeedSet = new JButton("Set");
@@ -234,6 +239,9 @@ public class MainView implements IVehicleObserver{
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		
+		lblMs = new JLabel(" m/s");
+		controlPanel.add(lblMs);
 		controlPanel.add(btnSpeedSet);
 		
 		lblDensityLevel = new JLabel("Density Level:");

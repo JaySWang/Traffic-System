@@ -18,10 +18,11 @@ public class Car extends VehicleWithRec{
 		super(id, location_x, location_y, angle);
 		
 		  
-				width = 26;
-				length = 32;
-				speed = ConstValues.CarSpeed;
-				desireSpeed = speed;
+				width = 20;
+				length = 25;
+				speedLimit = ConstValues.CarSpeedLimit;
+				acceleration = ConstValues.CarAcceleration;
+				
 		carIcon = new ImageIcon(getClass().getResource("/Icon/car.jpg"));
 		setRectangle();
 
