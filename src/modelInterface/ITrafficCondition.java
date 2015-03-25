@@ -7,4 +7,6 @@ public interface ITrafficCondition {
 	public int getDensity();
 	public int getSpeedLimit();
 	public void newPrivilegeVehicle();
+	
+    public void clean();
 }

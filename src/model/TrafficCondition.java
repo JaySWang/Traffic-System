@@ -33,6 +33,10 @@ public class TrafficCondition implements ITrafficCondition,ITrafficConditionObse
 	
 	
 	
+	public void clean(){
+		tc = new TrafficCondition();
+	}
+	
 	public boolean isNewPrivilegeVehicle() {
 		return newPrivilegeVehicle;
 	}

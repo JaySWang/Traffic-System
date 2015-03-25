@@ -13,7 +13,12 @@ import ControllerInterface.ITrafficLightController;
 
 
 
+import mapInfo.Entrance;
+import mapInfo.Exit;
+import mapInfo.Junction;
 import mapInfo.Light;
+import mapInfo.MapInfoManagement;
+import model.TrafficLight;
 import modelInterface.ITrafficLight;
 
 
@@ -21,15 +26,13 @@ import modelInterface.ITrafficLight;
 
 public class CrossMapView extends MapView {
 
-	 
-
 
 	
 
 	public CrossMapView(List<ITrafficLight> t, ITrafficLightController c) {
 		super(t,c);
 
-		map = new ImageIcon(getClass().getResource("/Icon/map.png"));
+		map = new ImageIcon(getClass().getResource("/Icon/one_cross_map.jpg"));
 		
 		initialLights();
 	
@@ -43,23 +46,17 @@ public class CrossMapView extends MapView {
 
 		lightList = new ArrayList();
 
-		Light light1 = new Light(294,244, 1,ConstValues.NorthToSouth);
-		Light light2 = new Light(294,357, 0,ConstValues.WestToEest);
-		Light light3 = new Light(407, 357,1,ConstValues.SouthToNorth);
 		
-//		Light light4 = new Light(721,245,1);
-//		Light light5 = new Light(721,360,0);
-//		Light light6 = new Light(834,360,1);
-//		Light light7 = new Light(834,245,1);
+		Light light4 = new Light(720,244,1,ConstValues.NorthToSouth);
+		Light light5 = new Light(720,357,0,ConstValues.WestToEest);
+		Light light6 = new Light(833,357,1,ConstValues.SouthToNorth);
+		Light light7 = new Light(833,244,1,ConstValues.EastToWest);
 
-		lightList.add(light1);
-		lightList.add(light2);
-		lightList.add(light3);
 		
-//		 lightList.add(light4);
-//		 lightList.add(light5);
-//		 lightList.add(light6);
-//		 lightList.add(light7);
+		 lightList.add(light4);
+		 lightList.add(light5);
+		 lightList.add(light6);
+		 lightList.add(light7);
 
 
 	}

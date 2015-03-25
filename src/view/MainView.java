@@ -306,16 +306,12 @@ public class MainView implements IVehicleObserver{
 		
 		mntmTRoad = new JMenuItem("T Road");
 		mntmTRoad.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				mainController.setMaps("TRoad");
-				mainController.start();
-			}
-			
+		
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+				frame.setVisible(false);
+
 				mainController.setMaps("TRoad");
 				mainController.start();
 			}
@@ -330,6 +326,8 @@ public class MainView implements IVehicleObserver{
 		
 			@Override
 			public void mousePressed(MouseEvent e) {
+				frame.setVisible(false);
+
 				mainController.setMaps("CrossRoad");
 				mainController.start();
 
@@ -344,13 +342,14 @@ public class MainView implements IVehicleObserver{
 		
 			@Override
 			public void mousePressed(MouseEvent e) {
+				frame.setVisible(false);
+
 				mainController.setMaps("TLCrossRoad");
 				mainController.start();
 
 			}
 		});
 		mnMaps.add(mntmTcrosslRoad);
-		frame.setVisible(true);
 
 		
 	

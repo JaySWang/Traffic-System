@@ -24,6 +24,8 @@ public class MapInfoManagement {
   }
   
   
+  
+  
 public List<Junction> getJunctions() {
 	return junctions;
 }

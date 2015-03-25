@@ -11,12 +11,14 @@ import ControllerInterface.IMainController;
 import ControllerInterface.ITrafficConditionController;
 import ControllerInterface.ITrafficLightController;
 import log.LogManagement;
+import model.Map;
 import model.TrafficCondition;
 import model.TrafficLight;
 import model.TrafficLightManagement;
 import model.TrafficPolicyManagement;
 import model.VehicleGenerator;
 import model.VehicleManagement;
+import modelInterface.IMap;
 import modelInterface.ITrafficCondition;
 import modelInterface.ITrafficLight;
 import view.MainView;
@@ -28,9 +30,10 @@ public class MainViewTest {
 
 		
 		
-		IMainController mainController = new MainController();
+		IMap map = new Map();
+		IMainController mainController = new MainController(map);
 		
-		mainController.setMaps("TLCrossRoad");
+		mainController.setMaps("TRoad");
 		mainController.start();
 	}
 }
