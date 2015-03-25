@@ -20,6 +20,8 @@ public class TrafficCondition implements ITrafficCondition,ITrafficConditionObse
 	int speedLimit = -1;
 	int density = 1;
 	
+	 boolean newPrivilegeVehicle = false;
+	
 	public static TrafficCondition getInstance(){
 		if(tc == null){
 			tc = new TrafficCondition();
@@ -29,6 +31,14 @@ public class TrafficCondition implements ITrafficCondition,ITrafficConditionObse
 		return  tc;
 	}
 	
+	
+	
+	public boolean isNewPrivilegeVehicle() {
+		return newPrivilegeVehicle;
+	}
+
+
+
 	private TrafficCondition(){
 		super();
 	}
@@ -89,6 +99,14 @@ public class TrafficCondition implements ITrafficCondition,ITrafficConditionObse
 	@Override
 	public void registerConditionObserver(ITrafficConditionObserver ob) {
 		trafficConditionObservers.add(ob);		
+	}
+
+	@Override
+	public void newPrivilegeVehicle() {
+		newPrivilegeVehicle = true;
+		notifyConditionObservers();	
+		newPrivilegeVehicle = false;
+
 	}
 
 }

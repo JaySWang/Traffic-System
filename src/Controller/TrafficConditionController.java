@@ -46,4 +46,10 @@ public class TrafficConditionController implements ITrafficConditionController {
        
 	}
 
+
+	@Override
+	public void newPrivilegeVehicle() {
+		tc.newPrivilegeVehicle();		
+	}
+
 }

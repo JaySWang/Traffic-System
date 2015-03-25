@@ -20,6 +20,7 @@ import ControllerInterface.ITrafficLightController;
 import constValue.ConstValues;
 
 import mapInfo.Light;
+import model.vehicles.VehicleWithPriority;
 import model.vehicles.VehicleWithRec;
 import modelInterface.ITrafficLight;
 import modelInterface.IVehicle;
@@ -164,9 +165,15 @@ public class MapView extends JPanel implements ITrafficLightObserver {
 				g.drawImage(v.getCarIcon().getImage(), x, y,
 						width,height, this);
 				
-//				Rectangle r = ((VehicleWithRec) v).getRectangle();
-//				g.drawImage(v.getCarIcon().getImage(), r.x, r.y,
-//						r.width, r.height, this);
+//				if(v  instanceof VehicleWithPriority){
+//					
+//					Rectangle r = ((VehicleWithPriority) v).getPriorityRectangle();
+//					g.drawImage(v.getCarIcon().getImage(), r.x, r.y,
+//							r.width, r.height, this);
+//					
+//				}
+////				
+
 				
 
 

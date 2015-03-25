@@ -82,6 +82,7 @@ public class MainView implements IVehicleObserver{
 	private MainController mainController;
 	private JLabel lblMs;
 	private JLabel lblSec;
+	private JButton btnPrivilege;
     
     
     
@@ -143,6 +144,7 @@ public class MainView implements IVehicleObserver{
 		//control view
 		controlPanel = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.anchor = GridBagConstraints.WEST;
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.fill = GridBagConstraints.VERTICAL;
 		gbc_panel_1.gridx = 0;
@@ -276,6 +278,17 @@ public class MainView implements IVehicleObserver{
 			}
 		});
 		panel.add(btnAnalysisResult);
+		
+		btnPrivilege = new JButton("Privilege");
+		btnPrivilege.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				tcc.newPrivilegeVehicle();
+
+			
+			}
+		});
+		panel.add(btnPrivilege);
 		
 		
 

@@ -13,6 +13,7 @@ import constValue.ConstValues;
 import model.vehicles.Bus;
 import model.vehicles.Car;
 import model.vehicles.Coach;
+import model.vehicles.VehicleWithPriority;
 import model.vehicles.VehicleWithRec;
 import modelInterface.IVehicle;
 import modelInterface.IVehicleGenerator;
@@ -133,6 +134,16 @@ while(true){
 	public void update(ITrafficConditionObservable o) {
 		densityLevel = 	((TrafficCondition)o).getDensity();	
 
+		
+		if(	((TrafficCondition)o).isNewPrivilegeVehicle()){
+		  Entrance enrance = new Entrance(3,1200,330,ConstValues.EastToWest);
+		
+		IVehicle v = new VehicleWithPriority(vehicleCount, enrance.getLocation_x(),
+		
+				enrance.getLocation_y(), enrance.getDirection());
+		VehicleManagement.getInstance().addVehicle(v);
+		}
+		
 	}
 
 

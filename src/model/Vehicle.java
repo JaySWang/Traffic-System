@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -596,6 +597,18 @@ public class Vehicle implements IVehicle {
 
 	@Override
 	public ImageIcon getCarIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean withPriority() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Rectangle getCarRectangle() {
 		// TODO Auto-generated method stub
 		return null;
 	}

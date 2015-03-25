@@ -1,5 +1,7 @@
 package modelInterface;
 
+import java.awt.Rectangle;
+
 import javax.swing.ImageIcon;
 
 public interface IVehicle {
@@ -24,11 +26,14 @@ public interface IVehicle {
 	public void setLength(int length);
 
 	
+	public boolean withPriority();
+	
 	public void setSpeed(int speed);
 	public void setAngle(int angle);
 	public boolean update();
 	
 	public ImageIcon getCarIcon();
+	public Rectangle getCarRectangle();
 
 	
 }
