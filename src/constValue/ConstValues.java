@@ -273,7 +273,7 @@ public class ConstValues {
 		this.setPerformPossibility(cs);
 		//ConjuctionPossibility
 		configurations = Configurations.readConfiguration("ConjuctionSpeed");
-		this.setPrioritylength(configurations[0]);
+		this.setConjuctionSpeed(configurations[0]);
 	}
 
 	public static void main(String[] arg) throws IOException {

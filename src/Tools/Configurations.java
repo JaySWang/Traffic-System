@@ -52,7 +52,7 @@ public class Configurations {
 			configurations[2] = Integer.parseInt(((lineData[4].split(",")[3])));
 			configurations[3] = Integer.parseInt(((lineData[4].split(",")[4])));
 		}
-		else if (type == "ConjuctionPossibility") {
+		else if (type == "ConjuctionSpeed") {
 			configurations[0] = Integer.parseInt(((lineData[6].split(",")[1])));
 			configurations[1] = Integer.parseInt(((lineData[6].split(",")[2])));
 			configurations[2] = Integer.parseInt(((lineData[6].split(",")[3])));

@@ -1,7 +1,10 @@
 package Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import constValue.ConstValues;
 
 
 import Controller.MainController;
@@ -29,12 +32,16 @@ public class MainViewTest {
 	public static void main(String args[]) {
 
 		
-		
+		try {
+			ConstValues constvalues = new ConstValues();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		IMap map = new Map();
 		IMainController mainController = new MainController(map);
 		
 		mainController.setMaps("TRoad");
-	//	mainController.setMaps("TLCrossRoad");
 		mainController.start();
 	}
 }

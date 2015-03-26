@@ -4,4 +4,4 @@ coach,32,26,80,20;\
 bus,33,26,80,20;\
 priority,34,26,80,20;\
 PerformPossibility,0.02,0,0,0;\
-ConjuctionPossibility,67,0,0,0
+ConjuctionSpeed,67,0,0,0
