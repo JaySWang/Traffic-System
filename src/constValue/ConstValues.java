@@ -70,6 +70,6 @@ public class ConstValues {
  
  public final static int NumOfbehaviorType = 2;
 
-public final static double PerformPossibility = 0.02;
+ public final static double PerformPossibility = 0.02;
  
 }
