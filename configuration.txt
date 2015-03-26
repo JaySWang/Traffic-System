@@ -1,0 +1,5 @@
+type,length,width,speed_limit,accelerate;\
+car,31,26,80,20;\
+coach,32,26,80,20;\
+bus, 33,26,80,20;\
+priority, 34,26,80,20
