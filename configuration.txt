@@ -1,7 +1,7 @@
 type,length,width,speed_limit,accelerate;\
-car,31,26,80,20;\
-coach,32,26,80,20;\
-bus,33,26,80,20;\
-priority,34,26,80,20;\
+car,31,26,300,40;\
+coach,32,250,80,30;\
+bus,33,26,200,20;\
+priority,34,26,300,40;\
 PerformPossibility,0.02,0,0,0;\
 ConjuctionSpeed,67,0,0,0
