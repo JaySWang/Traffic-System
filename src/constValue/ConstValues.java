@@ -59,15 +59,17 @@ public class ConstValues {
  public final static int PriorityAcceleration = 45;
  
  //road info
- public final static int roadWidth = 36;
- public final static int trafficLightArea = 60;
+ public final static int RoadWidth = 36;
+ public final static int TrafficLightArea = 60;
  
  
  //vehicle behavior
- public final static int normal = 0;
+ public final static int Normal = 0;
 
- public final static int cautious = 1;
+ public final static int Cautious = 1;
+ 
+ public final static int NumOfbehaviorType = 2;
 
-public final static double performPossibility = 0.1;
+public final static double PerformPossibility = 0.02;
  
 }

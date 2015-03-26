@@ -1,4 +1,4 @@
-package model;
+package Tools;
 
 public class GetColorFromJframe {
 

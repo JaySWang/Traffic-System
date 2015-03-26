@@ -380,9 +380,9 @@ public class VehicleWithRec implements IVehicle {
 		
 		
 		//behavior
-      if(getBehavior()==ConstValues.cautious){
+      if(getBehavior()==ConstValues.Cautious){
 			
-			if(Math.random()<ConstValues.performPossibility){
+			if(Math.random()<ConstValues.PerformPossibility){
 		         speed = 0;
 					return true;
 

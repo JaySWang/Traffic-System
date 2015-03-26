@@ -1,4 +1,4 @@
-package model;
+package Tools;
 
 import java.awt.Color;
 import java.io.IOException;

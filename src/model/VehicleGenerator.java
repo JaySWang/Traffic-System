@@ -80,18 +80,31 @@ while(state == ConstValues.ON ){
 			IVehicle v = null;
 			  int type = (int) (Math.random()*ConstValues.NumOfTypes);
 			  
+			  int behaviorType = (int) (Math.random()*ConstValues.NumOfbehaviorType);
+			   int behavior = ConstValues.Normal;
+			  switch(behaviorType){
+			  case ConstValues.Normal:
+				  behavior = ConstValues.Normal;
+				    break;
+			  case ConstValues.Cautious:
+				  behavior = ConstValues.Cautious;
+				    break;
+			  }
+
+			  
+			  
 			  switch(type){
 			  case ConstValues.Car: 
 				  v = new Car(vehicleCount, enrance.getLocation_x(),
-								enrance.getLocation_y(), enrance.getDirection(),ConstValues.normal);
+								enrance.getLocation_y(), enrance.getDirection(),behavior);
 				  break;
 			  case ConstValues.Coach: 
 				  v = new Coach(vehicleCount, enrance.getLocation_x(),
-								enrance.getLocation_y(), enrance.getDirection(),ConstValues.normal);
+								enrance.getLocation_y(), enrance.getDirection(),behavior);
 				  break;  
 			  case ConstValues.Bus: 
 				  v = new Bus(vehicleCount, enrance.getLocation_x(),
-								enrance.getLocation_y(), enrance.getDirection(),ConstValues.cautious);
+								enrance.getLocation_y(), enrance.getDirection(),behavior);
 				  break; 
 				  
 			  }
@@ -140,7 +153,7 @@ while(state == ConstValues.ON ){
 		  Entrance enrance = new Entrance(3,1200,330,ConstValues.EastToWest);
 		
 		IVehicle v = new VehicleWithPriority(vehicleCount, enrance.getLocation_x(),
-enrance.getLocation_y(), enrance.getDirection(),ConstValues.normal);
+enrance.getLocation_y(), enrance.getDirection(),ConstValues.Normal);
 		VehicleManagement.getInstance().addVehicle(v);
 		}
 		

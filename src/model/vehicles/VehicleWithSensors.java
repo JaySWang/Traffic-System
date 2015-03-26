@@ -6,7 +6,8 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 
-import model.Sensor_withoutCircle;
+import Tools.Sensor_withoutCircle;
+
 import modelInterface.IVehicle;
 
 /**

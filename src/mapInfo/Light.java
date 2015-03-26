@@ -120,11 +120,11 @@ public class Light {
 		int x = getLocation_x();
 		int y = getLocation_y();
 	    
-		int rWidth = ConstValues.trafficLightArea;
-		int rHeight = ConstValues.trafficLightArea;
+		int rWidth = ConstValues.TrafficLightArea;
+		int rHeight = ConstValues.TrafficLightArea;
        
         
-        double  increment = ConstValues.roadWidth;
+        double  increment = ConstValues.RoadWidth;
         
 		switch(getDirection()){
 		case ConstValues.EastToWest:

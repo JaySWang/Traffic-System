@@ -1,4 +1,4 @@
-package model;
+package Tools;
 
 import java.awt.AWTException;
 import java.awt.Color;
@@ -6,9 +6,6 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import Tools.GetColor;
-import Tools.GetColor2;
-import Tools.seperateRGB;
 
 /**
  * this sensor can only be used in the no circle maps
