@@ -85,6 +85,15 @@ public class ConstValues {
 	public final static int NumOfbehaviorType = 2;
 
 	public static double PerformPossibility = 0.02;
+	public int ConjuctionPossibility = 67;
+
+	public int getConjuctionPossibility() {
+		return ConjuctionPossibility;
+	}
+
+	public void setConjuctionPossibility(int conjuctionPossibility) {
+		ConjuctionPossibility = conjuctionPossibility;
+	}
 
 	public ConstValues() throws IOException {
 		initialVehicleConfiguration();
@@ -260,16 +269,20 @@ public class ConstValues {
 		this.setPriorityLimit(configurations[2]);
 		this.setPriorityAcceleration(configurations[3]);
 		// PerformPossibility
-//		configurations = Configurations.readConfiguration("PerformPossibility");
-//		this.setPerformPossibility(configurations[1]);
-		//configurations = Configurations.PerformPossibility();
+		double cs = Configurations.PerformPossibility();
+		this.setPerformPossibility(cs);
+		//ConjuctionPossibility
+		configurations = Configurations.readConfiguration("ConjuctionPossibility");
+		this.setPrioritylength(configurations[0]);
 	}
 
 	public static void main(String[] arg) throws IOException {
 		ConstValues c = new ConstValues();
 		System.out.println("car's profile: \n" + "legnth: " + c.getCarlength()
 				+ "\nwidth: " + c.getCarwidth() + "\nspeedlimit: "
-				+ c.getCarSpeedLimit() + "\naccelerate: " + c.getCarAcceleration());
-		System.out.println("PerformPossibility: "+c.getPerformPossibility());
+				+ c.getCarSpeedLimit() + "\naccelerate: "
+				+ c.getCarAcceleration());
+		System.out.println("PerformPossibility: " + c.getPerformPossibility());
+		System.out.println("ConjuctionPossibility: " + c.getConjuctionPossibility());
 	}
 }
