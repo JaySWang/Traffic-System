@@ -55,9 +55,9 @@ public class Configurations {
 			System.out.println("No configuration information about : " + type
 					+ "!!");
 		}
-		System.out.println("Lenght: " + configurations[0] + "\nWidth: "
-				+ configurations[1] + "\nSpeed: " + configurations[2]
-				+ "\nAccelerate: " + configurations[3]);
+//		System.out.println("Lenght: " + configurations[0] + "\nWidth: "
+//				+ configurations[1] + "\nSpeed: " + configurations[2]
+//				+ "\nAccelerate: " + configurations[3]);
 		return configurations;
 
 	}
