@@ -1,0 +1,551 @@
+
+\documentclass[12pt]{amsart}
+\usepackage{geometry} 
+\usepackage{shorttoc}
+\usepackage{graphicx}
+\usepackage{biblatex}
+
+\title{Team Report for the Traffic Simulator Project}
+\author{the Brisk Team}
+\date{25/Mar/2015} 
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\clearpage
+
+\section{Introduction}
+This report is about to document the progress of the group project "Traffic Simulation System" of the Brisk Team. Our team aims at developing a traffic simulation system that can support different types of vehicles running on several kinds of roads under some traffic management policies.
+
+The report is divided into twelve sections which would make this report clearly understand by readers. The first section provides the introduction of the group project which includes the basic reason and main idea of this traffic project,as well as the main work and the problem that our team tackled. And this section also summaries the achievement in the project briefly. The second section shows the overview of requirements analysis which is consist of functional requirements and non-functional requirements. The third section gives the main idea of design about this project. The fourth section illustrates the issues that we faced and the approaches that we resolved the relative problems. The fifth section provides the most significant implementation details which is focussing on the detailed solutions. The sixth section software testing which includes white box testing and black box testing. The seventh section provides the team work details which describe the how we worked together, including the group meeting details. The eighth section provides the critical evaluation about the project that shows what worked well and what didn't. The ninth section illustrates the peer assessment which shows the evaluation to each group members. The last sections include the conclusion, appendix.
+
+\subsection{Project Scope}
+
+In recent years, so many traffic simulation systems have been developed to analyze the traffic problem. The traffic network management become a significant issue in different countries, especially in some developing countries like India and China. And for some metropolises of Europe also exist this problem. Considering the congestions, traffic accidents and the middle-income classes rises, the transport policies are not followed which will become an increasingly prominent issue.
+
+The group project is mainly to show the overall situation of traffic simulation system that was developed by our team members. And this system simulates the different type of road routes, such as cross road and junction of three roads. We achieved this project through a graphical method. It looks similar to the real world traffic situation by a graphic user interface. Cars and buses has its own acceleration and make decision by traffic lights.
+
+
+The most important purpose of this simulator is to provide the users the basic understanding of traffic policies. To achieve authenticity, we set the parameters of the car and road conditions according to Britain's traffic rules.
+
+\subsection{Project Objectives}
+
+The Aim of this project is to develop a high quality traffic simulation system which can meet several kind of functions. For the users, they can use the graphic traffic simulation system to understand the transport policies.
+
+\section{Requirements And Design}
+
+Requirements Analysis is one of the most essential parts of the model. According to the regulation and identification of the system and the requirements, an appropriative traffic simulator can be developed. It is waste of time if our group members don't follow the requirements and would lead to failure.
+
+System context:The system context of this system is to simulate a road network which contains several different parts including: roundabouts and multi-lane junctions. There are also several types of vehicles running on it under some traffic policies. 
+
+You will see the use case in [FIGURE 1] 
+
+\subsection{Functional requirements}
+The requirements are focus on the functions that system obtain. And functional requirements specify particular results of the system.
+
+1.Traffic model should have different vehicles.
+
+2.Traffic model can be operated in different parts of road(eg. straight roads, curves, roundabouts).
+
+3.Designing suitable maps.
+
+4.Model should be based on time to change.
+
+5.Considering emergency situation.
+
+6.Allowing different traffic management policy.
+
+7.Comparing different policies.
+
+
+\subsection{Non-functional requirements}
+In systems engineering and requirements engineering, a non-functional requirement is a requirement that specifies criteria that can be used to judge the operation of a system, rather than specific behaviors. 
+
+1.Efficiency: space and time complex should not be very high.(Mandatory) 
+
+2.Flexible: should fit with general situations not only the situation we designed.(Optional)
+
+3.Standards requirements: should fit with software engineering principle.(Optional) 
+
+4.Implementation requirements: based on java programing language.(Optional) 
+
+5.Reliability:can run continuously for at least 5 hours.(Mandatory) 
+
+6.Robustness:can deal with unexpected input.(Mandatory) 
+
+7.Usability:can be used without training.(Optional) 
+
+\subsection{Risk Analysis}
+
+As you will see the Risk Table which was created to identify potential failure or waste of time. The risks are as follow:
+
+1.Poor Project Management
+
+2.Misunderstanding the requirements
+
+3.Team members dropped out
+
+4.Time management
+
+5.Unclear targets
+
+6.Tasks shared in between team members
+
+7.Unclear communication
+
+To some extent, different risk could affect the progress of the project. Some of the impact is relatively insignificant, they were considered as low-level risks. Some had a great influence that may affect the planning of project and were regarded as high-level risks.
+
+\section{Design and Implementation}
+
+At first,we tried to follow waterfall model.Since the time is limit and the system is a small project,we changed to adopt Agile Development and apply some practice from Scrum,like Daily Scrum Meeting.
+
+For Functional points achieved:
+1.Different vehicles(cars, coaches, buses ,vehicles with privilege).
+
+2.Different maps with different road network.(T Road map,Cross Road map,T and L and Cross Road map)
+
+3.There are several entrances and exits in maps.
+
+4.Different vehicles can have different behaviors.
+
+Currently,there are two types of behaviors:cautious and normal.When generating vehicles,each vehicle will be given a behaviors.
+
+Vehicles with cautious behavior will stop suddenly(to avoid pedestrian or other situation).
+
+Randomly with a certain possibility.
+
+5.Support emergency services.
+
+Vehicles with emergency will run in the central of roads and ignore traffic lights.
+
+Other vehicles on the same roads will give way to them.   
+
+6.Support different traffic management policy.
+
+A traffic management policy contains:traffic light state and interval time,speed limit.
+
+7.Support different road conditions.Different vehicle density levels.
+
+8.Able to analyze different policy and road conditions.
+
+With each combination of policy and road condition.
+
+Give the result of average speed and congestion rate.
+ 
+\subsection{Architecture Design}
+We adopt MVC architecture style.
+
+There are view:mainView,mapView,AnalysisView
+
+Controllers:mainController,trafficConditionController,TrafficLightController
+
+Models:Map,TrafficLightManagement,TrafficCondition
+
+As you will see in [FIGURE 2]
+
+\subsection{Class Design}
+main design patterns:
+
+Singleton:LogManagement,TrafficCondition and VehicleManagement
+
+As you will see in [FIGURE 3]
+
+Observer :
+
+ITrafficConditionObservable and ITrafficConditionObserver 
+
+ITrafficLightObservable and ITrafficLightObserver 
+
+ITrafficMgtPolicyObservable and ITrafficMgtPolicyObserver 
+
+As you will see in [FIGURE 4]
+
+ITrafficConditionObservable and ITrafficConditionObserver 
+
+As you will see in [FIGURE 5]
+
+\subsection{Design Principle}
+1.Dependence Inversion Principle.
+
+We design interfaces for most of the main classes.And other classes depend on these Interfaces.For example: IVehicle for VehicleWithRec,and VehicleGenerator depends on the Ivehicle.
+
+2.The Liskov Substitution Principle.
+
+As you will see in [FIGURE 6]
+
+3.Single responsibility principle.
+We tried to let each class only do the job it should do,just like analysis only calculate  the date;VehicleGenerator only generate vehicles
+
+\subsection{Model Design}
+Map model:each map has entrances,exits,junctions and light.Their position need to be calculated according to  specific map.
+   
+Vehicle Model : 
+
+Different vehicles have different sizes,acceleration,behaviors and speedLimit.These can be configured by txt.
+There are four Directions, and the direction of the vehicle may change when it arrives in junctions.
+Collision detection is based on Rectangle detection. Each vehicle has a car rectangle(itself) and a detection rectangle to detect the situation in front of the vehicle,which is calculated by its position ,speed and  acceleration.
+For vehicle with priority,it also has a priority rectangle to inform other vehicles to give way.
+ 
+Log Model :
+ 
+There are Vehicle log, TrafficMgtPolicyLog and analsisLog.
+
+Each time before traffic management policy or road condition change,the information of current policy and road condition will be saved as TrafficMgtPolicyLog(lightState, lightIntervalTime,speedLimit,startTime,endTime). 
+Meanwhile,a corresponding analysis log will be saved(speedLimit,String trafficLightState,lightIntervalTime, averageSpeed,densityLevel,congestionRate) 
+
+Traffic Light Model:
+
+Analysis Model:
+Make good use the vehicle log to calculate
+
+ calculate average speed: 
+	for(VehicleLog vl: vls){
+			totalSpeed+=vl.getSpeed();
+		}		
+		if(vls.size()!=0){
+			return totalSpeed/vls.size();
+		}
+
+calculate CongestionRate:
+for(VehicleLog vl:vls){
+            if(vl.getSpeed()<ConstValues.ConjuctionSpeed){
+            	count++;
+            }
+            
+		}
+				
+	if(vls.size()==0)
+		return 0;	
+	
+	double  rate = count/vls.size();
+
+
+Unit Test:
+We use unit test to test analysis model.
+
+UI design:
+There are main view and  analysis view. Main view contains a control panel and map panel.There is also a menu to change view.
+
+Map Design:
+size problems
+
+\section{Implementation}
+
+Based on our research work: the main factors effect the traffic system is:
+
+Traffic light:include have the traffic light or not and the internal time of changing;
+
+Speed Limit:NO 4,8,16,32;
+
+The vehicles? density:low,medium,high;
+
+In order to verify our system? accuracy and reliability we designed some experiments
+
+Experimental to simulate the effect of Traffic light for traffic system
+
+All the experiments are designed as the contrast experiments which means only the experimental factor is different. Every experiment last at least 5 minutes and three times in order to reduce accidental error.
+
+Experimental to simulate the effect of speed limit for traffic system.
+
+For the implementation of the software will show in [FIGURE 7-11]
+
+\section{Technical Problem and Solution}
+
+Technical Problems:
+
+When using a method for sensors around the car, we must design the mechanism that sensors are used to make the decision. Pattern recognition method may be a reasonable approach, However the image pattern recognition requires a large processing workload.
+
+Solution:
+
+We get inspiration from the car, using sensors to do judgment by colors.We can use java.awt.* Library jfame.getPixelColor (),or java.awt.image.BufferedImage.getRGB (int x, int y) to obtain the specified color of the location on the map.
+
+For the java.awt.Robot,this class is used to generate native system input events for the purposes of test automation, self-running demos, and other applications where control of the mouse and keyboard is needed. The primary purpose of Robot is to facilitate automated testing of Java platform implementations.And for the BufferedImage java.awt.Robot.createScreenCapture(Rectangle screenRect) creates an image containing pixels read from the screen. This image does not include the mouse cursor.
+
+Obtaining the parameters of the map and using java.awt.image.BufferedImage.get\\RGB(int x, int y) to get the color of the specify position.However,We can not arbitrarily set the position,and the judgment method of the sensors.For example, =the sensor which determine whether the cars crash into together should be located at the 10pixs of right side of the car driving direction. And the size should be 1*5 pixs.And we use the sRGB to make decision for the sensors. Considering the fault tolerance, round function is used during the read color.The refresh time of the map is 0.1 second, so cars should make a judgment within 0.1s and set state.
+
+\section{Software Testing}
+For a software system, software testing is an essential part, or even one of the most important parts. We can know the software vulnerability through diverse tests. As you will see in [FIGURE 12] a set of specified test data were used to check the main features and functions.
+
+The test events are show as below:
+
+ON and OFF button
+
+Interval Time
+
+Speed Limit
+
+Density
+
+Analysis
+
+The test events and related condition and expected action and actual action were showed as the Software Testing.
+
+\section{Group Work}
+For this group project, the essential part is the group work. The communication and related work arrangement determined the quality of the project directly. There were seven formal group meeting at different stages of the project. Each meeting has specific topics and conclusion. As you will see in [FIGURE 13-18] tables of the meeting recorded the details of each stages. For each member's individual work are show in [FIGURE 19-22].
+
+\section{Evaluation}
+To evaluate the project system properly, our team used the criteria of functionality, performance and requirements achieved. In our critical appraisal, we mentioned high functionality,simplicity,efficiency,fault tolerance.
+
+1.Traffic model have different vehicles. Our software system has different vehicles such as cars,buses and special vehicles which has priority.
+
+2.Our traffic model has several kinds of road,for example the cross road which has a complicated traffic situation.
+
+3.We checked the Road Making of the United Kingdom which illustrated the details of the road.For example,The width of the road is 7.9 meters.
+
+4.For the emergency situation,such as the ambulances and fire-fighting vehicles have the priority and when some emergency situation happen, the others vehicles should make way for them.
+
+5.The GUI is easy and simple to use.
+
+6.In addition to some unforeseen circumstances, in most cases, our system works smoothly and effortlessly.
+
+7.The system is fault tolerant.
+
+\section{Peer Assessment}
+To evaluate the peer properly. As you will see in []we used a peer assessment form. Each member need to evaluate the other members according to different parts. 
+
+In particular:
+
+-Participated in group discussions.
+
+-Helped keep the group on task.
+
+-Contributed useful ideas.
+
+-How much work was done.
+
+-Quality of completed work.
+
+Eventually we put out the total score proportionally to 100 points, calculated the percentage of each share fraction. For example Yiran's score is 66 and the total score is 274. So the actual score of Yiran is (100/274) * 66 = 24.1
+
+\section{Conclusion}
+Part1: All of us have learned a lot from the experience of doing this group project. We all improve skills in some way and have a better understanding of what teamwork is.
+
+-To make this traffic simulation system better, we have done a lot of research and have found  many relevant references,which help us design the basic structure of this system.
+
+-This traffic simulation system help us to understand different transport policies better and how to make the fluency of traffic flow better.
+
+-After finishing this project we have been familiar with GitHub and found the way we can cooperate well
+
+-Having variable levels of priority helps a lot to ensure the most important functions to be implemented well.Some tasks are less important than others help the whole team focus on accomplishing the fundamental part of our plan
+
+-Organize all the packages,classes and parameters in a good way will make the improvement and modification more convenient for each member in the group.
+
+-Having meetings every week and everyone give opinions make the plan more flexible and we can make changes before doing the main part of programming.
+
+-Everyone try to follow the plan strictly and the members encourage each other more than blaming each other is a effective method to strengthen the cohesion of the team.
+
+-Communication is essential, each member think over advantages and disadvantages of other members' ideas and say it honestly make everyone follow the plan smoothly.
+
+Part2:future work
+
+In the future work we may do some improvement:
+
+-more kinds of vehicles
+
+-more complicated road networks
+
+-more traffic management policies for comparison
+
+-more effective calculations 
+
+\section{References}
+
+Namekawa,M.,F. Ueda, Y.Hioki, Y. Ueda and A. Satoh,General Purpose Road Traffic Simulation System with a
+Cell Automaton Model,KaetsKaetsu University, Tokyo University.
+\\\\
+GO J., VU T., KUFFNER J.: Autonomous behaviors for interactive vehicle animations. In International Journal of Graphical Models (2005).
+\\\\
+Department of Transport(2014), "Transport Statistics",[online at https://www.g\\ov.uk/government/uploads/system/uploads/attachmentdata/file/389592/tsgb-2014\\.pdf,accessed 24 March 2015].
+\\\\
+The Government of United Kingdom(2006),"Road Safety Act", [http://www.legis\\lation.gov.uk/ukpga/2006/49/pdfs/ukpga 20060049 en.pdf,accessed 24 March 2015]
+\\\\
+Motor Vehicles (Construction and Use) Regulations 1999,"Road Traffic And Vehicles",[http://www.legislation.gov.uk/nisr/1999/454/made,aceessed 24 March 2015]
+
+\subsection{Appendices}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{UseCase.jpg}
+\caption{UseCase}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{MVC.jpg}
+\caption{Architecture Diagram}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{SingletonClass.jpg}
+\caption{Singleton Class}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{ObserverOne.jpg}
+\caption{ObserverOne}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{ObserverTwo.jpg}
+\caption{ObserverTwo}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Extend.jpg}
+\caption{Extend}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Function.jpg}
+\caption{Function}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Tjunction.jpg}
+\caption{Tjunction}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{CrossRoad.jpg}
+\caption{CrossRoad}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{TrafficMap.jpg}
+\caption{TrafficMap}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{TrafficSystem.jpg}
+\caption{TrafficSystem}
+\end{figure}
+
+\clearpage
+
+\begin{figure}
+\includegraphics[width=5.00in]{SoftwareTesting.png}
+\caption{Software Testing}
+\end{figure}
+
+\clearpage
+
+\begin{figure}
+\includegraphics[width=6.00in]{meeting1.png}
+\caption{Meeting One}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{meeting2.png}
+\caption{Meeting Two}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{meeting3.png}
+\caption{Meeting Three}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{meeting4.png}
+\caption{Meeting Four}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{meeting5.png}
+\caption{Meeting Five}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{meeting6.png}
+\caption{Meeting Six}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Yiran's Individual Work.png}
+\caption{Yiran's Individual Work}
+\end{figure}
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Shengsheng's Individual Work.png}
+\caption{Shengsheng's Individual Work}
+\end{figure}
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Tong's Individual Work.png}
+\caption{Tong's Individual Work}
+\end{figure}
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Zhaoxu's Individual Work.png}
+\caption{Zhaoxu's Individual Work}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Peer Assessment One.png}
+\caption{Peer Assessment One}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Peer Assessment Two.png}
+\caption{Peer Assessment Two}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Peer Assessment Three.png}
+\caption{Peer Assessment Three}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Peer Assessment Four.png}
+\caption{Peer Assessment Four}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htbp]
+\includegraphics[width=6.00in]{Peer Assessment Five.png}
+\caption{Peer Assessment Five}
+\end{figure}
+
+\end{document}
