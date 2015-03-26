@@ -83,15 +83,15 @@ while(state == ConstValues.ON ){
 			  switch(type){
 			  case ConstValues.Car: 
 				  v = new Car(vehicleCount, enrance.getLocation_x(),
-								enrance.getLocation_y(), enrance.getDirection());
+								enrance.getLocation_y(), enrance.getDirection(),ConstValues.normal);
 				  break;
 			  case ConstValues.Coach: 
 				  v = new Coach(vehicleCount, enrance.getLocation_x(),
-								enrance.getLocation_y(), enrance.getDirection());
+								enrance.getLocation_y(), enrance.getDirection(),ConstValues.normal);
 				  break;  
 			  case ConstValues.Bus: 
 				  v = new Bus(vehicleCount, enrance.getLocation_x(),
-								enrance.getLocation_y(), enrance.getDirection());
+								enrance.getLocation_y(), enrance.getDirection(),ConstValues.cautious);
 				  break; 
 				  
 			  }
@@ -140,8 +140,7 @@ while(state == ConstValues.ON ){
 		  Entrance enrance = new Entrance(3,1200,330,ConstValues.EastToWest);
 		
 		IVehicle v = new VehicleWithPriority(vehicleCount, enrance.getLocation_x(),
-		
-				enrance.getLocation_y(), enrance.getDirection());
+enrance.getLocation_y(), enrance.getDirection(),ConstValues.normal);
 		VehicleManagement.getInstance().addVehicle(v);
 		}
 		

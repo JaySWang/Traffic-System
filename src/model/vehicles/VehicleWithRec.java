@@ -28,7 +28,7 @@ public class VehicleWithRec implements IVehicle {
 	 int speed;// if the refresh 0.1s,the min speed is 1m/s therefore
 						// every pixel represent 0.1 meter
 	 
-	 
+	 int behavior;
 	 boolean priority = false ;
 	 boolean giveWay = false;  //give way for vehicles with priority
 	 
@@ -72,12 +72,12 @@ public class VehicleWithRec implements IVehicle {
 	
 	
 	public VehicleWithRec(int id, int location_x,
-			int location_y, int angle) {
+			int location_y, int angle ,int behavior) {
 		super();
 		this.id = count;
 		count++;
 
-	
+	    this.behavior = behavior;
 		this.location_x = location_x;
 		this.location_y = location_y;
 		
@@ -86,6 +86,18 @@ public class VehicleWithRec implements IVehicle {
 		
 	}
 	
+
+
+	public int getBehavior() {
+		return behavior;
+	}
+
+
+
+	public void setBehavior(int behavior) {
+		this.behavior = behavior;
+	}
+
 
 
 	public Rectangle getCarRectangle() {
@@ -365,6 +377,20 @@ public class VehicleWithRec implements IVehicle {
 		
 		
 	}else if(collisionState == ConstValues.Clear){
+		
+		
+		//behavior
+      if(getBehavior()==ConstValues.cautious){
+			
+			if(Math.random()<ConstValues.performPossibility){
+		         speed = 0;
+					return true;
+
+			}
+			
+		}
+		
+		
 		
 		//return from giving way to vehicles with priority 
 		if(giveWay){		

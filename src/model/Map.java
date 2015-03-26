@@ -179,7 +179,7 @@ public class Map implements IMap {
 			
 			
 
-			Junction j4 = new Junction(756,330,ConstValues.EastToWest,0.2,40,10);
+			Junction j4 = new Junction(756,335,ConstValues.EastToWest,0.15,40,10);
 			 
 			junctions.add(j4);
 			
@@ -259,11 +259,11 @@ public class Map implements IMap {
 			 
 			junctions.add(j2);
 			
-			Junction j3 = new Junction(320,330,ConstValues.EastToWest,1,40,10);
+			Junction j3 = new Junction(320,335,ConstValues.EastToWest,1,40,10);
 			 
 			junctions.add(j3);
 			
-			Junction j4 = new Junction(756,330,ConstValues.EastToWest,0.4,40,10);
+			Junction j4 = new Junction(756,335,ConstValues.EastToWest,0.15,40,10);
 			 
 			junctions.add(j4);
 			

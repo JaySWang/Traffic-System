@@ -62,5 +62,12 @@ public class ConstValues {
  public final static int roadWidth = 36;
  public final static int trafficLightArea = 60;
  
-	
+ 
+ //vehicle behavior
+ public final static int normal = 0;
+
+ public final static int cautious = 1;
+
+public final static double performPossibility = 0.1;
+ 
 }

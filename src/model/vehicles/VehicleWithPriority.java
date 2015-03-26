@@ -19,8 +19,8 @@ public class VehicleWithPriority  extends VehicleWithRec{
 	
 	private int priorityGap = 30;
 
-	public VehicleWithPriority(int id, int location_x, int location_y, int angle) {
-		super(id, location_x, location_y, angle);
+	public VehicleWithPriority(int id, int location_x, int location_y, int angle,int behavior) {
+		super(id, location_x, location_y, angle, behavior);
 
 		
 		

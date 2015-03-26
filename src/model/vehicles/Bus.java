@@ -7,8 +7,8 @@ import constValue.ConstValues;
 public class Bus extends VehicleWithRec{
 
 	public Bus(int id, int location_x, int location_y,
-			int angle) {
-		super(id, location_x, location_y, angle);
+			int angle,int behavior) {
+		super(id, location_x, location_y, angle, behavior);
 		
 		  
 				width = 25;

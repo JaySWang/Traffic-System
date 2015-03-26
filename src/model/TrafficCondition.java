@@ -21,6 +21,8 @@ public class TrafficCondition implements ITrafficCondition,ITrafficConditionObse
 	int density = 1;
 	
 	 boolean newPrivilegeVehicle = false;
+
+	 
 	
 	public static TrafficCondition getInstance(){
 		if(tc == null){
