@@ -93,7 +93,7 @@ public class Map implements IMap {
 
 
 
-			Entrance e1 = new Entrance(0,0,310,ConstValues.WestToEest);
+			Entrance e1 = new Entrance(0,0,288,ConstValues.WestToEest);
 			entrances.add(e1);
 			Exit exit1 = new Exit(1,0,330,ConstValues.SouthToNorth);
 			exits.add(exit1);
@@ -116,9 +116,10 @@ public class Map implements IMap {
 			
 			
 
-			Junction j1 = new Junction(115,281,ConstValues.WestToEest,1,30,8);
-			junctions.add(j1);
-			
+
+			Junction j3 = new Junction(320,330,ConstValues.EastToWest,1,40,10);
+			 
+			junctions.add(j3);
 
 
  
@@ -141,7 +142,7 @@ public class Map implements IMap {
 	 
 
 
-			Entrance e1 = new Entrance(0,0,310,ConstValues.WestToEest);
+			Entrance e1 = new Entrance(0,0,288,ConstValues.WestToEest);
 			entrances.add(e1);
 			Exit exit1 = new Exit(1,0,330,ConstValues.SouthToNorth);
 			exits.add(exit1);
@@ -173,9 +174,10 @@ public class Map implements IMap {
 
 			
 			
-			Junction j1 = new Junction(755,330,ConstValues.EastToWest,0.1,40,10);
+
+			Junction j4 = new Junction(756,330,ConstValues.EastToWest,0.2,40,10);
 			 
-			junctions.add(j1);
+			junctions.add(j4);
 			
 
 			
@@ -241,7 +243,7 @@ public class Map implements IMap {
 			
 			
 			
-			Junction j1 = new Junction(55,325,ConstValues.SouthToNorth,1,40,40);
+			Junction j1 = new Junction(55,325,ConstValues.SouthToNorth,1,50,40);
  
 			junctions.add(j1);
 			
@@ -253,11 +255,11 @@ public class Map implements IMap {
 			 
 			junctions.add(j3);
 			
-			Junction j4 = new Junction(755,330,ConstValues.EastToWest,0.1,40,10);
+			Junction j4 = new Junction(756,330,ConstValues.EastToWest,0.4,40,10);
 			 
 			junctions.add(j4);
 			
-			Junction j5 = new Junction(370,330,ConstValues.NorthToSouth,0.1,40,30);
+			Junction j5 = new Junction(370,330,ConstValues.NorthToSouth,0.2,40,30);
 			 
 			junctions.add(j5);
 			

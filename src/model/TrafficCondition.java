@@ -34,7 +34,11 @@ public class TrafficCondition implements ITrafficCondition,ITrafficConditionObse
 	
 	
 	public void clean(){
-		tc = new TrafficCondition();
+		trafficMgtPolicyObservers = new ArrayList<ITrafficMgtPolicyObserver> ();
+		 trafficConditionObservers = new ArrayList<ITrafficConditionObserver> ();
+		 speedLimit =-1;
+		 density = 1;
+		 newPrivilegeVehicle = false;
 	}
 	
 	public boolean isNewPrivilegeVehicle() {

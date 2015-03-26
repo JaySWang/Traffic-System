@@ -25,7 +25,7 @@ public class VehicleGenerator extends Thread implements IVehicleGenerator,ITraff
      int state;
 	 int densityLevel = ConstValues.Low;
      
-	 List<Entrance> entrances ;
+	 List<Entrance> entrances;
      
      int vehicleCount;
      
@@ -53,6 +53,7 @@ public class VehicleGenerator extends Thread implements IVehicleGenerator,ITraff
 	public void off() {
 		state = ConstValues.OFF;
 		
+		
 	}
 
 
@@ -60,7 +61,7 @@ public class VehicleGenerator extends Thread implements IVehicleGenerator,ITraff
 		
 		
 		
-while(true){
+while(state == ConstValues.ON ){
 	
 	  Entrance enrance;
       int no = (int) (Math.random()*entrances.size());

@@ -29,7 +29,7 @@ public class TLCrossMapView extends MapView {
 	public TLCrossMapView(List<ITrafficLight> t, ITrafficLightController c) {
 		super(t,c);
 
-		map = new ImageIcon(getClass().getResource("/Icon/map.png"));
+		map = new ImageIcon(getClass().getResource("/Icon/map.jpg"));
 		
 		initialLights();
 	

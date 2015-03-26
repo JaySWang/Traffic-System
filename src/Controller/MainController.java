@@ -43,7 +43,7 @@ public class MainController implements IMainController{
 	
 	
 	IMap map;
-	
+	VehicleGenerator vg;
 	
 	
 	
@@ -66,13 +66,18 @@ public class MainController implements IMainController{
 	public void start() {
 		
 		 //generator
-		VehicleGenerator vg = new VehicleGenerator(1,map.getEntrance());
+         if(vg!=null){
+        	 vg.off();
+         }
+		
+		  vg = new VehicleGenerator(1,map.getEntrance());
 	        vg.on();
 	        
 	    	//traffict condition
 	    	ITrafficCondition tc = TrafficCondition.getInstance();
 	    	ITrafficConditionController tcc = new TrafficConditionController(tc);
 
+	    	tc.clean();
 			((TrafficCondition)tc).registerTMPObserver(map.getTPmgt());
 			((TrafficCondition)tc).registerConditionObserver(vg);
 			 
