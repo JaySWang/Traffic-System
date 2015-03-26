@@ -6,7 +6,7 @@ import java.io.*;
  * @author qutong
  *
  */
-public class Configuration {
+public class Configurations {
 	/**
 	 * 
 	 * @param type
@@ -15,7 +15,7 @@ public class Configuration {
 	 * 			integrate array with length,width,speed,accelerate
 	 * @throws IOException
 	 */
-	int[] readConfiguration(String type) throws IOException {
+	public static int[] readConfiguration(String type) throws IOException {
 		int[] configurations = new int[4];
 		String content = null, read;
 		BufferedReader reader;
@@ -59,7 +59,7 @@ public class Configuration {
 	}
 
 	public static void main(String[] args) throws IOException {
-		Configuration c = new Configuration();
+		Configurations c = new Configurations();
 		c.readConfiguration("car");
 	}
 }
