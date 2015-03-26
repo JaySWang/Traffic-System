@@ -1,4 +1,5 @@
-#Mon Mar 23 22:29:04 GMT 2015
+#Thu Mar 26 11:23:29 GMT 2015
 eclipse.preferences.version=1
 encoding//src/Tools/MyScreenShot.java=UTF-8
-encoding//src/model/Vehicle.java=UTF-8
+encoding//src/Tools/Sensor_withoutCircle.java=UTF-8
+encoding//src/model/vehicles/VehicleWithSensors.java=UTF-8
