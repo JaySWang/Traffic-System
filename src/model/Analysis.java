@@ -3,6 +3,8 @@ package model;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import constValue.ConstValues;
+
 import log.LogManagement;
 import log.VehicleLog;
 import modelInterface.IAnalysis;
@@ -11,7 +13,6 @@ public class Analysis implements IAnalysis {
 
 	LogManagement lm = LogManagement.getInstance();
 	
-	int congestionSpeed = 100; 
 	
 	@Override
 	public double getAverageSpeedByVId(int VehicleId) {
@@ -63,7 +64,7 @@ public class Analysis implements IAnalysis {
 	double count = 0;
 		
 		for(VehicleLog vl:vls){
-            if(vl.getSpeed()<congestionSpeed){
+            if(vl.getSpeed()<ConstValues.ConjuctionSpeed){
             	count++;
             }
             

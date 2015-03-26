@@ -53,16 +53,16 @@ public class ConstValues {
 
 	// vehicle
 	// speedLimit;
-	public static int CarSpeedLimit = 280;
-	public static int CoachSpeedLimit = 200;
-	public static int BusSpeedLimit = 280;
-	public static int PriorityLimit = 250;
+	public static int CarSpeedLimit;
+	public static int CoachSpeedLimit;
+	public static int BusSpeedLimit;
+	public static int PriorityLimit;
 
 	// acceleration
-	public static int CarAcceleration = 40;
-	public static int CoachAcceleration = 30;
-	public static int BusAcceleration = 20;
-	public static int PriorityAcceleration = 45;
+	public static int CarAcceleration;
+	public static int CoachAcceleration ;
+	public static int BusAcceleration;
+	public static int PriorityAcceleration ;
 	// size
 	public static int Carlength;
 	public static int Carwidth;
@@ -84,15 +84,15 @@ public class ConstValues {
 
 	public final static int NumOfbehaviorType = 2;
 
-	public static double PerformPossibility = 0.02;
-	public int ConjuctionPossibility = 67;
+	public static double PerformPossibility;
+	public static int ConjuctionSpeed;
 
-	public int getConjuctionPossibility() {
-		return ConjuctionPossibility;
+	public int getConjuctionSpeed() {
+		return ConjuctionSpeed;
 	}
 
-	public void setConjuctionPossibility(int conjuctionPossibility) {
-		ConjuctionPossibility = conjuctionPossibility;
+	public void setConjuctionSpeed(int conjuctionSpeed) {
+		ConjuctionSpeed = conjuctionSpeed;
 	}
 
 	public ConstValues() throws IOException {
@@ -272,7 +272,7 @@ public class ConstValues {
 		double cs = Configurations.PerformPossibility();
 		this.setPerformPossibility(cs);
 		//ConjuctionPossibility
-		configurations = Configurations.readConfiguration("ConjuctionPossibility");
+		configurations = Configurations.readConfiguration("ConjuctionSpeed");
 		this.setPrioritylength(configurations[0]);
 	}
 
@@ -283,6 +283,6 @@ public class ConstValues {
 				+ c.getCarSpeedLimit() + "\naccelerate: "
 				+ c.getCarAcceleration());
 		System.out.println("PerformPossibility: " + c.getPerformPossibility());
-		System.out.println("ConjuctionPossibility: " + c.getConjuctionPossibility());
+		System.out.println("ConjuctionSpeed: " + c.getConjuctionSpeed());
 	}
 }
