@@ -646,6 +646,8 @@ public class VehicleWithRec implements IVehicle {
 						case ConstValues.EastToWest:
 
 							if(this.location_x>v.getLocation_x()){
+								 if(v.getAngle()==ConstValues.SouthToNorth)
+									 collisionCount++;
 							
 								
 								return ConstValues.VehicleCollision;
@@ -668,6 +670,10 @@ public class VehicleWithRec implements IVehicle {
 						
 						case ConstValues.SouthToNorth: 
 							 if(this.location_y>v.getLocation_y()){
+								 if(v.getAngle()==ConstValues.WestToEest)
+									 collisionCount++;
+								 
+								 
 								return ConstValues.VehicleCollision;
 							}
 
